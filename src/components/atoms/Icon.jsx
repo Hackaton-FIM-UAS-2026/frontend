@@ -25,6 +25,14 @@ const PATHS = {
   campana: "M6 17V11a6 6 0 0 1 12 0v6l2 2H4z M10 21h4",
   izq: "M15 5l-7 7 7 7",
   der: "M9 5l7 7-7 7",
+  x: "M6 6l12 12 M18 6L6 18",
+  alerta: "M12 3l9.5 17h-19z M12 10v4 M12 17.5h.01",
+  enviar: "M4 12l16-8-6 16-2.5-6.5z M11.5 13.5L20 4",
+  telefono: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z",
+  ubicacion: "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z M12 7.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
+  casa: "M4 11l8-7 8 7 M6 9.5V20h12V9.5",
+  avance: "M4 19h16 M7 15l4-4 3 3 5-6",
+  texto: "M4 18L9 6l5 12 M5.8 14h6.4 M15 18l3-7 3 7 M15.9 16h4.2",
 };
 
 export function Icon({ name, size = 28, ...p }) {

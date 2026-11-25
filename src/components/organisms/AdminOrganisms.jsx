@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Badge, Button, Icon, Avatar } from "../atoms";
+import { Badge, Button, Icon, Avatar, Input } from "../atoms";
 import { NOMBRE_RUTA } from "../../services/motorRuta";
 
 /* ===== Piezas del panel CEMujeres (datos ficticios) ===== */
 
 export function Panel({ titulo, accion, children, className = "" }) {
   return (
-    <section className={`pnl ${className}`}>
+    <section className={`card pnl ${className}`}>
       {(titulo || accion) && <header className="pnl__head"><h2>{titulo}</h2>{accion}</header>}
       {children}
     </section>
@@ -15,8 +15,8 @@ export function Panel({ titulo, accion, children, className = "" }) {
 
 export function KpiCard({ titulo, valor, detalle, lista }) {
   return (
-    <section className="kpi">
-      <small>{titulo}</small>
+    <section className="card card--brand kpi">
+      <h2 className="kpi__titulo">{titulo}</h2>
       <strong>{valor}</strong>
       {detalle && <span className="kpi__detalle">{detalle}</span>}
       <ul>
@@ -39,8 +39,8 @@ export function BarChart({ semanas, series }) {
       <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Usuarias nuevas por semana y por ruta">
         {ticks.map((t) => (
           <g key={t}>
-            <line x1={L} x2={W - R} y1={y(t)} y2={y(t)} stroke="var(--color-border)" strokeDasharray="3 4" />
-            <text x={L - 6} y={y(t) + 4} textAnchor="end" fontSize="11" fill="var(--color-text-muted)">{Math.round(t)}</text>
+            <line x1={L} x2={W - R} y1={y(t)} y2={y(t)} stroke="var(--border)" strokeDasharray="3 4" />
+            <text x={L - 6} y={y(t) + 4} textAnchor="end" fontSize="11" fill="var(--text-muted)">{Math.round(t)}</text>
           </g>
         ))}
         {semanas.map((s, gi) => {
@@ -51,7 +51,7 @@ export function BarChart({ semanas, series }) {
                 <rect key={serie.nombre} x={x0 + si * (bw + gap)} y={y(serie.datos[gi])} width={bw}
                   height={H - B - y(serie.datos[gi])} rx="3" fill={serie.color} />
               ))}
-              <text x={L + gi * gw + gw / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="var(--color-text-muted)">{s}</text>
+              <text x={L + gi * gw + gw / 2} y={H - 8} textAnchor="middle" fontSize="11" fill="var(--text-muted)">{s}</text>
             </g>
           );
         })}
@@ -96,7 +96,7 @@ export function UsersTable({ usuarias, onOpen, compact }) {
               <td><span className="who"><Avatar nombre={u.nombre} size={34} />{u.nombre}</span></td>
               <td><Badge tone={u.ruta}>{NOMBRE_RUTA[u.ruta]}</Badge></td>
               {!compact && <><td><Badge tone={TONO_ESTADO[u.estado] || "primary"}>{u.estado}</Badge></td><td>{u.municipio}</td><td>{u.ultima}</td></>}
-              <td><button className="dt__link" onClick={() => onOpen(u.id)}>Ver ficha</button></td>
+              <td><button type="button" className="dt__link" onClick={() => onOpen(u.id)}>Ver ficha</button></td>
             </tr>
           ))}
           {!usuarias.length && <tr><td colSpan="6" className="dt__empty">Sin resultados.</td></tr>}
@@ -118,7 +118,7 @@ export function CasosTable({ casos, onCambiar }) {
           {[...casos].sort((a, b) => ORDEN[a.urgencia] - ORDEN[b.urgencia]).map((c) => (
             <tr key={c.id}>
               <td><strong>{c.id}</strong><br /><small className="muted">{c.fecha}</small></td>
-              <td><span className={`urg urg--${c.urgencia}`}>{c.urgencia}</span></td>
+              <td><Badge tone={TONO_URG[c.urgencia]} dot>{c.urgencia}</Badge></td>
               <td>{c.tipo}</td>
               <td>{c.medio}<br /><small className="muted">{c.horario}</small></td>
               <td>
@@ -141,7 +141,7 @@ export function CasosCompactos({ casos }) {
         <li key={c.id}>
           <Avatar nombre={c.usuaria} size={38} />
           <span><strong>{c.id} · {c.tipo}</strong><small>{c.estado} · {c.fecha}</small></span>
-          <span className={`urg urg--${c.urgencia}`}>{c.urgencia}</span>
+          <Badge tone={TONO_URG[c.urgencia]} dot>{c.urgencia}</Badge>
         </li>
       ))}
     </ul>
@@ -172,7 +172,7 @@ export function UserFicha({ usuaria, onVolver, onRegistrar }) {
   const [nota, setNota] = useState("");
   return (
     <div className="ficha2">
-      <button className="dt__link" onClick={onVolver}><Icon name="izq" size={16} /> Volver a usuarias</button>
+      <button type="button" className="dt__link" onClick={onVolver}><Icon name="izq" size={16} /> Volver a usuarias</button>
       <Panel className="ficha2__head">
         <Avatar nombre={usuaria.nombre} size={72} />
         <div>
@@ -191,14 +191,12 @@ export function UserFicha({ usuaria, onVolver, onRegistrar }) {
           </dl>
         </Panel>
         <Panel titulo="Actualizar situación">
-          <label className="field"><span className="field__label">Situación</span>
-            <select className="sel sel--full" value={estado} onChange={(e) => setEstado(e.target.value)}>
-              {SITUACIONES.map((s) => <option key={s}>{s}</option>)}
-            </select></label>
-          <label className="field"><span className="field__label">Nota</span>
-            <textarea className="input" rows="3" value={nota} onChange={(e) => setNota(e.target.value)} /></label>
+          <Input as="select" label="Situación" value={estado} onChange={(e) => setEstado(e.target.value)}>
+            {SITUACIONES.map((s) => <option key={s}>{s}</option>)}
+          </Input>
+          <Input as="textarea" label="Nota" rows="3" value={nota} onChange={(e) => setNota(e.target.value)} />
           <Button onClick={() => { onRegistrar(usuaria.id, estado, nota); setNota(""); }}>Guardar</Button>
-          <p className="muted small" style={{ marginTop: 8 }}>Queda con la fuente «personal_cemujeres» y la versión del expediente sube. Si choca con lo que dijo ella, se marca para revisar.</p>
+          <p className="muted small pnl__nota">Queda con la fuente «personal_cemujeres» y la versión del expediente sube. Si choca con lo que dijo ella, se marca para revisar.</p>
         </Panel>
       </div>
       <Panel titulo="Línea de tiempo">
@@ -228,7 +226,7 @@ export function CatalogTable({ recursos, vencidos, onToggle }) {
                 <td>{r.fecha_cierre}</td>
                 <td>{r.verificado_el}</td>
                 <td>
-                  <button className={`toggle ${v ? "" : "toggle--on"}`} onClick={() => onToggle(r.id)} aria-pressed={!v}>
+                  <button type="button" className={`toggle ${v ? "" : "toggle--on"}`} onClick={() => onToggle(r.id)} aria-pressed={!v}>
                     {v ? "Vencido" : "Vigente"}
                   </button>
                 </td>

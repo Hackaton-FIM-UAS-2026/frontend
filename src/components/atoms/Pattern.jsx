@@ -1,6 +1,6 @@
 import { useId } from "react";
 
-/** Textura de hojas / remolinos (guiño al fondo crema de los carteles). Decorativa. */
+/** Textura de hojas (guiño a los carteles). Decorativa; ningún template la usa por defecto. */
 export function Pattern({ color = "var(--morado-300)", opacity = 0.18 }) {
   const id = useId();
   return (
@@ -10,8 +10,6 @@ export function Pattern({ color = "var(--morado-300)", opacity = 0.18 }) {
           <g fill={color} opacity={opacity}>
             <path d="M10 50C10 28 24 14 46 14c0 22-14 36-36 36z" />
             <path d="M52 86c0-18 11-30 29-30 0 18-11 30-29 30z" />
-            <circle cx="70" cy="22" r="6" />
-            <circle cx="22" cy="74" r="4" />
           </g>
         </pattern>
       </defs>
@@ -20,23 +18,32 @@ export function Pattern({ color = "var(--morado-300)", opacity = 0.18 }) {
   );
 }
 
-/** Ilustración original del hero: arcos de colores que "suben" como un camino. */
-export function ArcosIlustracion() {
-  const arcos = [
-    ["var(--turquesa-500)", 150], ["var(--naranja-500)", 126], ["var(--mostaza-500)", 102],
-    ["var(--oliva-500)", 78], ["var(--magenta-500)", 54],
-  ];
+/**
+ * Ilustración del camino: colinas en capas moradas y un sendero crema que sube
+ * hacia el horizonte. Monocroma, sin arcoíris.
+ */
+export function CaminoIlustracion({ className = "" }) {
   return (
-    <svg className="arcos" viewBox="0 0 400 300" role="img" aria-label="Arcos de colores que forman un camino ascendente">
-      {arcos.map(([c, r]) => (
-        <path key={r} d={`M${200 - r} 290 A${r} ${r} 0 0 1 ${200 + r} 290`} fill="none" stroke={c} strokeWidth="18" strokeLinecap="round" />
-      ))}
-      <circle cx="200" cy="290" r="22" fill="var(--coral-500)" />
-      <g fill="var(--morado-700)">
-        <circle cx="52" cy="238" r="7" /><circle cx="34" cy="196" r="5" /><circle cx="26" cy="160" r="3.5" />
-      </g>
-      <path d="M338 70c0-22 14-38 38-38 0 22-14 38-38 38z" fill="var(--morado-500)" />
-      <path d="M338 70L368 40" stroke="#fff" strokeWidth="2" />
+    <svg className={`camino-ilus ${className}`} viewBox="0 0 400 320" role="img"
+      aria-label="Un sendero que sube entre colinas hacia el horizonte">
+      <rect width="400" height="320" rx="24" fill="var(--morado-50)" />
+      <circle cx="292" cy="96" r="44" fill="var(--guinda-100)" />
+      <path d="M0 176c56-30 112-40 176-26s132 10 224-20v190H0z" fill="var(--morado-100)" />
+      <path d="M0 214c70-26 150-34 230-14s120 8 170-8v128H0z" fill="var(--morado-200)" />
+      <path d="M0 256c90-22 170-22 250-6s110 6 150-2v72H0z" fill="var(--morado-300)" />
+      {/* sendero */}
+      <path d="M150 320c10-40 70-52 92-78s-18-44 6-66 40-24 46-30"
+        fill="none" stroke="var(--crema-50)" strokeWidth="26" strokeLinecap="round" />
+      <path d="M150 320c10-40 70-52 92-78s-18-44 6-66 40-24 46-30"
+        fill="none" stroke="var(--morado-500)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="2 12" />
+      {/* hojas */}
+      <path d="M62 236c0-20 13-34 34-34 0 20-13 34-34 34z" fill="var(--morado-700)" />
+      <path d="M62 236L90 208" stroke="var(--morado-200)" strokeWidth="2" strokeLinecap="round" />
+      <path d="M332 262c0-14 9-24 24-24 0 14-9 24-24 24z" fill="var(--morado-800)" />
+      <circle cx="294" cy="146" r="6" fill="var(--guinda-700)" />
     </svg>
   );
 }
+
+/** Alias por compatibilidad con el nombre anterior. */
+export const ArcosIlustracion = CaminoIlustracion;

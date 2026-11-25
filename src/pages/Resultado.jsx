@@ -1,12 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { AppTemplate } from "../components/templates";
 import { RouteSummary } from "../components/molecules";
-import { Button } from "../components/atoms";
+import { Button, Icon } from "../components/atoms";
 import { calcularRuta, NOMBRE_RUTA } from "../services/motorRuta";
 import { leerExpediente, valores } from "../services/expediente";
 
 export default function Resultado() {
-  const nav = useNavigate();
   const ruta = calcularRuta(valores(leerExpediente()));
   // En producción: el LLM redacta ruta.factores; si tarda >6 s, esta plantilla.
   const explicacion = ruta.factores.length
@@ -15,7 +13,9 @@ export default function Resultado() {
   return (
     <AppTemplate>
       <RouteSummary ruta={ruta} explicacion={explicacion} />
-      <div style={{ marginTop: 24 }}><Button block onClick={() => nav("/dashboard")}>Ver mis recursos</Button></div>
+      <div className="resultado__cta">
+        <Button block to="/dashboard">Ver mis recursos <Icon name="flecha" size={18} /></Button>
+      </div>
     </AppTemplate>
   );
 }

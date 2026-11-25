@@ -40,7 +40,7 @@ export default function AdminPanel() {
   const exportarCasos = () => exportarCSV("canalizaciones_camino",
     ["Caso", "Urgencia", "Tipo", "Medio", "Horario", "Estado", "Fecha"],
     casos.map((c) => [c.id, c.urgencia, c.tipo, c.medio, c.horario, c.estado, c.fecha]));
-  const btnExcel = (onClick) => <Button variant="ghost" onClick={onClick}><Icon name="descargar" size={18} /> Exportar a Excel</Button>;
+  const btnExcel = (onClick) => <Button variant="ghost" size="sm" onClick={onClick}><Icon name="descargar" size={18} /> Exportar a Excel</Button>;
 
   const filtradas = usuarias.filter((u) => u.nombre.toLowerCase().includes(q.toLowerCase()));
   const fichaSel = usuarias.find((u) => u.id === sel);

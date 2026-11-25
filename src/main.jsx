@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { MotionConfig } from "motion/react";
 import App from "./App.jsx";
 import "./styles/tokens.css";
 import "./styles/global.css";
@@ -16,7 +17,10 @@ import "./styles/responsive.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      {/* Respeta prefers-reduced-motion: quita desplazamientos y deja la opacidad */}
+      <MotionConfig reducedMotion="user">
+        <App />
+      </MotionConfig>
     </BrowserRouter>
   </React.StrictMode>
 );

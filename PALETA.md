@@ -1,43 +1,20 @@
 # Paleta de colores — Camino
 
-Extraída de los carteles de referencia (Conferencia Regional sobre la Mujer, Mujeres en la Pesca, Compromiso Nacional, Mujeres Quintana Roo). Los valores son aproximaciones tomadas a ojo de las imágenes; ajusta con el cuentagotas si tienes los archivos originales.
+Basada en los carteles institucionales (Conferencia Regional sobre la Mujer, Mujeres en la Pesca, Compromiso Nacional, Mujeres Quintana Roo). **Se retiró el arcoíris decorativo**: la base es crema + morado + guinda, y los tonos de ruta solo codifican datos. Los valores viven en `src/styles/tokens.css`; el sistema completo está en `DESIGN.md`.
 
-| Rol | Token | Hex | De dónde sale |
-|---|---|---|---|
-| Primario | `--morado-700` | #5b2c83 | Colibrí, tarjeta Q. Roo |
-| Primario oscuro | `--morado-900` | #3e1b5c | Fondo del degradado |
-| Primario claro | `--morado-100` | #ebddf5 | Fondos suaves |
-| Secundario | `--guinda-700` | #5e1236 | Botón "Continuar leyendo" |
-| Acento | `--coral-500` | #e8603c | "por la vida, la felicidad" |
-| Naranja | `--naranja-500` | #ec8216 | Arco del banner |
-| Mostaza | `--mostaza-500` | #d9a514 | Espiral del colibrí |
-| Turquesa | `--turquesa-500` | #14a3b5 | Arco superior |
-| Oliva | `--oliva-500` | #6f8460 | Arco inferior |
-| Magenta | `--magenta-500` | #a9489b | Estrella de Pesca |
-| Fondo | `--crema-50` | #fbf7ef | Fondo crema de los carteles |
+| Rol | Token | Hex |
+|---|---|---|
+| Primario (acción) | `--morado-700` | #5b2c83 |
+| Marca oscura | `--morado-900` | #351650 |
+| Primario suave | `--morado-100` | #eee5f5 |
+| Secundario | `--guinda-700` | #5e1236 |
+| Fondo | `--crema-50` | #fbf8f2 |
+| Superficie hundida | `--crema-100` | #f5efe4 |
+| Texto | `--tinta-900` | #2a1c35 |
+| Texto secundario | `--tinta-500` | #6a5b74 |
 
-**Rutas:** Empleabilidad = turquesa · Emprendimiento = naranja · Capacitación = magenta.
-**Zona sensible:** solo morados, sin rojos de alerta (más sobria y discreta).
-**Contraste:** texto blanco sobre morado-700/900 y guinda cumple AA; sobre naranja, mostaza y turquesa usa texto oscuro (`--tinta`).
+**Tonos de dato** (badges, gráfica, calendario; cada uno con su par `-100` de fondo y `-700` de texto, todos AA):
+Empleabilidad = turquesa #2f8794 · Emprendimiento = naranja #c4722a · Capacitación = magenta #94468a · Éxito = oliva #5c7752 · Aviso = mostaza #b98d22 · Urgente = coral #c0502f (solo en el panel).
 
-## Estructura (Atomic Design)
-
-```
-src/
-  styles/tokens.css          ← paleta y variables
-  components/
-    atoms/        Button, Badge, Input, ProgressBar, Franja, Check, Logo
-    molecules/    QuestionCard, RequirementItem, ResourceCard, RouteSummary, ChatBubble, EmergencyBanner, StatCard
-    organisms/    TestBaseWizard, ResourceDashboard, ResourceDetail, AgentChat, SensitiveFlow, Navigation, AdminOrganisms
-    templates/    AppTemplate, AuthTemplate, FocusTemplate, AdminTemplate
-  pages/          Registro, TestBase, Resultado, Dashboard, RecursoDetalle, Seguimiento, Chat, Apoyo, AdminPanel
-  services/       motorRuta (reglas del MD), expediente (fusión/versión)
-  data/           campos (test base de 12 preguntas), recursos (catálogo de ejemplo)
-```
-
-## Cómo correr
-
-```bash
-npm install
-npm run dev
-```
+**Zona sensible:** solo morados, sin rojos de alerta.
+**Contraste:** todos los pares de texto/fondo del sistema cumplen AA (≥ 4.5:1).

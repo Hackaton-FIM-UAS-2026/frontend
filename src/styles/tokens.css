@@ -1,105 +1,205 @@
 /* ============================================================
-   TOKENS DE DISEÑO — tomados de los carteles institucionales
-   (Conferencia Regional de la Mujer, Mujeres en la Pesca,
-   Compromiso Nacional, Mujeres Quintana Roo)
+   CAMINO — TOKENS DE DISEÑO (única fuente de verdad)
+   Capa 1: primitivos  → solo se usan dentro de este archivo
+   Capa 2: semánticos  → lo que consumen los componentes
+   Capa 3: escalas     → tipo, espacio, forma, elevación, movimiento
+   Breakpoints (mobile-first, en @media no hay variables):
+     sm 640px · md 960px · lg 1280px
    ============================================================ */
 :root {
-  /* Morado (color principal: colibrí, tarjeta Q. Roo, banners) */
-  --morado-900: #3e1b5c;
+  /* ---------- 1. Primitivos ---------- */
+  /* Morado institucional (colibrí, tarjeta Q. Roo) */
+  --morado-50: #f8f4fb;
+  --morado-100: #eee5f5;
+  --morado-200: #ddcdea;
+  --morado-300: #c2a5d9;
+  --morado-500: #7a4aa3;
+  --morado-600: #693994;
   --morado-700: #5b2c83;
-  --morado-500: #7a44a6;
-  --morado-300: #b692d1;
-  --morado-100: #ebddf5;
+  --morado-800: #4a226c;
+  --morado-900: #351650;
+  --morado-950: #24103a;
 
   /* Guinda (botón "Continuar leyendo") */
-  --guinda-700: #5e1236;
+  --guinda-100: #f5e3ea;
   --guinda-500: #8a2252;
+  --guinda-700: #5e1236;
 
-  /* Coral (texto "por la vida, la felicidad") */
-  --coral-500: #e8603c;
-  --coral-100: #fce3da;
+  /* Crema cálida (fondo de los carteles) */
+  --crema-50: #fbf8f2;
+  --crema-100: #f5efe4;
+  --crema-200: #ece3d3;
+  --crema-300: #ddd0b9;
 
-  /* Naranja (arcos del banner) */
-  --naranja-500: #ec8216;
-  --naranja-100: #fdebd3;
-
-  /* Mostaza (espiral del colibrí) */
-  --mostaza-500: #d9a514;
-  --mostaza-100: #f9edc4;
-
-  /* Turquesa (arco superior) */
-  --turquesa-500: #14a3b5;
-  --turquesa-100: #d2eff3;
-
-  /* Oliva (arco inferior) */
-  --oliva-500: #6f8460;
-  --oliva-100: #e2e9dc;
-
-  /* Magenta (arcos / estrella de Pesca) */
-  --magenta-500: #a9489b;
-  --magenta-100: #f3daef;
-
-  /* Neutros cálidos (fondos crema de los carteles) */
-  --crema-50: #fbf7ef;
-  --crema-100: #f4ecdd;
-  --crema-300: #e6d8bd;
+  /* Tinta (texto con matiz morado, nunca gris puro) */
+  --tinta-900: #2a1c35;
+  --tinta-700: #4a3b56;
+  --tinta-500: #6a5b74;
   --blanco: #ffffff;
-  --tinta: #2b1a3a;
-  --tinta-suave: #6b5a7a;
 
-  /* ---------- Semánticos (usar SIEMPRE estos en componentes) ---------- */
-  --color-primary: var(--morado-700);
-  --color-primary-hover: var(--morado-900);
-  --color-primary-soft: var(--morado-100);
-  --color-secondary: var(--guinda-700);
-  --color-accent: var(--coral-500);
-  --color-accent-soft: var(--coral-100);
+  /* Tonos de dato: SOLO codifican rutas y estados, nunca decoran */
+  --turquesa-100: #ddeeee;
+  --turquesa-500: #2f8794;
+  --turquesa-700: #1c5b64;
+  --naranja-100: #f7e6d3;
+  --naranja-500: #c4722a;
+  --naranja-700: #83450f;
+  --magenta-100: #f1e0ec;
+  --magenta-500: #94468a;
+  --magenta-700: #6b2b61;
+  --mostaza-100: #f5ebcb;
+  --mostaza-500: #b98d22;
+  --mostaza-700: #6a500f;
+  --oliva-100: #e3eadc;
+  --oliva-500: #5c7752;
+  --oliva-700: #3a5032;
+  --coral-100: #f8e1d8;
+  --coral-500: #c0502f;
+  --coral-700: #8f351b;
 
-  --color-bg: var(--crema-50);
-  --color-surface: var(--blanco);
-  --color-surface-alt: var(--crema-100);
-  --color-border: var(--crema-300);
-  --color-text: var(--tinta);
-  --color-text-muted: var(--tinta-suave);
-  --color-on-primary: var(--blanco);
+  /* ---------- 2. Semánticos ---------- */
+  --bg: var(--crema-50);
+  --surface: var(--blanco);
+  --surface-sunken: var(--crema-100);
+  --surface-raised: var(--blanco);
+  --surface-brand: var(--morado-900);
+  --surface-brand-2: var(--morado-800);
+  --surface-scrim: rgb(36 16 58 / 0.48);
 
-  --color-success: var(--oliva-500);
-  --color-success-soft: var(--oliva-100);
-  --color-warning: var(--mostaza-500);
-  --color-warning-soft: var(--mostaza-100);
-  --color-danger: var(--coral-500);
-  --color-danger-soft: var(--coral-100);
-  --color-info: var(--turquesa-500);
-  --color-info-soft: var(--turquesa-100);
+  --text: var(--tinta-900);
+  --text-muted: var(--tinta-500);
+  --text-soft: var(--tinta-700);
+  --text-heading: var(--morado-900);
+  --text-on-brand: var(--blanco);
+  --text-on-brand-muted: var(--morado-200);
 
-  /* Áreas de la ruta */
+  --border: var(--crema-200);
+  --border-strong: var(--crema-300);
+  --border-on-brand: rgb(255 255 255 / 0.14);
+  --hover-on-brand: rgb(255 255 255 / 0.06);
+
+  --action: var(--morado-700);
+  --action-hover: var(--morado-800);
+  --action-press: var(--morado-900);
+  --action-soft: var(--morado-100);
+  --action-softer: var(--morado-50);
+  --action-ink: var(--morado-700);
+  --on-action: var(--blanco);
+  --action-2: var(--guinda-700);
+  --action-2-hover: var(--guinda-500);
+
+  --focus-ring: var(--morado-500);
+  --focus-ring-on-brand: var(--morado-200);
+
+  --success: var(--oliva-500);
+  --success-soft: var(--oliva-100);
+  --success-ink: var(--oliva-700);
+  --warning: var(--mostaza-500);
+  --warning-soft: var(--mostaza-100);
+  --warning-ink: var(--mostaza-700);
+  --danger: var(--coral-500);
+  --danger-soft: var(--coral-100);
+  --danger-ink: var(--coral-700);
+  --info: var(--turquesa-500);
+  --info-soft: var(--turquesa-100);
+  --info-ink: var(--turquesa-700);
+  --neutral-soft: var(--crema-100);
+  --neutral-ink: var(--tinta-700);
+
+  /* Rutas */
   --ruta-empleabilidad: var(--turquesa-500);
+  --ruta-empleabilidad-soft: var(--turquesa-100);
+  --ruta-empleabilidad-ink: var(--turquesa-700);
   --ruta-emprendimiento: var(--naranja-500);
+  --ruta-emprendimiento-soft: var(--naranja-100);
+  --ruta-emprendimiento-ink: var(--naranja-700);
   --ruta-capacitacion: var(--magenta-500);
+  --ruta-capacitacion-soft: var(--magenta-100);
+  --ruta-capacitacion-ink: var(--magenta-700);
 
-  /* Zona sensible (más sobria, sin colores de alerta agresivos) */
-  --sensible-bg: var(--morado-900);
-  --sensible-surface: var(--morado-100);
+  /* Zona sensible: solo morados, sin rojos de alerta */
+  --sensible-bg: var(--morado-50);
+  --sensible-surface: var(--blanco);
+  --sensible-accent: var(--morado-700);
+  --sensible-exit: var(--morado-900);
 
-  /* Tipografía y forma */
-  --font-display: "Fraunces", "Georgia", serif;      /* títulos con carácter, como el cartel */
+  /* Avatares (estables por nombre) */
+  --avatar-1: var(--morado-600);
+  --avatar-2: var(--turquesa-700);
+  --avatar-3: var(--naranja-700);
+  --avatar-4: var(--magenta-700);
+  --avatar-5: var(--oliva-700);
+  --avatar-6: var(--guinda-500);
+
+  /* ---------- 3. Escalas ---------- */
+  /* Tipografía */
+  --font-display: "Fraunces", "Georgia", serif;
   --font-body: "Noto Sans", "Segoe UI", system-ui, sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-pill: 999px;
-  --shadow-card: 0 2px 10px rgba(91, 44, 131, 0.12);
-  --space-1: 4px; --space-2: 8px; --space-3: 12px;
-  --space-4: 16px; --space-5: 24px; --space-6: 32px;
 
-  /* Arcos decorativos (franja multicolor del banner) */
-  --franja-arcos: linear-gradient(
-    90deg,
-    var(--turquesa-500) 0 20%,
-    var(--naranja-500) 20% 40%,
-    var(--mostaza-500) 40% 60%,
-    var(--oliva-500) 60% 80%,
-    var(--magenta-500) 80% 100%
-  );
-  --gradiente-hero: linear-gradient(160deg, var(--morado-500), var(--morado-900));
+  /* Escala fluida (≈1.2 en móvil → ≈1.25 en escritorio) */
+  --step--2: clamp(0.72rem, 0.70rem + 0.08vw, 0.76rem);
+  --step--1: clamp(0.84rem, 0.82rem + 0.10vw, 0.89rem);
+  --step-0:  clamp(1rem, 0.97rem + 0.14vw, 1.06rem);
+  --step-1:  clamp(1.15rem, 1.09rem + 0.28vw, 1.32rem);
+  --step-2:  clamp(1.35rem, 1.24rem + 0.52vw, 1.65rem);
+  --step-3:  clamp(1.6rem, 1.4rem + 0.95vw, 2.1rem);
+  --step-4:  clamp(1.95rem, 1.6rem + 1.7vw, 2.85rem);
+  --step-5:  clamp(2.3rem, 1.75rem + 2.7vw, 3.9rem);
+
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-body: 1.55;
+  --tracking-display: -0.02em;
+  --tracking-caps: 0.06em;
+  --measure: 65ch;
+
+  /* Espacio (base 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: clamp(56px, 4rem + 3vw, 104px);
+
+  /* Forma */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Elevación (sombra con desplazamiento y tinte morado, nunca halo) */
+  --shadow-1: 0 1px 2px rgb(53 22 80 / 0.06), 0 2px 8px rgb(53 22 80 / 0.05);
+  --shadow-2: 0 2px 4px rgb(53 22 80 / 0.06), 0 10px 24px rgb(53 22 80 / 0.09);
+  --shadow-bar: 0 4px 16px rgb(53 22 80 / 0.05);
+  --shadow-bar-up: 0 -1px 0 var(--border), 0 -6px 20px rgb(53 22 80 / 0.06);
+  --shadow-3: 0 8px 16px rgb(53 22 80 / 0.10), 0 24px 56px rgb(53 22 80 / 0.16);
+
+  /* Movimiento */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 140ms;
+  --dur-fast: 180ms;
+  --dur-base: 240ms;
+  --dur-slow: 360ms;
+
+  /* Capas */
+  --z-base: 1;
+  --z-sticky: 10;
+  --z-nav: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-exit: 50;
+
+  /* Layout */
+  --content-narrow: 680px;
+  --content: 1120px;
+  --gutter: clamp(16px, 4vw, 32px);
+  --tap: 48px;
+  --appbar-h: 60px;
+  --bottomnav-h: 64px;
 }

@@ -7,3 +7,4 @@ export * from "./ChatBubble.jsx";
 export * from "./StatCard.jsx";
 export * from "./HomeMolecules.jsx";
 export * from "./QuizMolecules.jsx";
+export * from "./PageHeader.jsx";
