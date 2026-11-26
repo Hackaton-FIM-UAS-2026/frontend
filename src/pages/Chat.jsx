@@ -8,7 +8,7 @@ export default function Chat() {
   return (
     <AppTemplate>
       <PageHeader title="Asistente" lead="Pregúntame sobre tus recomendaciones." />
-      <AgentChat onProponerCanalizacion={() => nav("/apoyo")} />
+      <AgentChat onProponerCanalizacion={() => nav("/apoyo")} onSinSesion={() => nav("/registro")} />
       <p className="small chat__apoyo"><Link to="/apoyo">Necesito otro tipo de apoyo</Link></p>
     </AppTemplate>
   );

@@ -12,14 +12,26 @@ const aparece = {
   transition: { duration: 0.24, ease: [0.22, 1, 0.36, 1] },
 };
 
-/** Detalle del recurso: lo que ya tienes / lo que te falta + preguntas del agente (1 a 3). */
-export function ResourceDetail({ recurso, onAction }) {
+/**
+ * Detalle del recurso: lo que ya tienes / lo que te falta + preguntas del agente (1 a 3).
+ * Con backend: `recurso.preguntas`, `recurso.cumple` y `requisitos[].ok` ya vienen evaluados;
+ * al contestar se llama `onResponder(campo, valor)` y la página vuelve a pedir el recurso.
+ */
+export function ResourceDetail({ recurso, onAction, onResponder }) {
   const [resp, setResp] = useState({});
-  const faltantes = recurso.requisitos.filter((r) => r.ok === null && !(r.campo in resp));
-  const preguntas = faltantes.filter((r) => DICCIONARIO_PREGUNTAS[r.campo]).slice(0, 3).map((r) => ({ campo: r.campo, ...DICCIONARIO_PREGUNTAS[r.campo] }));
-  const reqs = recurso.requisitos.map((r) => ({ ...r, ok: r.ok ?? (resp[r.campo] ? resp[r.campo] !== "No" && resp[r.campo] !== "Nada" : null) }));
-  const cumple = reqs.every((r) => r.ok === true);
+  const conApi = Array.isArray(recurso.preguntas);
+  const preguntas = conApi
+    ? recurso.preguntas
+    : recurso.requisitos.filter((r) => r.ok === null && !(r.campo in resp) && DICCIONARIO_PREGUNTAS[r.campo])
+        .slice(0, 3).map((r) => ({ campo: r.campo, ...DICCIONARIO_PREGUNTAS[r.campo] }));
+  const reqs = conApi ? recurso.requisitos
+    : recurso.requisitos.map((r) => ({ ...r, ok: r.ok ?? (resp[r.campo] ? resp[r.campo] !== "No" && resp[r.campo] !== "Nada" : null) }));
+  const cumple = conApi ? recurso.cumple === true : reqs.every((r) => r.ok === true);
   const listos = reqs.filter((r) => r.ok === true).length;
+  const responder = (campo, valor) => {
+    setResp({ ...resp, [campo]: valor });
+    onResponder?.(campo, valor);
+  };
 
   return (
     <div className="detail">
@@ -35,6 +47,8 @@ export function ResourceDetail({ recurso, onAction }) {
           <span><Icon name="escudo" size={16} /> Verificado en {recurso.verificado_el}</span>
         </>}
       />
+
+      {recurso.explicacion && <p className="detail__porque">{recurso.explicacion}</p>}
 
       <section className="card detail__reqs" aria-labelledby="req-titulo">
         <div className="detail__reqhead">
@@ -57,7 +71,7 @@ export function ResourceDetail({ recurso, onAction }) {
                   <div className="agentbox__opts">
                     {p.opciones.map((o) => (
                       <OptionButton key={o} compact label={o} active={resp[p.campo] === o}
-                        onClick={() => setResp({ ...resp, [p.campo]: o })} />
+                        onClick={() => responder(p.campo, o)} />
                     ))}
                   </div>
                 </motion.div>

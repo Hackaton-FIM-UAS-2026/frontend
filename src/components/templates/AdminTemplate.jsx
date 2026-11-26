@@ -13,7 +13,7 @@ const MENU = [
   ["/admin/metricas", "Métricas", "grafica"],
 ];
 
-export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, children }) {
+export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, persona, ocultar = [], onSalir, children }) {
   const [abierto, setAbierto] = useState(false);
 
   useEffect(() => {
@@ -32,11 +32,11 @@ export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, child
           <button type="button" className="adm__close" onClick={() => setAbierto(false)} aria-label="Cerrar menú"><Icon name="x" size={22} /></button>
         </div>
         <div className="adm__profile">
-          <Avatar nombre="Ana Torres" size={44} />
-          <span><strong>Ana Torres</strong><small>Asesora económica · demo</small></span>
+          <Avatar nombre={persona?.nombre || "Personal"} size={44} />
+          <span><strong>{persona?.nombre || "Personal"}</strong><small>{persona?.rolTexto || ""}</small></span>
         </div>
         <nav className="adm__nav" aria-label="Panel">
-          {MENU.map(([to, label, icon, end]) => (
+          {MENU.filter(([to]) => !ocultar.includes(to)).map(([to, label, icon, end]) => (
             <NavLink key={to} to={to} end={end} onClick={() => setAbierto(false)}
               className={({ isActive }) => (isActive ? "adm__link adm__link--on" : "adm__link")}>
               <Icon name={icon} size={20} /> <span>{label}</span>
@@ -45,7 +45,9 @@ export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, child
             </NavLink>
           ))}
         </nav>
-        <Link to="/" className="adm__link adm__out"><Icon name="salir" size={20} /> <span>Volver al sitio</span></Link>
+        {onSalir
+          ? <button type="button" className="adm__link adm__out" onClick={onSalir}><Icon name="salir" size={20} /> <span>Cerrar sesión</span></button>
+          : <Link to="/" className="adm__link adm__out"><Icon name="salir" size={20} /> <span>Volver al sitio</span></Link>}
       </aside>
       <AnimatePresence>
         {abierto && (

@@ -8,7 +8,9 @@ import { NOMBRE_RUTA } from "../../services/motorRuta";
 const DIA_HOY = 25; // demo: el panel está fechado el 25 de noviembre de 2026
 
 /** Días desde la última actividad ("25 nov" → 0). */
-export const diasSinActividad = (u) => Math.max(0, DIA_HOY - (parseInt(u.ultima, 10) || DIA_HOY));
+export const diasSinActividad = (u) => u.ultima_iso
+  ? Math.max(0, Math.floor((Date.now() - new Date(u.ultima_iso).getTime()) / 86400000))
+  : Math.max(0, DIA_HOY - (parseInt(u.ultima, 10) || DIA_HOY));
 
 /** Regla de seguimiento: nueva sin primer contacto, o 3+ días sin actividad. */
 export const necesitaSeguimiento = (u) => u.estado === "Nueva" || diasSinActividad(u) >= 3;

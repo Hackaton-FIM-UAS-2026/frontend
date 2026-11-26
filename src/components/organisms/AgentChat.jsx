@@ -1,21 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button, Icon } from "../atoms";
-import { ChatBubble, TypingBubble } from "../molecules";
+import { ChatBubble, TypingBubble, EmergencyBanner } from "../molecules";
+import { api } from "../../services/api";
 
 /**
- * Chat del agente. La detección de señales (M12) real vive en el backend;
- * aquí solo se simula con palabras clave para que el flujo se pueda demostrar.
- * Claude solo clasifica y elige plantilla: NO redacta libremente en el flujo sensible.
+ * Chat del agente. La detección de señales (M12) vive en el backend (POST /chat):
+ * Claude solo clasifica y elige plantilla; NO redacta libremente en el flujo sensible.
+ * La conversación no se guarda en ningún lado.
  */
-const SENALES = ["mi pareja", "ya no puedo más", "violencia", "me golpea", "miedo"];
-
-export function AgentChat({ onProponerCanalizacion }) {
+export function AgentChat({ onProponerCanalizacion, onSinSesion }) {
   const [msgs, setMsgs] = useState([
     { from: "agente", text: "Hola, ¿en qué te puedo ayudar con tus recomendaciones?" },
   ]);
   const [texto, setTexto] = useState("");
   const [propuesta, setPropuesta] = useState(false);
+  const [emergencia, setEmergencia] = useState(null);
   const [escribiendo, setEscribiendo] = useState(false);
   const fin = useRef(null);
   const reducir = useReducedMotion();
@@ -24,27 +24,30 @@ export function AgentChat({ onProponerCanalizacion }) {
     fin.current?.scrollIntoView({ behavior: reducir ? "auto" : "smooth", block: "end" });
   }, [msgs, escribiendo, propuesta, reducir]);
 
-  const enviar = (e) => {
+  const enviar = async (e) => {
     e.preventDefault();
-    if (!texto.trim() || escribiendo) return;
-    const hay = SENALES.some((s) => texto.toLowerCase().includes(s));
-    const respuesta = hay
-      ? "Gracias por contármelo. Hay personas que te pueden apoyar. ¿Quieres que te conecte con ellas? Tú decides."
-      : "Gracias. Lo tomo en cuenta para tus recomendaciones.";
-    setMsgs((m) => [...m, { from: "usuaria", text: texto }]);
+    const mensaje = texto.trim();
+    if (!mensaje || escribiendo) return;
+    setMsgs((m) => [...m, { from: "usuaria", text: mensaje }]);
     setTexto("");
     setPropuesta(false);
-    // Pausa breve y solo visual antes de la respuesta (no cambia la lógica de señales)
     setEscribiendo(true);
-    setTimeout(() => {
+    try {
+      const r = await api.chat(mensaje);
+      setMsgs((m) => [...m, { from: "agente", text: r.respuesta }]);
+      setPropuesta(Boolean(r.proponer_canalizacion));
+      setEmergencia(r.emergencia || null);
+    } catch (err) {
+      if (err.status === 401) return onSinSesion?.();
+      setMsgs((m) => [...m, { from: "agente", text: err.message || "La conexión está lenta. Intenta de nuevo." }]);
+    } finally {
       setEscribiendo(false);
-      setMsgs((m) => [...m, { from: "agente", text: respuesta }]);
-      setPropuesta(hay);
-    }, reducir ? 0 : 600);
+    }
   };
 
   return (
     <div className="chat">
+      {emergencia && <EmergencyBanner telefonoJuridico={emergencia.secretaria_mujeres_sinaloa?.telefono || undefined} />}
       <div className="chat__msgs" aria-live="polite">
         {msgs.map((m, i) => <ChatBubble key={i} from={m.from}>{m.text}</ChatBubble>)}
         {escribiendo && <TypingBubble />}

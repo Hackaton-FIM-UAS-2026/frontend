@@ -1,28 +1,28 @@
 import { useNavigate } from "react-router-dom";
 import { AppTemplate } from "../components/templates";
 import { ResourceDashboard } from "../components/organisms";
-import { PageHeader } from "../components/molecules";
+import { PageHeader, ApiEstado } from "../components/molecules";
 import { Badge } from "../components/atoms";
-import { leerCatalogoPublico } from "../services/catalogo";
-import { calcularRuta, NOMBRE_RUTA } from "../services/motorRuta";
-import { leerExpediente, valores } from "../services/expediente";
+import { NOMBRE_RUTA } from "../services/motorRuta";
+import { api } from "../services/api";
+import { useApi } from "../services/useApi";
 
 export default function Dashboard() {
   const nav = useNavigate();
-  const ruta = calcularRuta(valores(leerExpediente()));
-  const catalogo = leerCatalogoPublico();
-  const lista = catalogo.filter((r) => r.rutas.includes(ruta.principal) || r.rutas.includes(ruta.puente)).slice(0, 10);
+  const { datos, cargando, error, recargar } = useApi(api.recomendaciones);
+  const ruta = datos?.ruta;
   return (
     <AppTemplate wide>
       <PageHeader
         title="Tus recursos"
         lead="Elegidos según tu ruta."
-        meta={<>
+        meta={ruta && <>
           <Badge tone={ruta.principal} dot>{NOMBRE_RUTA[ruta.principal]}</Badge>
           {ruta.puente && <Badge tone={ruta.puente} dot>Puente: {NOMBRE_RUTA[ruta.puente]}</Badge>}
         </>}
       />
-      <ResourceDashboard recursos={lista.length ? lista : catalogo} onOpen={(id) => nav(`/recurso/${id}`)} />
+      {datos ? <ResourceDashboard recursos={datos.recursos} onOpen={(id) => nav(`/recurso/${id}`)} />
+        : <ApiEstado cargando={cargando} error={error} reintentar={recargar} />}
     </AppTemplate>
   );
 }

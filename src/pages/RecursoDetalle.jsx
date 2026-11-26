@@ -1,14 +1,38 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { AppTemplate } from "../components/templates";
 import { ResourceDetail } from "../components/organisms";
+import { ApiEstado } from "../components/molecules";
 import { Button, Icon } from "../components/atoms";
-import { leerCatalogoPublico } from "../services/catalogo";
+import { api } from "../services/api";
+import { useApi } from "../services/useApi";
 
 export default function RecursoDetalle() {
   const { id } = useParams();
   const nav = useNavigate();
-  const recurso = leerCatalogoPublico().find((r) => r.id === id);
-  if (!recurso) {
+  const { datos: recurso, cargando, error, recargar } = useApi(() => api.recurso(id), [id]);
+
+  // Cada respuesta entra al expediente (fuente: entrevista) y el backend recalcula "¡Cumples!"
+  const responder = async (campo, valor) => {
+    try {
+      await api.guardarCampos({ [campo]: valor }, "entrevista");
+      recargar();
+    } catch (e) {
+      alert(e.message || "No pudimos guardar tu respuesta.");
+    }
+  };
+
+  const accion = async (a) => {
+    try {
+      const r = await api.accion(id, a);
+      if (a === "aplicar" && r.url_accion && r.url_accion !== "#") window.open(r.url_accion, "_blank", "noopener");
+      else if (a === "guardar") nav("/seguimiento");
+      else recargar();
+    } catch (e) {
+      alert(e.message || "No pudimos registrar la acción.");
+    }
+  };
+
+  if (error?.status === 404 || (!cargando && !error && !recurso)) {
     return (
       <AppTemplate>
         <div className="card card--sunken empty">
@@ -23,7 +47,9 @@ export default function RecursoDetalle() {
   return (
     <AppTemplate>
       <Button variant="link" size="sm" onClick={() => nav(-1)} className="back"><Icon name="izq" size={18} /> Volver</Button>
-      <ResourceDetail recurso={recurso} onAction={(a) => (a === "aplicar" ? window.open(recurso.url_accion) : nav("/seguimiento"))} />
+      {recurso
+        ?<ResourceDetail key={recurso.id} recurso={recurso} onResponder={responder} onAction={accion} />
+        : <ApiEstado cargando={cargando} error={error} reintentar={recargar} />}
     </AppTemplate>
   );
 }

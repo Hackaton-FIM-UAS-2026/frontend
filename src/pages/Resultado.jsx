@@ -1,18 +1,16 @@
 import { AppTemplate } from "../components/templates";
-import { RouteSummary } from "../components/molecules";
+import { RouteSummary, ApiEstado } from "../components/molecules";
 import { Button, Icon } from "../components/atoms";
-import { calcularRuta, NOMBRE_RUTA } from "../services/motorRuta";
-import { leerExpediente, valores } from "../services/expediente";
+import { api } from "../services/api";
+import { useApi } from "../services/useApi";
 
 export default function Resultado() {
-  const ruta = calcularRuta(valores(leerExpediente()));
-  // En producción: el LLM redacta ruta.factores; si tarda >6 s, esta plantilla.
-  const explicacion = ruta.factores.length
-    ? `Porque ${ruta.factores.slice(0, 3).join(", ").toLowerCase()}.`
-    : `Te sugerimos ${NOMBRE_RUTA[ruta.principal]}.`;
+  // El backend decide la ruta (con regla de puente) y Claude/plantilla redacta la explicación
+  const { datos: ruta, cargando, error, recargar } = useApi(api.ruta);
   return (
     <AppTemplate>
-      <RouteSummary ruta={ruta} explicacion={explicacion} />
+      {ruta ? <RouteSummary ruta={ruta} explicacion={ruta.explicacion} factores={ruta.factores} />
+        : <ApiEstado cargando={cargando} error={error} reintentar={recargar} />}
       <div className="resultado__cta">
         <Button block to="/dashboard">Ver mis recursos <Icon name="flecha" size={18} /></Button>
       </div>
