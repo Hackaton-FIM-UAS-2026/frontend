@@ -53,7 +53,7 @@ export function SiteHeader() {
   return (
     <header className={`sitehead ${conScroll ? "sitehead--scrolled" : ""}`}>
       <div className="sitehead__in container">
-        <Link to="/" className="sitehead__logo" aria-label="Camino, inicio"><Logo /></Link>
+        <Link to="/" className="sitehead__logo" aria-label="Empoderate, inicio"><Logo /></Link>
 
         <nav className="sitenav" aria-label="Principal">
           <ul>{NAV.map(([to, label]) => <li key={to}><a href={to}>{label}</a></li>)}</ul>

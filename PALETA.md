@@ -1,4 +1,4 @@
-# Paleta de colores — Camino
+# Paleta de colores — Empoderate
 
 Basada en los carteles institucionales (Conferencia Regional sobre la Mujer, Mujeres en la Pesca, Compromiso Nacional, Mujeres Quintana Roo). **Se retiró el arcoíris decorativo**: la base es crema + morado + guinda, y los tonos de ruta solo codifican datos. Los valores viven en `src/styles/tokens.css`; el sistema completo está en `DESIGN.md`.
 

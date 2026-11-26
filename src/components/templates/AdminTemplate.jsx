@@ -7,12 +7,13 @@ import { SkipLink } from "./Templates.jsx";
 const MENU = [
   ["/admin", "Resumen", "panel", true],
   ["/admin/usuarias", "Usuarias", "usuarias"],
+  ["/admin/ofertas", "Ofertas de trabajo", "maletin"],
   ["/admin/bandeja", "Canalizaciones", "bandeja"],
   ["/admin/catalogo", "Catálogo", "libro"],
   ["/admin/metricas", "Métricas", "grafica"],
 ];
 
-export function AdminTemplate({ titulo, casosAbiertos = 0, children }) {
+export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, children }) {
   const [abierto, setAbierto] = useState(false);
 
   useEffect(() => {
@@ -39,7 +40,8 @@ export function AdminTemplate({ titulo, casosAbiertos = 0, children }) {
             <NavLink key={to} to={to} end={end} onClick={() => setAbierto(false)}
               className={({ isActive }) => (isActive ? "adm__link adm__link--on" : "adm__link")}>
               <Icon name={icon} size={20} /> <span>{label}</span>
-              {label === "Canalizaciones" && casosAbiertos > 0 && <em className="adm__badge">{casosAbiertos}</em>}
+              {label === "Canalizaciones" && casosAbiertos > 0 && <em className="adm__badge" aria-label={`${casosAbiertos} abiertas`}>{casosAbiertos}</em>}
+              {label === "Usuarias" && pendientes > 0 && <em className="adm__badge adm__badge--soft" aria-label={`${pendientes} para dar seguimiento`}>{pendientes}</em>}
             </NavLink>
           ))}
         </nav>

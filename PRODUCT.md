@@ -1,4 +1,4 @@
-# Camino — producto
+# Empoderate — producto
 
 ## Qué es
 Plataforma de orientación, evaluación, seguimiento y canalización para mujeres de Los Mochis / Ahome, Sinaloa. Un test base de 12 preguntas define una **ruta** (empleabilidad, emprendimiento o capacitación, más una ruta puente) y recomienda recursos reales y verificados. Además ofrece canalización discreta a apoyo jurídico y psicológico de CEMujeres.

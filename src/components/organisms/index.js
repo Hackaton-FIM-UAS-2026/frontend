@@ -10,3 +10,5 @@ export * from "./SiteFooter.jsx";
 export * from "./HeroSection.jsx";
 export * from "./BannerCarousel.jsx";
 export * from "./HomeSections.jsx";
+export * from "./AdminSeguimiento.jsx";
+export * from "./AdminOfertas.jsx";

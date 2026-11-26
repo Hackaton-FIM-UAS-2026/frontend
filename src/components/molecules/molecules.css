@@ -245,3 +245,76 @@ a.card, .card--link { text-decoration: none; cursor: pointer; }
 }
 .step h3 { margin: 6px 0 var(--space-1); }
 .step p { color: var(--text-muted); }
+
+/* ---------- Diálogo (hoja inferior en móvil, centrado en escritorio) ---------- */
+.dialog {
+  --dlg-dur: var(--dur-base);
+  width: 100%; max-width: 100%; max-height: 92dvh;
+  margin: auto auto 0; padding: 0;
+  border: 0; border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--surface); color: var(--text);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+  opacity: 1; transform: translateY(0);
+  transition:
+    opacity var(--dlg-dur) var(--ease-out),
+    transform var(--dur-slow) var(--ease-drawer),
+    overlay var(--dlg-dur) allow-discrete,
+    display var(--dlg-dur) allow-discrete;
+}
+.dialog:not([open]) { opacity: 0; transform: translateY(100%); --dlg-dur: var(--dur-fast); }
+@starting-style { .dialog[open] { opacity: 0; transform: translateY(100%); } }
+.dialog::backdrop {
+  background: var(--surface-scrim);
+  opacity: 1;
+  transition: opacity var(--dur-base) ease, overlay var(--dur-base) allow-discrete, display var(--dur-base) allow-discrete;
+}
+.dialog:not([open])::backdrop { opacity: 0; }
+@starting-style { .dialog[open]::backdrop { opacity: 0; } }
+.dialog__frame { display: flex; flex-direction: column; max-height: 92dvh; }
+.dialog__head {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-3);
+}
+.dialog__head h2 { font-size: var(--step-2); margin: 0; }
+.dialog__desc { color: var(--text-muted); font-size: var(--step--1); margin: var(--space-1) 0 0; }
+.dialog__close {
+  flex: none; display: grid; place-items: center; width: 44px; height: 44px; margin: -6px -8px 0 0;
+  border: 0; border-radius: 50%; background: none; color: var(--text-muted);
+  transition: background-color var(--dur-fast) ease;
+}
+@media (hover: hover) { .dialog__close:hover { background: var(--surface-sunken); color: var(--text); } }
+.dialog__close:focus-visible { border-radius: 50%; }
+.dialog__body { padding: var(--space-2) var(--space-5) var(--space-5); overflow-y: auto; overscroll-behavior: contain; }
+.dialog__foot {
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2);
+  padding: var(--space-4) var(--space-5) calc(var(--space-4) + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+@media (max-width: 639px) { .dialog__foot .btn { flex: 1; } }
+@media (min-width: 640px) {
+  .dialog { max-width: 520px; margin: auto; border-radius: var(--radius-lg); transform: scale(1); }
+  .dialog:not([open]) { transform: scale(0.97); }
+  @starting-style { .dialog[open] { transform: scale(0.97); } }
+  .dialog--wide { max-width: 760px; }
+  .dialog__head { padding: var(--space-6) var(--space-6) var(--space-3); }
+  .dialog__body { padding: var(--space-2) var(--space-6) var(--space-6); }
+  .dialog__foot { padding: var(--space-4) var(--space-6); }
+}
+
+/* ---------- Pastillas de filtro ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 36px; padding: 0 var(--space-4);
+  border: 1.5px solid var(--border-strong); border-radius: var(--radius-pill);
+  background: var(--surface); color: var(--text-soft);
+  font-size: var(--step--1); font-weight: 600;
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, color var(--dur-fast) ease, transform var(--dur-press) var(--ease-out);
+}
+.chip:active { transform: scale(0.96); }
+.chip:focus-visible { border-radius: var(--radius-pill); }
+@media (hover: hover) { .chip:hover:not([aria-pressed="true"]):not([aria-checked="true"]) { border-color: var(--morado-300); color: var(--action-ink); } }
+.chip[aria-pressed="true"], .chip[aria-checked="true"] { background: var(--action); border-color: var(--action); color: var(--on-action); }
+.chip__n { font-variant-numeric: tabular-nums; opacity: 0.75; }

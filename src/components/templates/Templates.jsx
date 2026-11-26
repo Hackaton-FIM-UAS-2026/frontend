@@ -33,7 +33,7 @@ export function AuthTemplate({ children }) {
   return (
     <div className="auth">
       <SkipLink />
-      <header className="auth__head container"><Link to="/" aria-label="Camino, inicio"><Logo /></Link></header>
+      <header className="auth__head container"><Link to="/" aria-label="Empoderate, inicio"><Logo /></Link></header>
       <motion.main id="contenido" className="auth__main" {...ENTRA}>
         <div className="card auth__card">{children}</div>
       </motion.main>

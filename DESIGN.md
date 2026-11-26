@@ -1,4 +1,4 @@
-# Camino — sistema de diseño
+# Empoderate — sistema de diseño
 
 **Fuente de verdad: `src/styles/tokens.css`.** Ningún otro archivo define colores, sombras ni duraciones. Los componentes consumen tokens semánticos, nunca primitivos.
 
@@ -45,3 +45,11 @@ Crema cálida como base, morado institucional para la marca y las acciones, y gu
 - `motion` (`motion/react`) para la transición direccional del test y del flujo de apoyo, las burbujas del chat, el menú móvil, el drawer del panel, la pastilla de navegación (`layoutId`) y la entrada única del hero.
 - `MotionConfig reducedMotion="user"` + `global.css`: con movimiento reducido se quitan los desplazamientos y se conserva la opacidad.
 - No hay animaciones al hacer scroll.
+
+## Panel de administración
+- **Resumen (dashboard):** tres accesos a pendientes (seguimiento, ofertas publicadas, canalizaciones), la lista «Para dar seguimiento» con botón Contactar, actividad reciente, canalizaciones, KPI, gráfica y calendario.
+- **Regla de seguimiento** (`AdminSeguimiento.jsx`): usuaria «Nueva» sin primer contacto, o 3 días o más sin actividad.
+- **`Dialog`** (molécula): `<dialog>` nativo; hoja inferior en móvil y centrado en escritorio, con entrada vía `@starting-style`.
+- **Ofertas de trabajo** (`/admin/ofertas`): tabla con filtros y el editor `OfertaEditor` (crear, editar, publicar o pausar). Se guardan con `services/catalogo.js` y aparecen en «Tus recursos» de las usuarias.
+- **Contacto:** `ContactoCard` en la ficha y `ContactarDialog` (WhatsApp, llamada o correo con mensaje neutro). Registrar el resultado añade una entrada a la línea de tiempo y a la actividad.
+- **Tablas `.dt--stack`:** se vuelven tarjetas con etiquetas por debajo de 760px.

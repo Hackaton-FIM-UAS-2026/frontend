@@ -13,7 +13,7 @@ export function AppHeader() {
   return (
     <header className="appbar">
       <div className="appbar__in container">
-        <Link to="/" className="appbar__logo" aria-label="Camino, inicio"><Logo /></Link>
+        <Link to="/" className="appbar__logo" aria-label="Empoderate, inicio"><Logo /></Link>
         <nav className="appbar__tabs" aria-label="Principal">
           {ITEMS.map(([to, label, icon]) => (
             <NavLink key={to} to={to} className={({ isActive }) => `tab ${isActive ? "tab--on" : ""}`}>

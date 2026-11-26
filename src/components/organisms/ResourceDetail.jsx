@@ -16,7 +16,7 @@ const aparece = {
 export function ResourceDetail({ recurso, onAction }) {
   const [resp, setResp] = useState({});
   const faltantes = recurso.requisitos.filter((r) => r.ok === null && !(r.campo in resp));
-  const preguntas = faltantes.slice(0, 3).map((r) => ({ campo: r.campo, ...DICCIONARIO_PREGUNTAS[r.campo] }));
+  const preguntas = faltantes.filter((r) => DICCIONARIO_PREGUNTAS[r.campo]).slice(0, 3).map((r) => ({ campo: r.campo, ...DICCIONARIO_PREGUNTAS[r.campo] }));
   const reqs = recurso.requisitos.map((r) => ({ ...r, ok: r.ok ?? (resp[r.campo] ? resp[r.campo] !== "No" && resp[r.campo] !== "Nada" : null) }));
   const cumple = reqs.every((r) => r.ok === true);
   const listos = reqs.filter((r) => r.ok === true).length;

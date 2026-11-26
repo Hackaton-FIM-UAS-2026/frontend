@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Badge, Button, Icon, Avatar, Input } from "../atoms";
 import { NOMBRE_RUTA } from "../../services/motorRuta";
+import { diasSinActividad, necesitaSeguimiento, textoDias, ContactoCard, ActividadTimeline } from "./AdminSeguimiento.jsx";
 
 /* ===== Piezas del panel CEMujeres (datos ficticios) ===== */
 
@@ -83,22 +84,41 @@ export function MiniCalendar({ marcas }) {
 
 const TONO_ESTADO = { Nueva: "primary", Inscrita: "warning", "En curso": "warning", Contratada: "success", "Curso terminado": "success" };
 
-export function UsersTable({ usuarias, onOpen, compact }) {
+export function UsersTable({ usuarias, onOpen, onContactar, compact }) {
   return (
     <div className="tablewrap">
-      <table className="dt">
+      <table className={`dt ${compact ? "" : "dt--stack"}`}>
         <thead>
-          <tr><th>Usuaria</th><th>Ruta</th>{!compact && <><th>Estado</th><th>Municipio</th><th>Última actividad</th></>}<th /></tr>
+          <tr>
+            <th>Usuaria</th><th>Ruta</th>
+            {!compact && <><th>Estado</th><th>Municipio</th><th>Última actividad</th></>}
+            <th><span className="visually-hidden">Acciones</span></th>
+          </tr>
         </thead>
         <tbody>
-          {usuarias.map((u) => (
-            <tr key={u.id}>
-              <td><span className="who"><Avatar nombre={u.nombre} size={34} />{u.nombre}</span></td>
-              <td><Badge tone={u.ruta}>{NOMBRE_RUTA[u.ruta]}</Badge></td>
-              {!compact && <><td><Badge tone={TONO_ESTADO[u.estado] || "primary"}>{u.estado}</Badge></td><td>{u.municipio}</td><td>{u.ultima}</td></>}
-              <td><button type="button" className="dt__link" onClick={() => onOpen(u.id)}>Ver ficha</button></td>
-            </tr>
-          ))}
+          {usuarias.map((u) => {
+            const d = diasSinActividad(u);
+            return (
+              <tr key={u.id}>
+                <td className="dt__main"><span className="who"><Avatar nombre={u.nombre} size={34} />{u.nombre}</span></td>
+                <td data-label="Ruta"><Badge tone={u.ruta}>{NOMBRE_RUTA[u.ruta]}</Badge></td>
+                {!compact && <>
+                  <td data-label="Estado"><Badge tone={TONO_ESTADO[u.estado] || "primary"}>{u.estado}</Badge></td>
+                  <td data-label="Municipio">{u.municipio}</td>
+                  <td data-label="Actividad">
+                    {textoDias(d)}
+                    {necesitaSeguimiento(u) && <><br /><small className="dt__alerta">Dar seguimiento</small></>}
+                  </td>
+                </>}
+                <td className="dt__end">
+                  <span className="dt__acciones">
+                    <button type="button" className="dt__link" onClick={() => onOpen(u.id)}>Ver ficha</button>
+                    {onContactar && <button type="button" className="dt__link dt__link--quiet" onClick={() => onContactar(u.id)}>Contactar</button>}
+                  </span>
+                </td>
+              </tr>
+            );
+          })}
           {!usuarias.length && <tr><td colSpan="6" className="dt__empty">Sin resultados.</td></tr>}
         </tbody>
       </table>
@@ -167,45 +187,51 @@ export function ActivityFeed({ items }) {
 
 const SITUACIONES = ["Inscrita", "En curso", "Curso terminado", "Contratada", "Negocio registrado"];
 
-export function UserFicha({ usuaria, onVolver, onRegistrar }) {
+export function UserFicha({ usuaria, onVolver, onRegistrar, onContactar }) {
   const [estado, setEstado] = useState(usuaria.estado);
   const [nota, setNota] = useState("");
+  const d = diasSinActividad(usuaria);
   return (
     <div className="ficha2">
       <button type="button" className="dt__link" onClick={onVolver}><Icon name="izq" size={16} /> Volver a usuarias</button>
       <Panel className="ficha2__head">
         <Avatar nombre={usuaria.nombre} size={72} />
-        <div>
+        <div className="ficha2__id">
           <h2>{usuaria.nombre}</h2>
-          <p className="muted">{usuaria.municipio} · Expediente v{usuaria.version}</p>
-          <p>
-            <Badge tone={usuaria.ruta}>{NOMBRE_RUTA[usuaria.ruta]}</Badge>{" "}
-            {usuaria.puente && <>+ puente <Badge tone={usuaria.puente}>{NOMBRE_RUTA[usuaria.puente]}</Badge></>}
+          <p className="muted">{usuaria.municipio} · Expediente v{usuaria.version} · Última actividad: {textoDias(d).toLowerCase()}</p>
+          <p className="ficha2__badges">
+            <Badge tone={usuaria.ruta}>{NOMBRE_RUTA[usuaria.ruta]}</Badge>
+            {usuaria.puente && <Badge tone={usuaria.puente}>Puente: {NOMBRE_RUTA[usuaria.puente]}</Badge>}
+            <Badge tone={TONO_ESTADO[usuaria.estado] || "primary"} dot>{usuaria.estado}</Badge>
+            {necesitaSeguimiento(usuaria) && <Badge tone="warning" dot>Dar seguimiento</Badge>}
           </p>
         </div>
       </Panel>
       <div className="ficha2__cols">
-        <Panel titulo="Expediente económico">
-          <dl className="datos">
-            {Object.entries(usuaria.campos).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
-          </dl>
-        </Panel>
-        <Panel titulo="Actualizar situación">
-          <Input as="select" label="Situación" value={estado} onChange={(e) => setEstado(e.target.value)}>
-            {SITUACIONES.map((s) => <option key={s}>{s}</option>)}
-          </Input>
-          <Input as="textarea" label="Nota" rows="3" value={nota} onChange={(e) => setNota(e.target.value)} />
-          <Button onClick={() => { onRegistrar(usuaria.id, estado, nota); setNota(""); }}>Guardar</Button>
-          <p className="muted small pnl__nota">Queda con la fuente «personal_cemujeres» y la versión del expediente sube. Si choca con lo que dijo ella, se marca para revisar.</p>
-        </Panel>
+        <div className="ficha2__main">
+          <Panel titulo="Actividad y seguimiento">
+            <ActividadTimeline historial={usuaria.historial} />
+          </Panel>
+          <Panel titulo="Expediente económico">
+            <dl className="datos">
+              {Object.entries(usuaria.campos).map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}
+            </dl>
+          </Panel>
+        </div>
+        <div className="ficha2__side">
+          <Panel titulo="Contacto">
+            <ContactoCard usuaria={usuaria} onContactar={() => onContactar(usuaria.id)} />
+          </Panel>
+          <Panel titulo="Actualizar situación">
+            <Input as="select" label="Situación" value={estado} onChange={(e) => setEstado(e.target.value)}>
+              {SITUACIONES.map((s) => <option key={s}>{s}</option>)}
+            </Input>
+            <Input as="textarea" label="Nota" rows="3" value={nota} onChange={(e) => setNota(e.target.value)} />
+            <Button onClick={() => { onRegistrar(usuaria.id, estado, nota); setNota(""); }}>Guardar</Button>
+            <p className="muted small pnl__nota">Queda con la fuente «personal_cemujeres» y la versión del expediente sube. Si choca con lo que dijo ella, se marca para revisar.</p>
+          </Panel>
+        </div>
       </div>
-      <Panel titulo="Línea de tiempo">
-        <ul className="timeline">
-          {usuaria.historial.map((h, i) => (
-            <li key={i}><b>{h.fecha}</b><span>{h.texto}</span><Badge tone="primary">{h.fuente}</Badge></li>
-          ))}
-        </ul>
-      </Panel>
     </div>
   );
 }

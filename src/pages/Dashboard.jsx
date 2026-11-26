@@ -3,14 +3,15 @@ import { AppTemplate } from "../components/templates";
 import { ResourceDashboard } from "../components/organisms";
 import { PageHeader } from "../components/molecules";
 import { Badge } from "../components/atoms";
-import { RECURSOS } from "../data/recursos";
+import { leerCatalogoPublico } from "../services/catalogo";
 import { calcularRuta, NOMBRE_RUTA } from "../services/motorRuta";
 import { leerExpediente, valores } from "../services/expediente";
 
 export default function Dashboard() {
   const nav = useNavigate();
   const ruta = calcularRuta(valores(leerExpediente()));
-  const lista = RECURSOS.filter((r) => r.rutas.includes(ruta.principal) || r.rutas.includes(ruta.puente)).slice(0, 10);
+  const catalogo = leerCatalogoPublico();
+  const lista = catalogo.filter((r) => r.rutas.includes(ruta.principal) || r.rutas.includes(ruta.puente)).slice(0, 10);
   return (
     <AppTemplate wide>
       <PageHeader
@@ -21,7 +22,7 @@ export default function Dashboard() {
           {ruta.puente && <Badge tone={ruta.puente} dot>Puente: {NOMBRE_RUTA[ruta.puente]}</Badge>}
         </>}
       />
-      <ResourceDashboard recursos={lista.length ? lista : RECURSOS} onOpen={(id) => nav(`/recurso/${id}`)} />
+      <ResourceDashboard recursos={lista.length ? lista : catalogo} onOpen={(id) => nav(`/recurso/${id}`)} />
     </AppTemplate>
   );
 }

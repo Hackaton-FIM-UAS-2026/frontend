@@ -16,7 +16,7 @@ import "./styles/responsive.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       {/* Respeta prefers-reduced-motion: quita desplazamientos y deja la opacidad */}
       <MotionConfig reducedMotion="user">
         <App />

@@ -2,12 +2,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import { AppTemplate } from "../components/templates";
 import { ResourceDetail } from "../components/organisms";
 import { Button, Icon } from "../components/atoms";
-import { RECURSOS } from "../data/recursos";
+import { leerCatalogoPublico } from "../services/catalogo";
 
 export default function RecursoDetalle() {
   const { id } = useParams();
   const nav = useNavigate();
-  const recurso = RECURSOS.find((r) => r.id === id);
+  const recurso = leerCatalogoPublico().find((r) => r.id === id);
   if (!recurso) {
     return (
       <AppTemplate>
