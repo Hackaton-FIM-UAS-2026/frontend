@@ -65,3 +65,5 @@
   .m2-form { margin-bottom: var(--space-5); padding: var(--space-2); border-radius: var(--radius-pill); background: var(--surface); box-shadow: var(--shadow-2); }
   .m2-campo { border-color: transparent; }
 }
+.m2-regresar { width: 40px; height: 40px; flex: none; border: 0; border-radius: 50%; display: grid; place-items: center; background: transparent; color: var(--action-ink); cursor: pointer; margin-left: calc(-1 * var(--space-2)); }
+@media (hover: hover) { .m2-regresar:hover { background: var(--action-softer); } }

@@ -3,7 +3,7 @@ import { Button, Icon } from "../atoms";
 import { OptionButton } from "./QuizMolecules.jsx";
 
 /** Tarjeta de una pregunta: pregunta, "por qué preguntamos" y opciones. */
-export function QuestionCard({ numero, pregunta, porque, tipo, opciones, valor, onChange, onNext, onBack }) {
+export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusiva, valor, onChange, onNext, onBack }) {
   const sel = tipo === "multiple" ? valor || [] : valor;
   const activa = (o) => (tipo === "multiple" ? sel.includes(o) : sel === o);
   const titulo = useRef(null);
@@ -14,7 +14,12 @@ export function QuestionCard({ numero, pregunta, porque, tipo, opciones, valor, 
   }, [numero]);
 
   const toggle = (o) => {
-    if (tipo === "multiple") onChange(activa(o) ? sel.filter((x) => x !== o) : [...sel, o]);
+    if (tipo === "multiple") {
+      if (activa(o)) onChange(sel.filter((x) => x !== o));
+      // «Ninguna» excluye a las demás, y elegir otra quita «Ninguna»
+      else if (exclusiva && o === exclusiva) onChange([o]);
+      else onChange([...sel.filter((x) => x !== exclusiva), o]);
+    }
     else { onChange(o); setTimeout(() => onNext?.(o), 220); }   // avanza solo, con un respiro visual
   };
 

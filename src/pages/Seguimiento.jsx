@@ -41,7 +41,7 @@ export default function Seguimiento() {
           <p className="m3-muted">{s.datos_guardados} de {s.total} datos</p>
           <ProgressBar value={s.datos_guardados} max={s.total} label="Tu perfil" />
           <p className="m3-muted">Entre más nos cuentes, mejores opciones te damos.</p>
-          {s.datos_guardados < s.total && <Button variant="quiet" size="sm" to="/test" className="m3-auto">Completar mi perfil</Button>}
+          {s.datos_guardados < s.total && <Button variant="quiet" size="sm" to="/completar-perfil?volver=/seguimiento" className="m3-auto">Completar mi perfil</Button>}
         </section>
 
         <section className="card card--sunken" aria-labelledby="datos-t" id="mis-datos">

@@ -39,7 +39,7 @@ export default function Explorar() {
   );
 
   return (
-    <AppTemplate wide>
+    <AppTemplate wide publica>
       <h1 className="m3-h1">Explorar</h1>
       <div className="m3-explorar">
         <aside className="m3-explorar__filtros">{filtros}</aside>

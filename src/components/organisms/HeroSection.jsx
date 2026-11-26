@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { Button, Icon, CaminoIlustracion } from "../atoms";
-import { destino } from "../../modulos/registro";
 
 const sube = (delay) => ({
   initial: { opacity: 0, transform: "translateY(12px)" },
@@ -20,7 +19,7 @@ export function HeroSection() {
             Gratis y desde tu celular.
           </motion.p>
           <motion.div className="hero__cta" {...sube(0.12)}>
-            <Button to={destino("/entrar", "/registro")}>Comenzar</Button>
+            <Button to="/registro">Comenzar</Button>
             <Button to="/como-funciona" variant="ghost">¿Cómo funciona?</Button>
           </motion.div>
           <motion.p className="hero__place" {...sube(0.18)}>

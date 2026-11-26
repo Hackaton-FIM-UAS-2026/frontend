@@ -16,7 +16,7 @@ export const TEST_BASE = [
   { campo: "horario", pregunta: "¿En qué horario puedes?", tipo: "multiple",
     opciones: ["Mañana", "Tarde", "Noche", "Fines de semana"] },
   { campo: "cuidados", pregunta: "¿Tienes personas a tu cargo?", tipo: "multiple",
-    opciones: ["Niñas o niños", "Personas mayores", "Ninguna"] },
+    opciones: ["Niñas o niños", "Personas mayores", "Ninguna"], exclusiva: "Ninguna" },
   { campo: "dispositivo", pregunta: "¿Con qué te conectas?", tipo: "unica",
     opciones: ["Solo celular con datos", "Celular con wifi", "Computadora"] },
   { campo: "habilidades", pregunta: "¿Qué sabes hacer?", tipo: "multiple",

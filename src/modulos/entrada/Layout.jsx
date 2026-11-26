@@ -26,6 +26,7 @@ export function EntradaLayout({ regresar, children }) {
           {regresar
             ? <Link to={regresar.to} className="btn btn--link btn--sm"><Icon name="izq" size={18} /> {regresar.texto}</Link>
             : <Link to="/" className="m1-barra__logo" aria-label="Empoderate, inicio"><Logo /></Link>}
+          {/* En escritorio el logo ya está en el panel morado: esta barra solo se ve en celular */}
         </header>
         <motion.main id="contenido" className="m1-form" {...ENTRA}>{children}</motion.main>
       </div>

@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Button, Icon } from "../../components/atoms";
-import { destino } from "../registro";
 import { CIFRAS, LINEA, RESPALDO_ALIADAS } from "./datos.js";
 import { empresasAliadas } from "./servicio.js";
 import "./estilos.css";
 
-export const comenzar = () => destino("/entrar", "/registro");
+export const comenzar = () => "/registro";
 
 export function Seccion({ id, alt, marca, titulo, lead, children, className = "" }) {
   return (

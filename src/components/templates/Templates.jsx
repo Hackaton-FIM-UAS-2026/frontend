@@ -2,6 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { AppHeader, BottomNav } from "../organisms";
 import { Logo } from "../atoms";
+import { useRequiereSesion } from "../../services/useSesion";
 
 const ENTRA = {
   initial: { opacity: 0, transform: "translateY(8px)" },
@@ -14,8 +15,11 @@ export function SkipLink() {
 }
 
 /** App de la usuaria: barra superior, contenido y navegación inferior (móvil). */
-export function AppTemplate({ children, wide }) {
+/** `publica`: pantallas que se pueden ver sin sesión (p. ej. Explorar). */
+export function AppTemplate({ children, wide, publica }) {
   const { pathname } = useLocation();
+  const lista = useRequiereSesion(!publica);
+  if (!lista) return null;
   return (
     <div className="app">
       <SkipLink />

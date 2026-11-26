@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Logo, Icon, Button } from "../atoms";
-import { destino } from "../../modulos/registro";
 import { TEMAS } from "../../modulos/portada/datos.js";
 
 function useConScroll() {
@@ -21,7 +20,6 @@ export function SiteHeader() {
   const [abierto, setAbierto] = useState(false);
   const conScroll = useConScroll();
   const { pathname } = useLocation();
-  const entrar = destino("/entrar", "/registro");
 
   useEffect(() => { setAbierto(false); }, [pathname]);
   useEffect(() => {
@@ -43,8 +41,8 @@ export function SiteHeader() {
         </nav>
 
         <div className="sitehead__tools">
-          <Button to={entrar} size="sm" variant="link" className="sitehead__entrar">Entrar</Button>
-          <Button to={entrar} size="sm" className="sitehead__login">Comenzar</Button>
+          <Button to="/entrar" size="sm" variant="link" className="sitehead__entrar">Entrar</Button>
+          <Button to="/registro" size="sm" className="sitehead__login">Comenzar</Button>
           <button type="button" className="burger" onClick={() => setAbierto(!abierto)}
             aria-expanded={abierto} aria-controls="menu-movil" aria-label={abierto ? "Cerrar menú" : "Abrir menú"}>
             <Icon name={abierto ? "x" : "menu"} size={24} />
@@ -64,7 +62,8 @@ export function SiteHeader() {
               transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}>
               <ul className="container">
                 {TEMAS.map(([to, label]) => <li key={to}><Link to={to}>{label}<Icon name="der" size={18} /></Link></li>)}
-                <li className="mobilenav__cta"><Button block to={entrar}>Comenzar</Button></li>
+                <li className="mobilenav__cta"><Button block to="/registro">Comenzar</Button></li>
+                <li className="mobilenav__cta"><Button block variant="ghost" to="/entrar">Ya tengo cuenta: entrar</Button></li>
               </ul>
             </motion.nav>
           </>

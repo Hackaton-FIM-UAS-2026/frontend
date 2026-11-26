@@ -51,7 +51,7 @@ export default function PanelEmpresa() {
     catch (e) { setEstado({ error: e.status === 403 ? "Esta cuenta no es de una empresa." : e.status === 404 ? "Esta cuenta aún no tiene empresa registrada." : e.message }); }
   }, []);
   useEffect(() => { revisar(); }, [revisar]);
-  const cerrar = async () => { await salir(); setEstado({ sinSesion: true }); };
+  const cerrar = async () => { await salir(); window.location.assign("/"); };
 
   if (estado.cargando) return <AuthTemplate><p className="m6-muted">Cargando…</p></AuthTemplate>;
   if (estado.sinSesion) return <Entrar onListo={revisar} />;

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRequiereSesion } from "../../services/useSesion";
+import { destino } from "../registro";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Icon } from "../../components/atoms";
 import { AppHeader } from "../../components/organisms";
@@ -26,7 +28,11 @@ const msg = (de, texto, extra = {}) => ({ id: ++sec, de, texto, ...extra });
 export default function Asistente() {
   const nav = useNavigate();
   const reducir = useReducedMotion();
-  const [msgs, setMsgs] = useState([msg("asistente", "Hola. Soy el asistente de SEMujeres. ¿En qué te ayudo?")]);
+  const lista = useRequiereSesion();
+  const [msgs, setMsgs] = useState([
+    msg("asistente", "Hola. Soy el asistente de SEMujeres. ¿En qué te ayudo?"),
+    msg("asistente", "Si alguien se acerca y no quieres que vea esta pantalla, toca «Salida rápida»: se cambia por una página del clima."),
+  ]);
   const [chips, setChips] = useState(CHIPS_INICIO);
   const [texto, setTexto] = useState("");
   const [escribiendo, setEscribiendo] = useState(false);
@@ -105,15 +111,24 @@ export default function Asistente() {
   };
 
   const salir = (
-    <button type="button" className="m2-salida" onClick={salidaRapida}>
-      <Icon name="x" size={16} strokeWidth="2.4" /> Salir rápido
+    <button type="button" className="m2-salida" onClick={salidaRapida} aria-label="Salida rápida: cambia esta página por otra">
+      <Icon name="x" size={16} strokeWidth="2.4" /> Salida rápida
     </button>
   );
+  const regresar = (
+    <button type="button" className="m2-regresar" onClick={() => (window.history.length > 1 ? nav(-1) : nav(destino("/inicio", "/dashboard")))}
+      aria-label="Regresar">
+      <Icon name="izq" size={22} />
+    </button>
+  );
+
+  if (!lista) return null;
 
   return (
     <div className="m2">
       <div className="m2-solo-pc"><AppHeader /></div>
       <header className="m2-head">
+        {regresar}
         <span className="m2-avatar" aria-hidden="true">S</span>
         <div><b>Asistente de SEMujeres</b><small>Asistente automático · 24 h</small></div>
         {salir}
@@ -121,6 +136,7 @@ export default function Asistente() {
 
       <main id="contenido" className="m2-cuerpo">
         <div className="m2-cabecera-pc">
+          {regresar}
           <span className="m2-avatar" aria-hidden="true">S</span>
           <div><b>Asistente de SEMujeres</b><small>Asistente automático · disponible 24 h</small></div>
           {salir}

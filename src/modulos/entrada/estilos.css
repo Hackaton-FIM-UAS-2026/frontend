@@ -24,3 +24,8 @@
   .m1-barra { background: transparent; box-shadow: none; }
   .m1-form { align-self: center; padding-top: 0; }
 }
+.m1-o { display: flex; align-items: center; gap: var(--space-3); color: var(--text-muted); font-size: var(--step--1); margin: var(--space-2) 0; }
+.m1-o::before, .m1-o::after { content: ""; flex: 1; height: 1px; background: var(--border-strong); }
+.m1-cambio { margin: var(--space-2) 0 0; text-align: center; color: var(--text-soft); }
+.m1-cambio a { font-weight: 700; color: var(--action-ink); }
+@media (min-width: 960px) { .m1-barra:has(.m1-barra__logo) { display: none; } .m1-lado:has(.m1-barra__logo) { grid-template-rows: 1fr; } }

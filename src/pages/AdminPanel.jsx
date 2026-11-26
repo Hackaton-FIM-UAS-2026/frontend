@@ -40,7 +40,7 @@ export default function AdminPanel() {
 
   if (yo === undefined) return <AuthTemplate><p className="muted">Cargando…</p></AuthTemplate>;
   if (!yo) return <AdminLogin onListo={setYo} />;
-  return <PanelInterno yo={yo} onSalir={async () => { await salir(); setYo(null); }} />;
+  return <PanelInterno yo={yo} onSalir={async () => { await salir(); window.location.assign("/"); }} />;
 }
 
 function AdminLogin({ onListo }) {
