@@ -1,0 +1,52 @@
+/* ===== AJUSTES RESPONSIVOS GENERALES (se importa al final) ===== */
+img, svg { max-width: 100%; }
+body { overflow-x: hidden; }
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .grid4 { grid-template-columns: repeat(2, 1fr); }
+  .tiles { grid-template-columns: repeat(3, 1fr); }
+  .hero__in { gap: 16px; }
+  .mainnav a { padding: 14px 10px; font-size: .95rem; }
+}
+
+/* Celular */
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+  .topbar__in { padding: 8px 14px; }
+  .topbar__right { gap: 8px; }
+  .aa { padding: 4px 8px; }
+  .hero__in { padding: 28px 16px 36px; }
+  .hero__cta { flex-direction: column; }
+  .hero__cta a, .hero__cta .btn { width: 100%; }
+  .hero__band { height: 18px; }
+  .banner-wrap { padding: 0 12px; margin-top: 28px; }
+  .banner { flex-direction: column; padding: 24px 16px 20px; min-height: 0; }
+  .banner__arrow { position: absolute; top: 12px; width: 36px; height: 36px; font-size: 1.3rem; }
+  .banner__arrow:first-child { left: 10px; }
+  .banner__arrow:last-child { right: 10px; }
+  .banner__body { padding-top: 28px; }
+  .banner h2 { font-size: 1.35rem; }
+  .sec { padding: 36px 16px; }
+  .sec__title { font-size: 1.5rem; }
+  .grid4, .tiles { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid3 { gap: 14px; }
+  .fcard { padding: 18px; }
+  .step { padding: 14px; gap: 12px; }
+  .support { padding: 22px 18px; }
+  .sitefoot__in { gap: 20px; }
+}
+@media (max-width: 380px) {
+  .grid4, .tiles { grid-template-columns: 1fr; }
+  .topbar__login { padding: 6px 12px; font-size: .85rem; }
+}
+
+/* Pantallas de la app de la usuaria: más aire en escritorio, columna cómoda en móvil */
+@media (min-width: 900px) {
+  .app__main { max-width: 900px; padding: 40px 24px; }
+  .app__main > div > section { display: grid; gap: 0 20px; grid-template-columns: repeat(2, 1fr); align-items: start; }
+  .app__main > div > section > h2 { grid-column: 1 / -1; }
+}
+.auth__card { padding: 32px 24px; }
+@media (max-width: 480px) { .auth { padding: 12px; } .route h1 { font-size: 1.9rem; } }
+.bottomnav { padding-bottom: env(safe-area-inset-bottom); }

@@ -1,0 +1,35 @@
+/* ===== ORGANISMOS ===== */
+.wizard__count { color: var(--color-text-muted); margin: var(--space-2) 0 var(--space-5); }
+.linkbtn { background: none; border: 0; color: var(--morado-700); font-weight: 700; padding: var(--space-3) 0; }
+
+.detail h1 { font-size: 1.7rem; }
+.muted { color: var(--color-text-muted); } .small { font-size: .85rem; }
+.reqlist { padding: 0; margin: 0 0 var(--space-5); }
+.agentbox { background: var(--mostaza-100); border-radius: var(--radius-lg); padding: var(--space-5); margin-bottom: var(--space-5); }
+.agentbox__opts { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.cumples { font-family: var(--font-display); font-size: 1.6rem; color: var(--oliva-500); font-weight: 800; }
+.detail__actions { display: grid; gap: var(--space-3); }
+
+.chat { display: flex; flex-direction: column; min-height: 60vh; }
+.chat__msgs { flex: 1; }
+.chat__form { display: flex; gap: var(--space-2); position: sticky; bottom: 70px; background: var(--color-bg); padding: var(--space-3) 0; }
+.chat__propuesta { display: grid; gap: var(--space-2); margin: var(--space-3) 0; }
+
+.sensible { background: var(--sensible-surface); border-radius: var(--radius-lg); padding: var(--space-5); display: grid; gap: var(--space-3); }
+.salida { justify-self: end; background: var(--morado-900); color: #fff; border: 0; border-radius: var(--radius-pill); padding: 8px 16px; font-weight: 700; }
+.check-row { display: flex; gap: var(--space-3); align-items: flex-start; }
+.check-row input { width: 22px; height: 22px; flex: none; }
+
+.appheader { background: var(--morado-700); padding: var(--space-3) var(--space-4) 0; }
+.bottomnav { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: #fff; border-top: 1px solid var(--color-border); }
+.bn { flex: 1; text-align: center; padding: 14px 4px; text-decoration: none; color: var(--color-text-muted); font-weight: 700; font-size: .9rem; }
+.bn--on { color: var(--morado-700); border-top: 4px solid var(--naranja-500); }
+
+.table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card); }
+.table th { background: var(--morado-700); color: #fff; text-align: left; padding: 12px 16px; }
+.table td { padding: 12px 16px; border-bottom: 1px solid var(--color-border); }
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-5); }
+.inbox { display: grid; gap: var(--space-3); }
+.caso { background: #fff; border-radius: var(--radius-md); padding: var(--space-4); border-left: 6px solid var(--mostaza-500); box-shadow: var(--shadow-card); }
+.caso--inmediata { border-left-color: var(--coral-500); }
+.ficha { background: #fff; padding: var(--space-5); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); }

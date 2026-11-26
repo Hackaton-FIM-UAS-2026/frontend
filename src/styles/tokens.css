@@ -1,0 +1,105 @@
+/* ============================================================
+   TOKENS DE DISEÑO — tomados de los carteles institucionales
+   (Conferencia Regional de la Mujer, Mujeres en la Pesca,
+   Compromiso Nacional, Mujeres Quintana Roo)
+   ============================================================ */
+:root {
+  /* Morado (color principal: colibrí, tarjeta Q. Roo, banners) */
+  --morado-900: #3e1b5c;
+  --morado-700: #5b2c83;
+  --morado-500: #7a44a6;
+  --morado-300: #b692d1;
+  --morado-100: #ebddf5;
+
+  /* Guinda (botón "Continuar leyendo") */
+  --guinda-700: #5e1236;
+  --guinda-500: #8a2252;
+
+  /* Coral (texto "por la vida, la felicidad") */
+  --coral-500: #e8603c;
+  --coral-100: #fce3da;
+
+  /* Naranja (arcos del banner) */
+  --naranja-500: #ec8216;
+  --naranja-100: #fdebd3;
+
+  /* Mostaza (espiral del colibrí) */
+  --mostaza-500: #d9a514;
+  --mostaza-100: #f9edc4;
+
+  /* Turquesa (arco superior) */
+  --turquesa-500: #14a3b5;
+  --turquesa-100: #d2eff3;
+
+  /* Oliva (arco inferior) */
+  --oliva-500: #6f8460;
+  --oliva-100: #e2e9dc;
+
+  /* Magenta (arcos / estrella de Pesca) */
+  --magenta-500: #a9489b;
+  --magenta-100: #f3daef;
+
+  /* Neutros cálidos (fondos crema de los carteles) */
+  --crema-50: #fbf7ef;
+  --crema-100: #f4ecdd;
+  --crema-300: #e6d8bd;
+  --blanco: #ffffff;
+  --tinta: #2b1a3a;
+  --tinta-suave: #6b5a7a;
+
+  /* ---------- Semánticos (usar SIEMPRE estos en componentes) ---------- */
+  --color-primary: var(--morado-700);
+  --color-primary-hover: var(--morado-900);
+  --color-primary-soft: var(--morado-100);
+  --color-secondary: var(--guinda-700);
+  --color-accent: var(--coral-500);
+  --color-accent-soft: var(--coral-100);
+
+  --color-bg: var(--crema-50);
+  --color-surface: var(--blanco);
+  --color-surface-alt: var(--crema-100);
+  --color-border: var(--crema-300);
+  --color-text: var(--tinta);
+  --color-text-muted: var(--tinta-suave);
+  --color-on-primary: var(--blanco);
+
+  --color-success: var(--oliva-500);
+  --color-success-soft: var(--oliva-100);
+  --color-warning: var(--mostaza-500);
+  --color-warning-soft: var(--mostaza-100);
+  --color-danger: var(--coral-500);
+  --color-danger-soft: var(--coral-100);
+  --color-info: var(--turquesa-500);
+  --color-info-soft: var(--turquesa-100);
+
+  /* Áreas de la ruta */
+  --ruta-empleabilidad: var(--turquesa-500);
+  --ruta-emprendimiento: var(--naranja-500);
+  --ruta-capacitacion: var(--magenta-500);
+
+  /* Zona sensible (más sobria, sin colores de alerta agresivos) */
+  --sensible-bg: var(--morado-900);
+  --sensible-surface: var(--morado-100);
+
+  /* Tipografía y forma */
+  --font-display: "Fraunces", "Georgia", serif;      /* títulos con carácter, como el cartel */
+  --font-body: "Noto Sans", "Segoe UI", system-ui, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-card: 0 2px 10px rgba(91, 44, 131, 0.12);
+  --space-1: 4px; --space-2: 8px; --space-3: 12px;
+  --space-4: 16px; --space-5: 24px; --space-6: 32px;
+
+  /* Arcos decorativos (franja multicolor del banner) */
+  --franja-arcos: linear-gradient(
+    90deg,
+    var(--turquesa-500) 0 20%,
+    var(--naranja-500) 20% 40%,
+    var(--mostaza-500) 40% 60%,
+    var(--oliva-500) 60% 80%,
+    var(--magenta-500) 80% 100%
+  );
+  --gradiente-hero: linear-gradient(160deg, var(--morado-500), var(--morado-900));
+}
