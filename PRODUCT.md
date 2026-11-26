@@ -1,11 +1,11 @@
 # Empoderate — producto
 
 ## Qué es
-Plataforma de orientación, evaluación, seguimiento y canalización para mujeres de Los Mochis / Ahome, Sinaloa. Un test base de 12 preguntas define una **ruta** (empleabilidad, emprendimiento o capacitación, más una ruta puente) y recomienda recursos reales y verificados. Además ofrece canalización discreta a apoyo jurídico y psicológico de CEMujeres.
+Plataforma de orientación, evaluación, seguimiento y canalización para mujeres de Los Mochis / Ahome, Sinaloa. Un test base de 12 preguntas define una **ruta** (empleabilidad, emprendimiento o capacitación, más una ruta puente) y recomienda recursos reales y verificados. Además ofrece canalización discreta a apoyo jurídico y psicológico de SEMujeres.
 
 ## Quién la usa
 - **Usuarias:** mujeres adultas, muchas desde el celular con datos limitados, con tiempo escaso por trabajo o cuidados y con distintos niveles de lectura. Algunas pueden estar en una situación de riesgo.
-- **Personal de CEMujeres:** asesoras y especialistas que dan seguimiento, atienden canalizaciones y mantienen el catálogo (panel `/admin`).
+- **Personal de SEMujeres:** asesoras y especialistas que dan seguimiento, atienden canalizaciones y mantienen el catálogo (panel `/admin`).
 
 ## Tono
 Confianza, calma, claridad institucional moderna y cercanía humana. Nunca infantil, clínica, alarmista ni saturada. Lenguaje claro y frases cortas, de tú.
@@ -22,4 +22,4 @@ Confianza, calma, claridad institucional moderna y cercanía humana. Nunca infan
 |---|---|---|
 | Portal | `/` | Persuadir: orientar sin fricción hacia el test |
 | App de la usuaria | `/registro`, `/test`, `/resultado`, `/dashboard`, `/recurso/:id`, `/seguimiento`, `/chat`, `/apoyo` | Operar |
-| Panel CEMujeres | `/admin/*` | Operar |
+| Panel SEMujeres | `/admin/*` | Operar |

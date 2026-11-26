@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M5 · Recepción — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M5 · Recepción: visitas previstas</h1>
+  <p>Saber quién va a llegar, cuándo y a qué módulo. Nunca el motivo.</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Una sola vista: tabla con <b>Cuándo · Quién · Va a · Estado · Acción</b>. Sin calendario.</li>
+  <li>Pestañas «Hoy» (por defecto) · «Próximos días».</li>
+  <li>Estados: Por llegar = <code>badge--warn</code>, Llegó = <code>badge--ok</code>, No vino = <code>badge</code> neutro.</li>
+  <li>Acción por fila: «Ya llegó» (primario) y «No vino» (enlace). Un toque, sin formularios.</li>
+  <li>Prohibido mostrar motivo, folio de canalización, urgencia o notas.</li>
+</ul></div>
+
+<h2 class="sec">Pantalla</h2>
+<div class="pc"><div class="adm">
+  <aside class="adm__side">
+    <span class="logo">Empoderate</span>
+    <div class="adm__perfil"><span class="avatar">R</span><span><b>Rocío Soto</b><small>Recepción</small></span></div>
+    <span class="adm__link adm__link--on">Visitas previstas <em>3</em></span>
+    <span class="adm__link" style="margin-top:auto">Cerrar sesión</span>
+  </aside>
+  <main class="adm__main">
+    <div class="adm__top"><h1>Visitas previstas</h1></div>
+    <div class="chips"><span class="chip chip--on">Hoy · jueves 26</span><span class="chip">Próximos días</span></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="tabla">
+        <tr><th>Cuándo</th><th>Quién</th><th>Va a</th><th>Estado</th><th></th></tr>
+        <tr><td>Mañana</td><td><b>María López R.</b></td><td>Trabajo Social</td><td><span class="badge badge--warn">Por llegar</span></td><td><span class="btn btn--sm">Ya llegó</span> <span class="btn btn--link btn--sm">No vino</span></td></tr>
+        <tr><td>Mañana</td><td><b>Lucía Torres V.</b></td><td>Empoderamiento económico</td><td><span class="badge badge--ok">Llegó</span></td><td></td></tr>
+        <tr><td>Tarde</td><td><b>Ana Pérez G.</b></td><td>Psicología</td><td><span class="badge badge--warn">Por llegar</span></td><td><span class="btn btn--sm">Ya llegó</span> <span class="btn btn--link btn--sm">No vino</span></td></tr>
+      </table>
+    </div>
+    <p class="muted">Las visitas las agenda el asistente cuando la usuaria elige «Prefiero ir en persona».</p>
+  </main>
+</div></div>
+
+<h2 class="sec">Celular o tableta</h2>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="icono-btn"><i data-i="menu"></i></span><b>Visitas previstas</b></div>
+      <div class="cel__body">
+        <div class="chips"><span class="chip chip--on">Hoy</span><span class="chip">Próximos días</span></div>
+        <div class="card"><div class="acciones" style="justify-content:space-between"><b>María López R.</b><span class="badge badge--warn">Por llegar</span></div><span class="muted">Mañana · Trabajo Social</span><div class="acciones"><span class="btn btn--sm">Ya llegó</span><span class="btn btn--sm btn--link">No vino</span></div></div>
+        <div class="card"><div class="acciones" style="justify-content:space-between"><b>Lucía Torres V.</b><span class="badge badge--ok">Llegó</span></div><span class="muted">Mañana · Empoderamiento económico</span></div>
+      </div>
+    </div></div>
+  </div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

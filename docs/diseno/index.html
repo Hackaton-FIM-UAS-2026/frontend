@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Empoderate · Diseño por módulo</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <h1>Empoderate · Diseño por módulo</h1>
+  <p>Referencia visual <b>no negociable</b> del prototipo (entrega 27 nov 2026). Cada pantalla que construyas debe verse como su maqueta. Si algo no cuadra, se pregunta antes de improvisar.</p>
+</header>
+
+<div class="reglas"><h2>Reglas para todo el equipo</h2><ul>
+  <li><b>Solo tokens.</b> Colores, sombras, radios, espacios y duraciones salen de <code>src/styles/tokens.css</code>. Prohibido escribir un hex, un px de sombra o una fuente nueva en un componente.</li>
+  <li><b>Solo componentes existentes</b> para lo básico: <code>Button</code>, <code>Input</code>, <code>Badge</code>, <code>.card</code>, <code>OptionButton</code>, <code>PageHeader</code>, <code>Dialog</code>, <code>Icon</code>. Si falta uno, se pide a M0; no se inventa otro parecido.</li>
+  <li><b>Tipografía:</b> Fraunces solo para títulos h1–h2 y cifras grandes; Noto Sans para todo lo demás.</li>
+  <li><b>Toque:</b> todo lo tocable mide al menos 48 px (<code>--tap</code>).</li>
+  <li><b>Lenguaje:</b> de tú, frases cortas. Prohibido para la usuaria: «ruta», «puente», «empleabilidad», «versión», «recursos», «LFPDPPP», «canalización». Siempre «SEMujeres».</li>
+  <li><b>Zona sensible</b> (asistente, ayuda): solo morados, salida rápida visible y Esc.</li>
+  <li><b>Aplicación web responsiva:</b> cada pantalla tiene versión de celular (360 px) y de computadora (≥ 960 px), ambas en su maqueta. Sin scroll horizontal.</li>
+  <li><b>Sin control de tamaño de letra</b> (A−/A+) en ninguna pantalla.</li>
+  <li><b>Íconos:</b> solo los del componente <code>Icon</code>. Nada de emojis en la interfaz.</li>
+  <li><b>Accesibilidad:</b> contraste ≥ 4.5:1 (los tokens ya lo cumplen), foco visible, etiquetas en todos los campos.</li>
+  <li><b>Movimiento:</b> solo con <code>motion</code> y las duraciones de tokens; respeta «reducir movimiento».</li>
+  <li><b>Clases CSS de tu módulo</b> con prefijo propio (<code>.m3-…</code>) en <code>src/modulos/&lt;tuyo&gt;/estilos.css</code>. No editas CSS global.</li>
+</ul></div>
+
+<h2 class="sec">Módulos</h2>
+<div class="fila" style="gap:var(--space-4)">
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m1-entrada.html"><span class="badge badge--marca">M1</span><span class="h3">Entrada</span><span class="muted">Google y correo</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m2-asistente.html"><span class="badge badge--marca">M2</span><span class="h3">Asistente</span><span class="muted">Equipo de agentes, canalización y emergencia</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m3-caminos.html"><span class="badge badge--marca">M3</span><span class="h3">Caminos</span><span class="muted">Inicio, Explorar y Mi avance</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m4-expediente.html"><span class="badge badge--marca">M4</span><span class="h3">Expediente</span><span class="muted">Trabajo Social y especialistas</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m5-recepcion.html"><span class="badge badge--marca">M5</span><span class="h3">Recepción</span><span class="muted">Visitas previstas</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m6-empresas.html"><span class="badge badge--marca">M6</span><span class="h3">Empresas</span><span class="muted">Registro, vacantes, revisión y candidatas</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m7-portada.html"><span class="badge badge--marca">M7</span><span class="h3">Landing</span><span class="muted">Landing: quiénes somos, cómo funciona y empresas aliadas</span></a>
+  <a class="card" style="width:270px;text-decoration:none;color:inherit" href="m7-paginas.html"><span class="badge badge--marca">M7</span><span class="h3">Páginas de cada tema</span><span class="muted">Quiénes somos, Qué hacemos, Cómo funciona, Empresas, Apoyo</span></a>
+</div>
+</div><script src="_iconos.js"></script></body></html>

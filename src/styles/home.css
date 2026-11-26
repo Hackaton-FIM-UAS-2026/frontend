@@ -25,16 +25,6 @@ html:has(.home) { scroll-behavior: smooth; }
 .sitehead__tools { margin-left: auto; display: flex; align-items: center; gap: var(--space-2); }
 .sitehead__login { display: none; }
 
-.textsize { display: inline-flex; border-radius: var(--radius-pill); background: var(--surface-sunken); padding: 2px; }
-.textsize button {
-  min-width: 44px; height: 40px; padding: 0 var(--space-2);
-  border: 0; border-radius: var(--radius-pill); background: none;
-  color: var(--text-soft); font-weight: 700; font-size: var(--step--1);
-  transition: background-color var(--dur-fast) ease, transform var(--dur-press) var(--ease-out);
-}
-@media (hover: hover) { .textsize button:hover { background: var(--surface); color: var(--action-ink); } }
-.textsize button:active { transform: scale(0.94); }
-.textsize button:focus-visible { border-radius: var(--radius-pill); }
 
 .burger {
   display: grid; place-items: center;

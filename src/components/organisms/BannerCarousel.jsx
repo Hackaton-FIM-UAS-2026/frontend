@@ -9,7 +9,7 @@ const ACCESOS = [
     texto: "No inventamos oportunidades: elegimos de un catálogo curado y verificado en noviembre 2026.",
     cta: ["Ver tipos de recursos", "#recursos"] },
   { icon: "corazon", titulo: "¿Necesitas otro tipo de apoyo?",
-    texto: "Orientación jurídica o psicológica de CEMujeres, solo si tú lo decides.",
+    texto: "Orientación jurídica o psicológica de SEMujeres, solo si tú lo decides.",
     cta: ["Conocer más", "#apoyo"] },
 ];
 

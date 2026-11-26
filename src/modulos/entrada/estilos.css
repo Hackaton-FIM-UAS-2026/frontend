@@ -1,0 +1,26 @@
+/* ===== M1 · Entrada ===== */
+.m1 { min-height: 100dvh; background: var(--bg); display: grid; }
+.m1-marca { display: none; }
+.m1-lado { display: grid; grid-template-rows: auto 1fr; }
+.m1-barra { min-height: var(--appbar-h); display: flex; align-items: center; padding: 0 var(--gutter); background: var(--surface); box-shadow: var(--shadow-bar); }
+.m1-barra__logo { text-decoration: none; display: inline-flex; }
+.m1-form { width: 100%; max-width: 400px; margin: 0 auto; padding: var(--space-7) var(--gutter) var(--space-9); display: flex; flex-direction: column; gap: var(--space-4); }
+.m1-pila { display: flex; flex-direction: column; gap: var(--space-4); }
+.m1-titulo { font-family: var(--font-display); font-weight: 600; color: var(--text-heading); font-size: var(--step-3); line-height: var(--leading-snug); letter-spacing: var(--tracking-display); margin: 0; }
+.m1-lead { color: var(--text-soft); margin: 0; }
+.m1-proveedor.btn { --btn-bg: var(--surface); --btn-fg: var(--text); --btn-border: var(--border-strong); --btn-bg-hover: var(--action-softer); justify-content: flex-start; padding-left: var(--space-5); gap: var(--space-3); }
+.m1-proveedor[aria-disabled="true"] { opacity: 0.45; cursor: not-allowed; }
+.m1-g { font-weight: 800; color: var(--info); width: 20px; text-align: center; }
+.m1-check { margin: var(--space-1) 0; }
+.m1-error { margin: 0; border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); background: var(--danger-soft); color: var(--danger-ink); font-size: var(--step--1); }
+.m1-ayuda { margin: var(--space-4) 0 0; color: var(--text-muted); font-size: var(--step--1); }
+.m1-centro { text-align: center; }
+
+@media (min-width: 960px) {
+  .m1 { grid-template-columns: 1fr 1fr; }
+  .m1-marca { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-6); padding: var(--space-9) var(--space-8); background: var(--surface-brand); color: var(--text-on-brand); position: sticky; top: 0; height: 100dvh; }
+  .m1-marca__titulo { font-family: var(--font-display); font-weight: 500; font-size: var(--step-4); line-height: var(--leading-tight); letter-spacing: var(--tracking-display); margin: 0 0 var(--space-4); }
+  .m1-marca__texto { color: var(--text-on-brand-muted); margin: 0; max-width: 40ch; }
+  .m1-barra { background: transparent; box-shadow: none; }
+  .m1-form { align-self: center; padding-top: 0; }
+}

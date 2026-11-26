@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M7 · Landing — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M7 · Landing</h1>
+  <p>La página pública: quiénes somos, por qué existimos, qué hacemos, cómo funciona y quién nos apoya. Conserva el contenido de la landing actual con lenguaje más simple. Entrar a la app es otra pantalla (M1).</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Orden: Navegación → Hero → Quiénes somos → Por qué existimos → Qué hacemos → Cómo funciona (diagrama) → Pensada para tu vida real → Empresas aliadas → Apoyo jurídico y psicológico → Pie.</li>
+  <li>Se conserva lo de la landing actual: hero e ilustración (<code>CaminoIlustracion</code>), «¿Cómo funciona?», «Pensada para tu vida real» y «Apoyo jurídico y psicológico» con <code>EmergencyBanner</code>. «Tres rutas» se reemplaza por «Qué hacemos» y el carrusel se quita.</li>
+  <li>«Cómo funciona» es un diagrama de bolitas y palitos: 4 pasos en línea y al final una rama con dos salidas. En escritorio es horizontal; en celular, vertical. Solo líneas de 2 px <code>--morado-300</code> y bolitas de 64 px.</li>
+  <li>Empresas aliadas: logos en gris al 70 %, a color al pasar el cursor, 56 px de alto, y un hueco «Tu empresa aquí». Vienen de <code>GET /publico/empresas-aliadas</code>, con los logos locales de <code>/aliadas/</code> como respaldo.</li>
+  <li>Botones: «Comenzar» y «Entrar» → <code>/entrar</code>; «Registra tu empresa» → <code>/empresas/registro</code>.</li>
+  <li>Navegación: <b>opción A elegida</b>, cada botón abre su página (<a href="m7-paginas.html">m7-paginas.html</a>, y /quienes-somos en <a href="m7-navegacion.html">m7-navegacion.html</a>). En celular, menú desplegable (☰) con los cinco botones.</li>
+  <li>Sin control de tamaño de letra. «SEMujeres» en todos los textos.</li>
+</ul></div>
+
+<h2 class="sec">Computadora</h2>
+<div class="pc lp">
+  <nav class="lp-nav"><span class="logo">Empoderate</span>
+    <span class="lp-nav__links"><span>Quiénes somos</span><span>Qué hacemos</span><span>Cómo funciona</span><span>Empresas</span><span>Apoyo</span></span>
+    <span class="lp-nav__fin"><span class="btn btn--link btn--sm">Entrar</span><span class="btn btn--sm">Comenzar</span></span>
+  </nav>
+
+  <section class="lp-hero">
+    <div>
+      <h1>Encuentra tu siguiente <em>paso económico</em></h1>
+      <p class="lp-lead">Te decimos qué trabajo, curso, beca o apoyo es para ti, por qué, y cómo llegar. Gratis y desde tu celular.</p>
+      <div class="acciones"><span class="btn">Comenzar</span><span class="btn btn--ghost">¿Cómo funciona?</span></div>
+      <p class="muted" style="margin-top:var(--space-5);display:flex;gap:6px;align-items:center"><i data-i="ubicacion" data-s="16"></i> Secretaría de las Mujeres · Ahome, Sinaloa</p>
+    </div>
+    <div class="lp-hero__arte">Ilustración actual<br>(CaminoIlustracion)</div>
+  </section>
+
+  <section class="lp-sec lp-sec--alt"><div class="lp-in lp-dos">
+    <div>
+      <h2 class="lp-titulo">Quiénes somos</h2>
+      <p class="lp-lead" style="margin:0">Empoderate es la plataforma de la <b>Secretaría de las Mujeres de Ahome (SEMujeres)</b>. SEMujeres da asesoría jurídica, psicológica y de trabajo social a mujeres, gratis. Empoderate lleva esa ayuda a tu celular y suma lo que te hace falta para salir adelante: trabajo, cursos y apoyos.</p>
+    </div>
+    <div class="lp-cifras">
+      <div class="lp-cifra"><b>1,500</b><span>mujeres atendidas al año</span></div>
+      <div class="lp-cifra"><b>Gratis</b><span>toda la atención</span></div>
+      <div class="lp-cifra"><b>24 h</b><span>línea de apoyo</span></div>
+    </div>
+  </div></section>
+
+  <section class="lp-sec"><div class="lp-in">
+    <h2 class="lp-titulo">Por qué existimos</h2>
+    <p class="lp-lead">Muchas mujeres quieren trabajar o aprender algo nuevo, pero no saben por dónde empezar. Y cuando alguien vive violencia, no tener ingresos propios hace más difícil salir de ella.</p>
+    <div class="lp-tres">
+      <div class="lp-pilar"><span class="lp-pilar__ic"><i data-i="buscar"></i></span><h3>La información está dispersa</h3><p>Cursos, vacantes y becas viven en muchos lugares distintos.</p></div>
+      <div class="lp-pilar"><span class="lp-pilar__ic"><i data-i="reloj"></i></span><h3>El tiempo no alcanza</h3><p>Trabajo, hijos y cuidados dejan poco espacio para buscar.</p></div>
+      <div class="lp-pilar"><span class="lp-pilar__ic"><i data-i="usuaria"></i></span><h3>Contar tu historia otra vez</h3><p>Pedir ayuda no debería significar repetirlo todo a cada persona.</p></div>
+    </div>
+  </div></section>
+
+  <section class="lp-sec lp-sec--alt"><div class="lp-in">
+    <h2 class="lp-titulo">Qué hacemos</h2>
+    <p class="lp-lead">Tres cosas, en un solo lugar.</p>
+    <div class="lp-tres">
+      <div class="lp-pilar"><span class="lp-pilar__ic"><i data-i="ruta"></i></span><h3>Te orientamos</h3><p>Te mostramos el trabajo, curso, beca o apoyo que te queda, y qué te falta para lograrlo.</p></div>
+      <div class="lp-pilar"><span class="lp-pilar__ic"><i data-i="maletin"></i></span><h3>Te conectamos con empresas</h3><p>Vacantes de empresas de Ahome, revisadas una por una por SEMujeres.</p></div>
+      <div class="lp-pilar"><span class="lp-pilar__ic"><i data-i="corazon"></i></span><h3>Te acompañamos</h3><p>Si necesitas asesoría legal o psicológica, SEMujeres te atiende sin que repitas tu historia.</p></div>
+    </div>
+  </div></section>
+
+  <section class="lp-sec"><div class="lp-in">
+    <h2 class="lp-titulo">Cómo funciona</h2>
+    <p class="lp-lead">De entrar a dar tu primer paso.</p>
+    <div class="flujo">
+      <div class="flujo__paso"><span class="bolita"><i data-i="celular" data-s="26"></i></span><b>Entras</b><small>Con Google o con tu correo.</small></div>
+      <div class="flujo__paso"><span class="bolita"><i data-i="lapiz" data-s="26"></i></span><b>Nos cuentas de ti</b><small>12 preguntas, menos de 3 minutos.</small></div>
+      <div class="flujo__paso"><span class="bolita"><i data-i="ruta" data-s="26"></i></span><b>Ves tus caminos</b><small>Lo que te conviene y qué te falta.</small></div>
+      <div class="flujo__paso"><span class="bolita bolita--fuerte"><i data-i="chat" data-s="26"></i></span><b>Te acompañamos</b><small>Nuestro asistente resuelve tus dudas.</small></div>
+      <div class="flujo__rama">
+        <div><span class="bolita bolita--sm"><i data-i="check"></i></span><span><b>Das el paso</b><small>Aplicas, te inscribes o pides el apoyo.</small></span></div>
+        <div><span class="bolita bolita--sm"><i data-i="escudo"></i></span><span><b>SEMujeres te atiende</b><small>Solo si lo necesitas y tú lo pides.</small></span></div>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="lp-sec lp-sec--alt"><div class="lp-in">
+    <h2 class="lp-titulo">Pensada para tu vida real</h2>
+    <div class="lp-vida" style="margin-top:var(--space-6)">
+      <div><i data-i="reloj" data-s="26"></i><h3>Tu tiempo y tus cuidados</h3><p>Buscamos opciones que te cuadren con tus horarios y con quien cuidas.</p></div>
+      <div><i data-i="wifi" data-s="26"></i><h3>Pocos datos</h3><p>Ligera, sin videos automáticos.</p></div>
+      <div><i data-i="chat" data-s="26"></i><h3>Fácil de entender</h3><p>Frases cortas, sin palabras complicadas.</p></div>
+      <div><i data-i="candado" data-s="26"></i><h3>Tus datos, contigo</h3><p>Nada se guarda sin tu permiso.</p></div>
+    </div>
+  </div></section>
+
+  <section class="lp-sec"><div class="lp-in" style="text-align:center;display:flex;flex-direction:column;align-items:center">
+    <h2 class="lp-titulo">Empresas que abren sus puertas</h2>
+    <p class="lp-lead">Cada vacante la revisa una persona de SEMujeres antes de publicarse.</p>
+    <div class="aliadas">
+      <img src="../../public/aliadas/empatico.png" alt="Empático coffee bar">
+      <img src="../../public/aliadas/medusa.png" alt="Medusa Ristorante">
+      <span class="hueco">Tu empresa aquí</span>
+    </div>
+    <span class="btn btn--ghost" style="margin-top:var(--space-7)">Registra tu empresa</span>
+  </div></section>
+
+  <section class="lp-sec lp-sec--marca"><div class="lp-in lp-dos">
+    <div>
+      <h2 class="lp-titulo">Apoyo jurídico y psicológico</h2>
+      <p class="lp-lead" style="color:var(--text-on-brand-muted)">Si necesitas otro tipo de apoyo, pídelo cuando quieras desde el asistente. Nunca te lo preguntamos de entrada y nada se guarda sin tu permiso.</p>
+      <ul class="linea" style="color:var(--text-on-brand)">
+        <li>Tú decides si quieres que te contacte SEMujeres.</li>
+        <li>Eliges cuándo y por dónde es seguro contactarte.</li>
+        <li>Botón de salida rápida en todo momento.</li>
+      </ul>
+    </div>
+    <div class="card" style="color:var(--text)">
+      <span class="h2">¿Estás en peligro ahora?</span>
+      <span class="muted">Llama a la línea 24 h de SEMujeres.</span>
+      <span class="btn btn--block"><i data-i="telefono"></i> Llamar a SEMujeres 24 h</span>
+      <span class="muted" style="text-align:center">Si no contestan: 911</span>
+    </div>
+  </div></section>
+
+  <footer class="lp-foot"><span><span class="logo">Empoderate</span><br>Secretaría de las Mujeres · Ahome, Sinaloa</span><span>Aviso de privacidad · Contacto · Empresas</span></footer>
+</div>
+
+<h2 class="sec">Celular</h2>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in lp">
+      <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin"><span class="btn btn--sm">Entrar</span><span class="icono-btn"><i data-i="menu"></i></span></span></div>
+      <div class="cel__body">
+        <h1 class="h1">Encuentra tu siguiente paso económico</h1>
+        <p class="lead">Te decimos qué trabajo, curso, beca o apoyo es para ti, y cómo llegar.</p>
+        <span class="btn btn--block">Comenzar</span>
+        <span class="btn btn--block btn--ghost">¿Cómo funciona?</span>
+        <div class="lp-cifras" style="margin-top:var(--space-4)">
+          <div class="lp-cifra"><b style="font-size:var(--step-2)">1,500</b><span>mujeres al año</span></div>
+          <div class="lp-cifra"><b style="font-size:var(--step-2)">Gratis</b><span>siempre</span></div>
+          <div class="lp-cifra"><b style="font-size:var(--step-2)">24 h</b><span>línea</span></div>
+        </div>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Hero + quiénes somos</p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in lp">
+      <div class="cel__body">
+        <h2 class="lp-titulo" style="font-size:var(--step-2)">Cómo funciona</h2>
+        <div class="flujo flujo--v">
+          <div class="flujo__paso"><span class="bolita"><i data-i="celular" data-s="26"></i></span><div><b>Entras</b><small>Con Google o con tu correo.</small></div></div>
+          <div class="flujo__paso"><span class="bolita"><i data-i="lapiz" data-s="26"></i></span><div><b>Nos cuentas de ti</b><small>Menos de 3 minutos.</small></div></div>
+          <div class="flujo__paso"><span class="bolita"><i data-i="ruta" data-s="26"></i></span><div><b>Ves tus caminos</b><small>Lo que te conviene y qué te falta.</small></div></div>
+          <div class="flujo__paso"><span class="bolita bolita--fuerte"><i data-i="chat" data-s="26"></i></span><div><b>Te acompañamos</b><small>El asistente resuelve tus dudas.</small></div></div>
+          <div class="flujo__rama">
+            <div><span class="bolita bolita--sm"><i data-i="check"></i></span><span><b>Das el paso</b><small>Aplicas o te inscribes.</small></span></div>
+            <div><span class="bolita bolita--sm"><i data-i="escudo"></i></span><span><b>SEMujeres te atiende</b><small>Si lo necesitas.</small></span></div>
+          </div>
+        </div>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Cómo funciona (vertical)</p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in lp">
+      <div class="cel__body" style="text-align:center;align-items:center">
+        <h2 class="lp-titulo" style="font-size:var(--step-2)">Empresas que abren sus puertas</h2>
+        <p class="muted">Cada vacante la revisa SEMujeres.</p>
+        <div class="aliadas" style="gap:var(--space-6);flex-direction:column"><img src="../../public/aliadas/empatico.png" alt="Empático coffee bar" style="height:44px"><img src="../../public/aliadas/medusa.png" alt="Medusa Ristorante" style="height:36px"></div>
+        <span class="btn btn--ghost btn--block">Registra tu empresa</span>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Empresas aliadas</p>
+  </div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

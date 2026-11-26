@@ -10,3 +10,5 @@ export * from "./QuizMolecules.jsx";
 export * from "./PageHeader.jsx";
 export * from "./Dialog.jsx";
 export * from "./ApiEstado.jsx";
+export * from "./BotonAsistente.jsx";
+export * from "./MenuCuenta.jsx";

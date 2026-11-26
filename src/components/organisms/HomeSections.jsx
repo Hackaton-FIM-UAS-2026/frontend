@@ -105,7 +105,7 @@ export function SupportSection() {
             <p>Si necesitas otro tipo de apoyo, puedes pedirlo en cualquier momento desde el asistente.
                Nunca te lo preguntamos de entrada y nada se guarda sin tu confirmación.</p>
             <ul className="support__list">
-              <li><Icon name="check" size={18} /> Tú decides si quieres que te contacte una especialista de CEMujeres.</li>
+              <li><Icon name="check" size={18} /> Tú decides si quieres que te contacte una especialista de SEMujeres.</li>
               <li><Icon name="check" size={18} /> Eliges cuándo y por dónde es seguro contactarte.</li>
               <li><Icon name="check" size={18} /> Botón de salida rápida y avisos discretos.</li>
             </ul>

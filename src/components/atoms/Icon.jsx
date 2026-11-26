@@ -37,6 +37,9 @@ const PATHS = {
   correo: "M3 6h18v12H3z M3 7l9 6 9-6",
   lapiz: "M4 20h4L19 9l-4-4L4 16z M13.5 6.5l4 4",
   texto: "M4 18L9 6l5 12 M5.8 14h6.4 M15 18l3-7 3 7 M15.9 16h4.2",
+  microfono: "M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z M5 11a7 7 0 0 0 14 0 M12 18v3",
+  edificio: "M4 21V5l8-2v18 M12 8h8v13 M3 21h18 M8 8h.01 M8 12h.01 M8 16h.01 M16 12h.01 M16 16h.01",
+  celular: "M7 3h10v18H7z M11 18h2",
 };
 
 export function Icon({ name, size = 28, ...p }) {

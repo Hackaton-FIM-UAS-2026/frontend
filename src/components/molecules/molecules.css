@@ -318,3 +318,9 @@ a.card, .card--link { text-decoration: none; cursor: pointer; }
 @media (hover: hover) { .chip:hover:not([aria-pressed="true"]):not([aria-checked="true"]) { border-color: var(--morado-300); color: var(--action-ink); } }
 .chip[aria-pressed="true"], .chip[aria-checked="true"] { background: var(--action); border-color: var(--action); color: var(--on-action); }
 .chip__n { font-variant-numeric: tabular-nums; opacity: 0.75; }
+
+/* ---------- Menú de cuenta (M0) ---------- */
+.menucuenta__btn { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 0; background: var(--action-softer); color: var(--action-ink); cursor: pointer; }
+.menucuenta { display: flex; flex-direction: column; gap: var(--space-3); }
+.menucuenta .opt { text-align: left; text-decoration: none; color: var(--text); }
+.menucuenta .btn { margin-top: var(--space-3); }

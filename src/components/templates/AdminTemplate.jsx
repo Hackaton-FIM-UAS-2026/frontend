@@ -4,16 +4,23 @@ import { AnimatePresence, motion } from "motion/react";
 import { Icon, Avatar, Logo } from "../atoms";
 import { SkipLink } from "./Templates.jsx";
 
-const MENU = [
-  ["/admin", "Resumen", "panel", true],
-  ["/admin/usuarias", "Usuarias", "usuarias"],
-  ["/admin/ofertas", "Ofertas de trabajo", "maletin"],
-  ["/admin/bandeja", "Canalizaciones", "bandeja"],
-  ["/admin/catalogo", "Catálogo", "libro"],
-  ["/admin/metricas", "Métricas", "grafica"],
+/** Menú base del panel de SEMujeres. Los módulos agregan secciones (src/modulos/<m>/panel.jsx). */
+export const MENU_BASE = [
+  { to: "/admin", label: "Resumen", icon: "panel", end: true },
+  { to: "/admin/usuarias", label: "Usuarias", icon: "usuarias" },
+  { to: "/admin/ofertas", label: "Ofertas de trabajo", icon: "maletin" },
+  { to: "/admin/bandeja", label: "Canalizaciones", icon: "bandeja" },
+  { to: "/admin/catalogo", label: "Catálogo", icon: "libro" },
+  { to: "/admin/metricas", label: "Métricas", icon: "grafica" },
 ];
 
-export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, persona, ocultar = [], onSalir, children }) {
+const HOY = new Intl.DateTimeFormat("es-MX", { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(new Date());
+
+/**
+ * Layout del panel (personal de SEMujeres y empresas).
+ * `menu`: [{ to, label, icon, end?, badge?: number, badgeSoft?: boolean }]
+ */
+export function AdminTemplate({ titulo, menu = MENU_BASE, marca = "SEMujeres", casosAbiertos = 0, persona, onSalir, children }) {
   const [abierto, setAbierto] = useState(false);
 
   useEffect(() => {
@@ -28,7 +35,7 @@ export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, perso
       <SkipLink />
       <aside className={`adm__side ${abierto ? "adm__side--open" : ""}`} aria-label="Menú del panel">
         <div className="adm__brand">
-          <Logo light /><span>CEMujeres</span>
+          <Logo light /><span>{marca}</span>
           <button type="button" className="adm__close" onClick={() => setAbierto(false)} aria-label="Cerrar menú"><Icon name="x" size={22} /></button>
         </div>
         <div className="adm__profile">
@@ -36,12 +43,11 @@ export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, perso
           <span><strong>{persona?.nombre || "Personal"}</strong><small>{persona?.rolTexto || ""}</small></span>
         </div>
         <nav className="adm__nav" aria-label="Panel">
-          {MENU.filter(([to]) => !ocultar.includes(to)).map(([to, label, icon, end]) => (
+          {menu.map(({ to, label, icon, end, badge, badgeSoft }) => (
             <NavLink key={to} to={to} end={end} onClick={() => setAbierto(false)}
               className={({ isActive }) => (isActive ? "adm__link adm__link--on" : "adm__link")}>
               <Icon name={icon} size={20} /> <span>{label}</span>
-              {label === "Canalizaciones" && casosAbiertos > 0 && <em className="adm__badge" aria-label={`${casosAbiertos} abiertas`}>{casosAbiertos}</em>}
-              {label === "Usuarias" && pendientes > 0 && <em className="adm__badge adm__badge--soft" aria-label={`${pendientes} para dar seguimiento`}>{pendientes}</em>}
+              {badge > 0 && <em className={`adm__badge ${badgeSoft ? "adm__badge--soft" : ""}`} aria-label={`${badge} pendientes`}>{badge}</em>}
             </NavLink>
           ))}
         </nav>
@@ -63,11 +69,13 @@ export function AdminTemplate({ titulo, casosAbiertos = 0, pendientes = 0, perso
           </button>
           <div className="adm__titles">
             <h1>{titulo}</h1>
-            <small>Panel CEMujeres · miércoles 25 de noviembre de 2026</small>
+            <small>Panel {marca} · {HOY}</small>
           </div>
-          <Link to="/admin/bandeja" className="adm__bell" aria-label={`Canalizaciones abiertas: ${casosAbiertos}`}>
-            <Icon name="campana" size={22} />{casosAbiertos > 0 && <em>{casosAbiertos}</em>}
-          </Link>
+          {casosAbiertos > 0 && (
+            <Link to="/admin/bandeja" className="adm__bell" aria-label={`Canalizaciones abiertas: ${casosAbiertos}`}>
+              <Icon name="campana" size={22} /><em>{casosAbiertos}</em>
+            </Link>
+          )}
         </header>
         <main id="contenido" className="adm__main">{children}</main>
       </div>

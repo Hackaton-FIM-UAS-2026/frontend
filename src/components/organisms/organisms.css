@@ -11,13 +11,7 @@
 .appbar__in { display: flex; align-items: center; gap: var(--space-4); min-height: var(--appbar-h); }
 .appbar__logo { text-decoration: none; display: inline-flex; padding: var(--space-2) 0; }
 .appbar__tabs { display: none; }
-.appbar__apoyo {
-  margin-left: auto;
-  display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-3);
-  border-radius: var(--radius-pill);
-  color: var(--text-soft); font-size: var(--step--1); font-weight: 600; text-decoration: none;
-}
-@media (hover: hover) { .appbar__apoyo:hover { background: var(--action-softer); color: var(--action-ink); } }
+.appbar__fin { margin-left: auto; display: flex; align-items: center; gap: var(--space-2); }
 
 .tab {
   position: relative;

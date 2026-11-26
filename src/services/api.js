@@ -35,10 +35,20 @@ async function pedir(metodo, ruta, cuerpo) {
   }
 }
 
-const get = (r) => pedir("GET", r);
-const post = (r, b) => pedir("POST", r, b);
-const patch = (r, b) => pedir("PATCH", r, b);
-const del = (r) => pedir("DELETE", r);
+// Exportados para que cada módulo arme su propio servicio (src/modulos/<m>/servicio.js)
+export const get = (r) => pedir("GET", r);
+export const post = (r, b) => pedir("POST", r, b);
+export const patch = (r, b) => pedir("PATCH", r, b);
+export const del = (r) => pedir("DELETE", r);
+
+/** Sube un archivo a un bucket público de Supabase Storage y regresa su URL pública. */
+export async function subirArchivo(bucket, archivo) {
+  const ext = (archivo.name.split(".").pop() || "png").toLowerCase();
+  const ruta = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+  const { error } = await supabase.storage.from(bucket).upload(ruta, archivo, { upsert: false });
+  if (error) throw new ApiError(0, "No pudimos subir el archivo. Intenta con otra imagen.");
+  return supabase.storage.from(bucket).getPublicUrl(ruta).data.publicUrl;
+}
 
 export const api = {
   // Público

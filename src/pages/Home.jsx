@@ -1,19 +1,2 @@
-import { HomeTemplate } from "../components/templates";
-import {
-  HeroSection, BannerCarousel, RoutesSection, HowItWorks,
-  ResourceTypes, ContextSection, SupportSection,
-} from "../components/organisms";
-
-export default function Home() {
-  return (
-    <HomeTemplate>
-      <HeroSection />
-      <BannerCarousel />
-      <RoutesSection />
-      <HowItWorks />
-      <ResourceTypes />
-      <ContextSection />
-      <SupportSection />
-    </HomeTemplate>
-  );
-}
+// La landing vive en el módulo M7 (src/modulos/portada).
+export { default } from "../modulos/portada/Landing.jsx";

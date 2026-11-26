@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Routes, Route, useNavigate, useLocation, Link, Navigate } from "react-router-dom";
-import { AdminTemplate, AuthTemplate } from "../components/templates";
+import { AdminTemplate, AuthTemplate, MENU_BASE } from "../components/templates";
+import { seccionesPanel } from "../modulos/registro";
 import { Button, Icon, Input } from "../components/atoms";
 import {
   Panel, KpiCard, BarChart, MiniCalendar, UsersTable, CasosTable, CasosCompactos,
@@ -14,11 +15,15 @@ import { supabase, salir } from "../lib/supabase";
 import { api } from "../services/api";
 
 const ROL_TEXTO = {
-  asesora_economica: "Asesora económica",
+  asesora_economica: "Empoderamiento económico",
   especialista_juridica: "Especialista jurídica",
   especialista_psicologica: "Especialista psicológica",
   coordinacion: "Coordinación",
+  trabajo_social: "Trabajo Social",
+  recepcion: "Recepción",
 };
+// Roles que usan el panel base (resumen, usuarias, ofertas, canalizaciones, catálogo, métricas)
+const ROLES_BASE = ["asesora_economica", "especialista_juridica", "especialista_psicologica", "coordinacion"];
 const COLOR_RUTA = { empleabilidad: "var(--turquesa-500)", emprendimiento: "var(--naranja-500)", capacitacion: "var(--magenta-500)" };
 const NOMBRE = { empleabilidad: "Empleabilidad", emprendimiento: "Emprendimiento", capacitacion: "Capacitación" };
 
@@ -54,7 +59,7 @@ function AdminLogin({ onListo }) {
         onListo(await api.admin.yo());
       } catch (e2) {
         await salir();
-        throw new Error(e2.status === 403 ? "Esta cuenta no es del personal de CEMujeres." : e2.message);
+        throw new Error(e2.status === 403 ? "Esta cuenta no es del personal de SEMujeres." : e2.message);
       }
     } catch (err) {
       setError(/invalid/i.test(err.message) ? "Correo o contraseña incorrectos." : err.message);
@@ -65,7 +70,7 @@ function AdminLogin({ onListo }) {
   return (
     <AuthTemplate>
       <form onSubmit={entrar}>
-        <h1>Panel CEMujeres</h1>
+        <h1>Panel SEMujeres</h1>
         <p className="muted auth__lead">Acceso solo para el personal.</p>
         <Input id="adm-correo" type="email" label="Correo" autoComplete="username" required value={correo} onChange={(e) => setCorreo(e.target.value)} />
         <Input id="adm-pass" type="password" label="Contraseña" autoComplete="current-password" required
@@ -102,12 +107,16 @@ function PanelInterno({ yo, onSalir }) {
   const fallo = (e) => setAviso(e?.message || "Algo salió mal.");
   const cargarCatalogo = useCallback(() => api.admin.recursos().then(setCatalogo).catch(fallo), []);
 
+  const usaBase = ROLES_BASE.includes(yo.rol);
+  const secciones = seccionesPanel.filter((x) => x.roles.includes(yo.rol));
+
   useEffect(() => {
+    if (!usaBase) return;
     if (esAsesora) api.admin.usuarias().then(setUsuarias).catch(fallo);
     if (esEspecialista) api.admin.canalizaciones().then(setCasos).catch(fallo);
     cargarCatalogo();
     api.admin.metricas().then(setMetr).catch(() => {});
-  }, [esAsesora, esEspecialista, cargarCatalogo]);
+  }, [usaBase, esAsesora, esEspecialista, cargarCatalogo]);
 
   const abiertos = casos.filter((c) => c.estado !== "cerrada").length;
   const pendientes = usuarias.filter(necesitaSeguimiento);
@@ -294,18 +303,30 @@ function PanelInterno({ yo, onSalir }) {
   );
 
   const titulos = { usuarias: "Usuarias", ofertas: "Ofertas de trabajo", bandeja: "Canalizaciones", catalogo: "Catálogo", metricas: "Métricas" };
-  const titulo = titulos[pathname.split("/")[2]] || "Resumen";
+  secciones.forEach((x) => { titulos[x.ruta] = x.titulo; });
+  const titulo = titulos[pathname.split("/")[2]] || (usaBase ? "Resumen" : secciones[0]?.titulo || "Panel");
   const ocultar = [!esAsesora && "/admin/usuarias", !esEspecialista && "/admin/bandeja"].filter(Boolean);
+  const menu = [
+    ...(usaBase ? MENU_BASE.filter((m) => !ocultar.includes(m.to)).map((m) => (
+      m.to === "/admin/bandeja" ? { ...m, badge: abiertos }
+        : m.to === "/admin/usuarias" ? { ...m, badge: pendientes.length, badgeSoft: true } : m)) : []),
+    ...secciones.map((x) => ({ to: `/admin/${x.ruta}`, label: x.titulo, icon: x.icono })),
+  ];
   return (
-    <AdminTemplate titulo={titulo} casosAbiertos={abiertos} pendientes={pendientes.length}
-      persona={{ nombre: yo.nombre, rolTexto: ROL_TEXTO[yo.rol] }} ocultar={ocultar} onSalir={onSalir}>
+    <AdminTemplate titulo={titulo} menu={menu} casosAbiertos={usaBase ? abiertos : 0}
+      persona={{ nombre: yo.nombre, rolTexto: ROL_TEXTO[yo.rol] }} onSalir={onSalir}>
       {aviso && (
         <p className="card card--sunken small" role="alert">
           {aviso} <Button variant="link" size="sm" onClick={() => setAviso("")}>Cerrar</Button>
         </p>
       )}
       <Routes>
-        <Route index element={resumen()} />
+        <Route index element={usaBase ? resumen()
+          : secciones[0] ? <Navigate to={secciones[0].ruta} replace />
+          : <p className="muted">Tu sección del panel todavía no está disponible.</p>} />
+        {secciones.map(({ ruta, Componente }) => (
+          <Route key={ruta} path={`${ruta}/*`} element={<Componente yo={yo} />} />
+        ))}
         <Route path="usuarias" element={vistaUsuarias()} />
         <Route path="ofertas" element={vistaOfertas()} />
         <Route path="bandeja" element={bandeja()} />

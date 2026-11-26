@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M7 · Páginas de la landing — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="m7-portada.html">← Landing</a> · <a href="m7-navegacion.html">Navegación (opción A elegida)</a></p>
+  <h1>M7 · Páginas de cada tema (opción A)</h1>
+  <p>Cada botón de la barra abre su página. Todas comparten la misma anatomía: barra con el tema activo, migas, título, cuerpo y «Sigue con: …» al final. La landing conserva su resumen de cada tema.</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Rutas: <code>/quienes-somos</code>, <code>/que-hacemos</code>, <code>/como-funciona</code>, <code>/empresas</code>, <code>/apoyo</code>. El botón de la barra del tema actual queda resaltado (<code>--action-soft</code>).</li>
+  <li>Anatomía fija: migas «Inicio › Tema» → título Fraunces → introducción (máx. 2 frases) → contenido → barra final «Sigue con: [siguiente tema] →».</li>
+  <li>Orden de «Sigue con»: Quiénes somos → Qué hacemos → Cómo funciona → Empresas → Apoyo → (vuelve a) Comenzar.</li>
+  <li>Datos aproximados marcados para revisión: dirección y horario. Teléfono real: <b>668 102 5080</b>.</li>
+  <li>En celular: mismo contenido en una columna; la barra es el menú desplegable (☰).</li>
+  <li>La página <code>/quienes-somos</code> está en <a href="m7-navegacion.html">m7-navegacion.html</a> (opción A).</li>
+</ul></div>
+
+<!-- QUÉ HACEMOS -->
+<p class="vista-titulo">/que-hacemos</p>
+<div class="pc lp">
+  <nav class="lp-nav"><span class="logo">Empoderate</span>
+    <span class="lp-nav__links"><span>Quiénes somos</span><span class="on">Qué hacemos</span><span>Cómo funciona</span><span>Empresas</span><span>Apoyo</span></span>
+    <span class="lp-nav__fin"><span class="btn btn--link btn--sm">Entrar</span><span class="btn btn--sm">Comenzar</span></span></nav>
+  <section class="lp-sec"><div class="lp-in">
+    <p class="migas">Inicio <i data-i="der" data-s="14"></i> Qué hacemos</p>
+    <h1 class="lp-titulo" style="font-size:var(--step-4);margin-top:var(--space-4)">Qué hacemos</h1>
+    <p class="lp-lead">Te orientamos, te conectamos con empresas y te acompañamos. Todo gratis.</p>
+    <div class="lp-tres">
+      <div class="card"><span class="lp-pilar__ic"><i data-i="ruta"></i></span><span class="h2">Te orientamos</span><p class="muted">Según tu tiempo, tus estudios y lo que quieres lograr.</p>
+        <ul class="linea"><li>Cursos y talleres<small>Excel, repostería, barismo, atención al cliente</small></li><li>Becas<small>Para terminar la prepa o estudiar algo nuevo</small></li><li>Apoyos<small>Para iniciar o hacer crecer tu negocio</small></li></ul></div>
+      <div class="card"><span class="lp-pilar__ic"><i data-i="maletin"></i></span><span class="h2">Te conectamos</span><p class="muted">Bolsa de trabajo con empresas de Ahome.</p>
+        <ul class="linea"><li>Vacantes revisadas<small>Una persona de SEMujeres revisa cada una</small></li><li>Te decimos qué te falta<small>Y qué curso te ayuda a lograrlo</small></li><li>Aplicas desde tu celular<small>La empresa solo ve tus datos de trabajo</small></li></ul></div>
+      <div class="card"><span class="lp-pilar__ic"><i data-i="corazon"></i></span><span class="h2">Te acompañamos</span><p class="muted">Cuando necesitas más que una oportunidad.</p>
+        <ul class="linea"><li>Asesoría jurídica<small>Pensión, divorcio, custodia, denuncia</small></li><li>Apoyo psicológico<small>Terapia y atención en momentos difíciles</small></li><li>Sin repetir tu historia<small>Un solo expediente para todas las áreas</small></li></ul></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-8);border-top:1px solid var(--border);padding-top:var(--space-5)"><span class="muted">Sigue con:</span><span class="btn btn--ghost">Cómo funciona <i data-i="flecha" data-s="18"></i></span></div>
+  </div></section>
+</div>
+
+<!-- CÓMO FUNCIONA -->
+<p class="vista-titulo">/como-funciona</p>
+<div class="pc lp">
+  <nav class="lp-nav"><span class="logo">Empoderate</span>
+    <span class="lp-nav__links"><span>Quiénes somos</span><span>Qué hacemos</span><span class="on">Cómo funciona</span><span>Empresas</span><span>Apoyo</span></span>
+    <span class="lp-nav__fin"><span class="btn btn--link btn--sm">Entrar</span><span class="btn btn--sm">Comenzar</span></span></nav>
+  <section class="lp-sec"><div class="lp-in">
+    <p class="migas">Inicio <i data-i="der" data-s="14"></i> Cómo funciona</p>
+    <h1 class="lp-titulo" style="font-size:var(--step-4);margin-top:var(--space-4)">Cómo funciona</h1>
+    <p class="lp-lead">De entrar a dar tu primer paso, en menos de 10 minutos.</p>
+    <div class="flujo">
+      <div class="flujo__paso"><span class="bolita"><i data-i="celular" data-s="26"></i></span><b>1 · Entras</b><small>Con tu cuenta de Google o con tu correo.</small></div>
+      <div class="flujo__paso"><span class="bolita"><i data-i="lapiz" data-s="26"></i></span><b>2 · Nos cuentas de ti</b><small>12 preguntas de opción múltiple. Cada una dice para qué la usamos.</small></div>
+      <div class="flujo__paso"><span class="bolita"><i data-i="ruta" data-s="26"></i></span><b>3 · Ves tus caminos</b><small>Qué te conviene, cuánto te falta y qué curso te ayuda.</small></div>
+      <div class="flujo__paso"><span class="bolita bolita--fuerte"><i data-i="chat" data-s="26"></i></span><b>4 · Te acompañamos</b><small>Nuestro asistente responde a cualquier hora.</small></div>
+      <div class="flujo__rama">
+        <div><span class="bolita bolita--sm"><i data-i="check"></i></span><span><b>Das el paso</b><small>Aplicas, te inscribes o pides el apoyo.</small></span></div>
+        <div><span class="bolita bolita--sm"><i data-i="escudo"></i></span><span><b>SEMujeres te atiende</b><small>Solo si lo necesitas y tú lo pides.</small></span></div>
+      </div>
+    </div>
+    <h2 class="lp-titulo" style="font-size:var(--step-2);margin-top:var(--space-9)">Preguntas frecuentes</h2>
+    <div class="lp-dos" style="gap:var(--space-5)">
+      <div class="card"><span class="h3">¿Cuesta algo?</span><span class="muted">No. Todo es gratis.</span></div>
+      <div class="card"><span class="h3">¿Necesito computadora?</span><span class="muted">No. Funciona desde tu celular con pocos datos.</span></div>
+      <div class="card"><span class="h3">¿Quién ve mis datos?</span><span class="muted">Solo el área de SEMujeres que te atiende. Las empresas solo ven tus datos de trabajo.</span></div>
+      <div class="card"><span class="h3">¿Puedo borrar mis datos?</span><span class="muted">Sí, cuando quieras, desde el menú.</span></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-8);border-top:1px solid var(--border);padding-top:var(--space-5)"><span class="muted">Sigue con:</span><span class="btn btn--ghost">Empresas <i data-i="flecha" data-s="18"></i></span></div>
+  </div></section>
+</div>
+
+<!-- EMPRESAS -->
+<p class="vista-titulo">/empresas</p>
+<div class="pc lp">
+  <nav class="lp-nav"><span class="logo">Empoderate</span>
+    <span class="lp-nav__links"><span>Quiénes somos</span><span>Qué hacemos</span><span>Cómo funciona</span><span class="on">Empresas</span><span>Apoyo</span></span>
+    <span class="lp-nav__fin"><span class="btn btn--link btn--sm">Entrar</span><span class="btn btn--sm">Comenzar</span></span></nav>
+  <section class="lp-sec"><div class="lp-in">
+    <p class="migas">Inicio <i data-i="der" data-s="14"></i> Empresas</p>
+    <h1 class="lp-titulo" style="font-size:var(--step-4);margin-top:var(--space-4)">Empresas que abren sus puertas</h1>
+    <p class="lp-lead">Empresas de Ahome que publican vacantes para mujeres. SEMujeres revisa cada empresa y cada vacante antes de publicarla.</p>
+    <div class="aliadas" style="justify-content:flex-start">
+      <img src="../../public/aliadas/empatico.png" alt="Empático coffee bar">
+      <img src="../../public/aliadas/medusa.png" alt="Medusa Ristorante">
+      <span class="hueco">Tu empresa aquí</span>
+    </div>
+    <div class="lp-dos" style="margin-top:var(--space-8)">
+      <div>
+        <h2 class="lp-titulo" style="font-size:var(--step-2)">¿Tienes una empresa?</h2>
+        <ul class="linea"><li>Te registras<small>Nombre, RFC, giro y contacto</small></li><li>SEMujeres revisa tu empresa<small>Una sola vez</small></li><li>Publicas tus vacantes<small>Cada una se revisa antes de salir</small></li><li>Recibes candidatas<small>Con sus datos de trabajo</small></li></ul>
+      </div>
+      <div class="card card--brand" style="align-self:center">
+        <span class="h2" style="color:inherit">Súmate</span>
+        <span class="muted">Es gratis para tu empresa.</span>
+        <span class="btn btn--light btn--block">Registra tu empresa</span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-8);border-top:1px solid var(--border);padding-top:var(--space-5)"><span class="muted">Sigue con:</span><span class="btn btn--ghost">Apoyo <i data-i="flecha" data-s="18"></i></span></div>
+  </div></section>
+</div>
+
+<!-- APOYO -->
+<p class="vista-titulo">/apoyo</p>
+<div class="pc lp">
+  <nav class="lp-nav"><span class="logo">Empoderate</span>
+    <span class="lp-nav__links"><span>Quiénes somos</span><span>Qué hacemos</span><span>Cómo funciona</span><span>Empresas</span><span class="on">Apoyo</span></span>
+    <span class="lp-nav__fin"><span class="btn btn--link btn--sm">Entrar</span><span class="btn btn--sm">Comenzar</span></span></nav>
+  <section class="lp-sec"><div class="lp-in">
+    <p class="migas">Inicio <i data-i="der" data-s="14"></i> Apoyo</p>
+    <h1 class="lp-titulo" style="font-size:var(--step-4);margin-top:var(--space-4)">Apoyo jurídico y psicológico</h1>
+    <p class="lp-lead">Si vives violencia o necesitas orientación legal o emocional, SEMujeres te atiende gratis. Tú decides cuándo y cómo.</p>
+    <div class="lp-dos">
+      <div class="pc__col">
+        <div class="card"><span class="h3">Cómo pedirlo</span><ul class="linea"><li>Desde el asistente<small>Escribe «necesito apoyo» o «hablar con una persona»</small></li><li>Eliges cómo es seguro contactarte<small>WhatsApp, llamada, solo en la app o en persona</small></li><li>Recibes un folio<small>Te contactan en máximo 2 días hábiles</small></li></ul></div>
+        <div class="card"><span class="h3">Tu privacidad</span><span class="muted">Nada se guarda sin tu permiso. Solo el área que te atiende ve tu caso. Hay un botón de salida rápida en todo momento.</span></div>
+      </div>
+      <div class="pc__col">
+        <div class="card card--brand">
+          <span class="h2" style="color:inherit">¿Estás en peligro ahora?</span>
+          <span class="muted">Línea de atención de SEMujeres</span>
+          <span class="btn btn--light btn--block"><i data-i="telefono"></i> 668 102 5080</span>
+          <span class="muted" style="text-align:center">Si no contestan: 911</span>
+        </div>
+        <div class="card card--sunken"><span class="h3">Visítanos</span>
+          <span class="muted" style="display:flex;gap:6px;align-items:center"><i data-i="ubicacion" data-s="16"></i> Los Mochis, Ahome (dirección por confirmar)</span>
+          <span class="muted" style="display:flex;gap:6px;align-items:center"><i data-i="reloj" data-s="16"></i> Lunes a viernes, 8:00 a 15:00 (aprox.)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--space-8);border-top:1px solid var(--border);padding-top:var(--space-5)"><span class="muted">¿Lista para empezar?</span><span class="btn">Comenzar <i data-i="flecha" data-s="18"></i></span></div>
+  </div></section>
+</div>
+
+<h2 class="sec">Celular (misma anatomía en una columna)</h2>
+<div class="fila">
+  <div class="cel"><div class="cel__in lp">
+    <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin"><span class="btn btn--sm">Entrar</span><span class="icono-btn"><i data-i="menu"></i></span></span></div>
+    <div class="cel__body">
+      <p class="migas">Inicio <i data-i="der" data-s="14"></i> Apoyo</p>
+      <h1 class="h1">Apoyo jurídico y psicológico</h1>
+      <p class="lead">SEMujeres te atiende gratis. Tú decides cuándo y cómo.</p>
+      <div class="card card--brand"><span class="h3" style="color:inherit">¿Estás en peligro ahora?</span><span class="btn btn--light btn--block"><i data-i="telefono"></i> 668 102 5080</span><span class="muted" style="text-align:center">Si no contestan: 911</span></div>
+      <div class="card"><span class="h3">Cómo pedirlo</span><ul class="linea"><li>Desde el asistente</li><li>Eliges cómo contactarte</li><li>Recibes un folio</li></ul></div>
+    </div>
+  </div></div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

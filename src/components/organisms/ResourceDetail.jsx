@@ -3,7 +3,9 @@ import { AnimatePresence, motion } from "motion/react";
 import { Button, Icon, Badge } from "../atoms";
 import { RequirementItem, PageHeader, OptionButton } from "../molecules";
 import { DICCIONARIO_PREGUNTAS } from "../../data/campos";
-import { NOMBRE_RUTA } from "../../services/motorRuta";
+// Tipo visible (sin palabras internas como «empleabilidad»)
+const TIPO = { vacante: "Vacante", curso: "Curso", beca: "Beca", apoyo: "Apoyo", financiamiento: "Apoyo para tu negocio" };
+const TONO_TIPO = { vacante: "empleabilidad", curso: "capacitacion", beca: "emprendimiento", apoyo: "emprendimiento", financiamiento: "emprendimiento" };
 
 const aparece = {
   initial: { opacity: 0, transform: "translateY(6px)" },
@@ -36,7 +38,7 @@ export function ResourceDetail({ recurso, onAction, onResponder }) {
   return (
     <div className="detail">
       <div className="detail__rutas">
-        {recurso.rutas.map((r) => <Badge key={r} tone={r} dot>{NOMBRE_RUTA[r]}</Badge>)}
+        <Badge tone={TONO_TIPO[recurso.tipo] || "primary"}>{TIPO[recurso.tipo] || "Opción"}</Badge>
       </div>
       <PageHeader
         title={recurso.titulo}

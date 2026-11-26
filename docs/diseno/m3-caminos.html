@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M3 · Caminos — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M3 · Inicio por Caminos, Explorar y Mi avance</h1>
+  <p>Lo que más le conviene, en orden, con los pasos para llegar. Y todo lo demás en «Explorar».</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Orden del Inicio: saludo → «Chatea con nuestro asistente» → «Tus caminos» → «También te puede interesar».</li>
+  <li>Cada camino: tarjeta de la meta con «Cumples X de Y» + barra; debajo, con línea punteada, «Para lograrlo te falta: …» y las tarjetas que lo resuelven.</li>
+  <li>Badges por tipo: vacante = turquesa, curso = magenta, beca/apoyo = naranja.</li>
+  <li><b>Celular:</b> menú inferior Inicio · Explorar · Mi avance. <b>Escritorio (≥ 960 px):</b> las mismas tres como pestañas en la barra superior; el menú inferior desaparece.</li>
+  <li><b>Escritorio Inicio:</b> dos columnas. Izquierda, «Tus caminos»; derecha, el asistente y «También te puede interesar».</li>
+  <li><b>Escritorio Explorar:</b> filtros en una columna a la izquierda y resultados en rejilla de 3.</li>
+  <li>Sin control de tamaño de letra. Prohibido en pantalla: «ruta», «puente», «empleabilidad», «versión», «recursos».</li>
+</ul></div>
+
+<h2 class="sec">Computadora · Inicio</h2>
+<div class="pc">
+  <div class="appbar appbar--pc"><span class="logo">Empoderate</span>
+    <nav class="tabs"><span class="tab tab--on"><i data-i="casa" data-s="18"></i>Inicio</span><span class="tab"><i data-i="buscar" data-s="18"></i>Explorar</span><span class="tab"><i data-i="avance" data-s="18"></i>Mi avance</span></nav>
+    <span class="appbar__fin"><span class="icono-btn"><i data-i="menu"></i></span></span>
+  </div>
+  <div class="pc__body">
+    <h1 class="h1">Hola, María</h1>
+    <div class="pc__cols">
+      <div class="pc__col">
+        <p class="titulo-seccion">Tus caminos</p>
+        <div class="card">
+          <span class="badge badge--vacante">Vacante</span>
+          <span class="h3">Auxiliar contable · Despacho Ruiz y Asociados</span>
+          <span class="muted">Lun a vie, mañana · Los Mochis · $8,500 al mes</span>
+          <span class="cumple">Cumples 3 de 4 <span class="barra"><i style="width:75%"></i></span></span>
+        </div>
+        <div class="puente">
+          <span class="puente__lbl">Para lograrlo te falta: saber Excel</span>
+          <div class="card"><span class="badge badge--curso">Curso · gratis</span><span class="h3">Excel básico desde tu celular</span><span class="muted">4 semanas · en línea</span></div>
+          <span class="puente__lbl">Te ayuda también</span>
+          <div class="card"><span class="badge badge--curso">Taller · SAT</span><span class="h3">Tu RFC y facturas paso a paso</span><span class="muted">Sábado 5 dic · SAT Los Mochis</span></div>
+        </div>
+        <div class="card">
+          <span class="badge badge--apoyo">Beca</span>
+          <span class="h3">Beca para terminar la prepa</span>
+          <span class="cumple">Cumples todo <span class="barra"><i style="width:100%"></i></span></span>
+        </div>
+      </div>
+      <div class="pc__col">
+        <div class="card card--brand">
+          <span class="h2" style="color:inherit">¿Tienes dudas?</span>
+          <span class="muted">Te ayudamos a elegir o a pedir apoyo.</span>
+          <span class="btn btn--light btn--block"><i data-i="chat"></i> Chatea con nuestro asistente</span>
+        </div>
+        <p class="titulo-seccion">También te puede interesar</p>
+        <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Barista · Empático coffee bar</span><span class="muted">Mañanas · Los Mochis</span></div>
+        <div class="card"><span class="badge badge--curso">Curso</span><span class="h3">Atención al cliente</span><span class="muted">En línea · gratis</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec">Computadora · Explorar</h2>
+<div class="pc">
+  <div class="appbar appbar--pc"><span class="logo">Empoderate</span>
+    <nav class="tabs"><span class="tab"><i data-i="casa" data-s="18"></i>Inicio</span><span class="tab tab--on"><i data-i="buscar" data-s="18"></i>Explorar</span><span class="tab"><i data-i="avance" data-s="18"></i>Mi avance</span></nav>
+    <span class="appbar__fin"><span class="icono-btn"><i data-i="menu"></i></span></span>
+  </div>
+  <div class="pc__body">
+    <h1 class="h1">Explorar</h1>
+    <div style="display:grid;grid-template-columns:240px 1fr;gap:var(--space-7);align-items:start">
+      <aside class="filtros">
+        <span class="h3">Tipo</span><div class="chips"><span class="chip chip--on">Vacantes</span><span class="chip">Cursos</span><span class="chip">Becas y apoyos</span></div>
+        <span class="h3">Horario</span><div class="chips"><span class="chip chip--on">Mañana</span><span class="chip">Tarde</span><span class="chip">Noche</span></div>
+        <span class="h3">Otros</span><div class="chips"><span class="chip">Gratis</span><span class="chip">En línea</span></div>
+      </aside>
+      <div class="pc__col">
+        <div class="input"><span class="campo" style="display:flex;gap:8px;align-items:center"><i data-i="buscar"></i> Busca: cocina, Excel, beca…</span></div>
+        <p class="muted">3 opciones</p>
+        <div class="rejilla">
+          <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Barista</span><span class="muted">Empático coffee bar · Mañanas</span></div>
+          <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Auxiliar contable</span><span class="muted">Despacho Ruiz · Mañanas</span></div>
+          <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Recepcionista</span><span class="muted">Ejemplo — Hotel local · Mañanas</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec">Celular</h2>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin"><span class="icono-btn"><i data-i="menu"></i></span></span></div>
+      <div class="cel__body">
+        <h1 class="h1">Hola, María</h1>
+        <span class="btn btn--block"><i data-i="chat"></i> Chatea con nuestro asistente</span>
+        <p class="titulo-seccion">Tus caminos</p>
+        <div class="card">
+          <span class="badge badge--vacante">Vacante</span>
+          <span class="h3">Auxiliar contable · Despacho Ruiz</span>
+          <span class="muted">Lun a vie, mañana · $8,500 al mes</span>
+          <span class="cumple">Cumples 3 de 4 <span class="barra"><i style="width:75%"></i></span></span>
+        </div>
+        <div class="puente">
+          <span class="puente__lbl">Para lograrlo te falta: saber Excel</span>
+          <div class="card"><span class="badge badge--curso">Curso · gratis</span><span class="h3">Excel básico desde tu celular</span><span class="muted">4 semanas · en línea</span></div>
+        </div>
+      </div>
+      <div class="bottomnav"><span class="on"><b><i data-i="casa"></i></b>Inicio</span><span><b><i data-i="buscar"></i></b>Explorar</span><span><b><i data-i="avance"></i></b>Mi avance</span></div>
+    </div></div>
+    <p class="pie-pantalla">1 · Inicio<small>/inicio</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin"><span class="icono-btn"><i data-i="menu"></i></span></span></div>
+      <div class="cel__body">
+        <h1 class="h1">Explorar</h1>
+        <div class="input"><span class="campo" style="display:flex;gap:8px;align-items:center"><i data-i="buscar"></i> Busca: cocina, Excel…</span></div>
+        <div class="chips"><span class="chip chip--on">Vacantes</span><span class="chip">Cursos</span><span class="chip">Becas y apoyos</span><span class="chip">Gratis</span><span class="chip">En línea</span></div>
+        <p class="muted">12 opciones</p>
+        <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Mesera · Medusa Ristorante</span><span class="muted">Tardes · Los Mochis</span></div>
+        <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Barista · Empático coffee bar</span><span class="muted">Mañanas · Los Mochis</span></div>
+      </div>
+      <div class="bottomnav"><span><b><i data-i="casa"></i></b>Inicio</span><span class="on"><b><i data-i="buscar"></i></b>Explorar</span><span><b><i data-i="avance"></i></b>Mi avance</span></div>
+    </div></div>
+    <p class="pie-pantalla">2 · Explorar<small>/explorar</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin"><span class="icono-btn"><i data-i="menu"></i></span></span></div>
+      <div class="cel__body">
+        <h1 class="h1">Mi avance</h1>
+        <div class="card">
+          <span class="h2">Lo que has hecho</span>
+          <ul class="linea">
+            <li>Te inscribiste a Excel básico<small>12 nov</small></li>
+            <li>Aplicaste a Auxiliar contable<small>20 nov · Esperando respuesta</small></li>
+            <li>Hiciste tu test<small>2 oct</small></li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="h2">Tu perfil</span>
+          <span class="cumple">9 de 12 datos <span class="barra"><i style="width:75%"></i></span></span>
+          <span class="muted">Entre más nos cuentes, mejores opciones te damos.</span>
+          <span class="btn btn--quiet btn--sm" style="align-self:flex-start">Completar mi perfil</span>
+        </div>
+      </div>
+      <div class="bottomnav"><span><b><i data-i="casa"></i></b>Inicio</span><span><b><i data-i="buscar"></i></b>Explorar</span><span class="on"><b><i data-i="avance"></i></b>Mi avance</span></div>
+    </div></div>
+    <p class="pie-pantalla">3 · Mi avance<small>/seguimiento · nunca muestra pedidos de apoyo</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin"><span class="icono-btn"><i data-i="x"></i></span></span></div>
+      <div class="cel__body">
+        <span class="h2">Menú</span>
+        <span class="opt">Mis datos</span>
+        <span class="opt">Aviso de privacidad</span>
+        <span class="opt">Borrar mis datos</span>
+        <span class="btn btn--block btn--ghost" style="margin-top:auto"><i data-i="salir"></i> Cerrar sesión</span>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">4 · Menú<small>Cerrar sesión siempre a la vista</small></p>
+  </div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M4 · Expediente — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M4 · Expediente único, Trabajo Social y especialistas</h1>
+  <p>Un expediente por mujer (CURP). Cada área ve solo lo suyo. Ella no repite su historia.</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Sidebar morado (<code>--surface-brand</code>) igual al panel actual; enlace activo con pastilla <code>--action-soft</code>.</li>
+  <li>Buscador «Buscar por nombre o CURP» arriba a la derecha en todas las vistas del módulo.</li>
+  <li>Encabezado de la ficha: nombre, CURP con los últimos 8 caracteres ocultos (<code>LORM******</code>), edad, colonia, «Expediente desde …», badges de folio y urgencia.</li>
+  <li>Bloque confidencial que no le toca a quien mira: <code>.aviso--candado</code> con ícono de candado y solo «En atención jurídica desde 26 nov». Nunca un bloque vacío o un error.</li>
+  <li>Campos con etiqueta legible («Horas libres a la semana»), nunca claves internas (<code>horas_semana</code>).</li>
+  <li>Urgencia: inmediata = <code>badge--danger</code>, pronta = <code>badge--warn</code>, informativa = <code>badge--info</code>.</li>
+</ul></div>
+
+<h2 class="sec">1 · Trabajo Social: solicitudes nuevas</h2>
+<div class="pc"><div class="adm">
+  <aside class="adm__side">
+    <span class="logo">Empoderate</span>
+    <div class="adm__perfil"><span class="avatar">L</span><span><b>Laura Méndez</b><small>Trabajo Social</small></span></div>
+    <span class="adm__link adm__link--on">Solicitudes nuevas <em>3</em></span>
+    <span class="adm__link">Mis casos</span>
+    <span class="adm__link">Expedientes</span>
+    <span class="adm__link" style="margin-top:auto">Cerrar sesión</span>
+  </aside>
+  <main class="adm__main">
+    <div class="adm__top"><h1>Solicitudes nuevas</h1><span class="buscador" style="display:flex;gap:8px;align-items:center"><i data-i="buscar" data-s="18"></i> Buscar por nombre o CURP</span></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="tabla">
+        <tr><th>Folio</th><th>Mujer</th><th>Llegó por</th><th>Urgencia</th><th>Hace</th><th></th></tr>
+        <tr><td><b>C-015</b></td><td>Ana Pérez G.</td><td>Asistente</td><td><span class="badge badge--danger">Inmediata</span></td><td>20 min</td><td><span class="btn btn--sm">Abrir</span></td></tr>
+        <tr><td><b>C-014</b></td><td>María López R.</td><td>Asistente</td><td><span class="badge badge--warn">Pronta</span></td><td>2 h</td><td><span class="btn btn--sm">Abrir</span></td></tr>
+        <tr><td><b>C-013</b></td><td>Rosa Gil M.</td><td>«Hablar con una persona»</td><td><span class="badge badge--info">Informativa</span></td><td>1 día</td><td><span class="btn btn--sm">Abrir</span></td></tr>
+      </table>
+    </div>
+  </main>
+</div></div>
+
+<h2 class="sec">2 · Ficha del expediente (vista de Trabajo Social)</h2>
+<div class="pc"><div class="adm">
+  <aside class="adm__side">
+    <span class="logo">Empoderate</span>
+    <div class="adm__perfil"><span class="avatar">L</span><span><b>Laura Méndez</b><small>Trabajo Social</small></span></div>
+    <span class="adm__link adm__link--on">Solicitudes nuevas <em>3</em></span>
+    <span class="adm__link">Mis casos</span>
+    <span class="adm__link">Expedientes</span>
+  </aside>
+  <main class="adm__main">
+    <div class="adm__top"><span class="btn btn--link btn--sm"><i data-i="izq" data-s="18"></i> Solicitudes</span><span class="buscador" style="display:flex;gap:8px;align-items:center"><i data-i="buscar" data-s="18"></i> Buscar por nombre o CURP</span></div>
+    <div class="card" style="flex-direction:row;align-items:center;gap:var(--space-4)">
+      <span class="avatar" style="width:64px;height:64px;font-size:22px">ML</span>
+      <div style="flex:1"><span class="h2">María López Ramírez</span><p class="muted">CURP LORM****** · 34 años · Col. Jiquilpan, Ahome · Expediente desde 2 oct 2026</p></div>
+      <span class="badge badge--marca">Folio C-014</span><span class="badge badge--warn">Pronta</span>
+    </div>
+    <div class="cols">
+      <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+        <div class="card">
+          <span class="h2">Lo que nos contó</span><span class="muted">Resumen que ella aprobó · 25 nov</span>
+          <p style="margin:0">Necesita asesoría para pensión alimenticia de 2 hijos. Ya está separada.</p>
+          <dl class="datos"><dt>Contacto seguro</dt><dd>WhatsApp · entre semana en la mañana</dd><dt>¿Dejar mensaje?</dt><dd>No</dd></dl>
+          <span class="titulo-seccion">Asignar a</span>
+          <div class="acciones"><span class="btn">Jurídico</span><span class="btn btn--ghost">Psicología</span><span class="btn btn--ghost">Ambas</span></div>
+        </div>
+        <div class="card">
+          <span class="h2">Datos generales</span>
+          <dl class="datos"><dt>Escolaridad</dt><dd>Secundaria</dd><dt>Personas a su cargo</dt><dd>Niñas o niños</dd><dt>Horas libres a la semana</dt><dd>10 a 15</dd><dt>Se conecta con</dt><dd>Solo celular con datos</dd></dl>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--space-5)">
+        <div class="card">
+          <span class="h2">Línea de tiempo</span>
+          <ul class="linea">
+            <li>Pidió apoyo desde el asistente<small>25 nov · C-014</small></li>
+            <li>Se inscribió a Excel básico<small>12 nov · Empoderamiento económico</small></li>
+            <li>Hizo su test · camino: empleo<small>2 oct</small></li>
+          </ul>
+        </div>
+        <div class="card"><span class="h2">Notas de Trabajo Social</span><div class="input"><span class="campo" style="min-height:80px">Escribe una nota…</span></div><span class="btn btn--sm" style="align-self:flex-start">Guardar nota</span></div>
+      </div>
+    </div>
+  </main>
+</div></div>
+
+<h2 class="sec">3 · La misma mujer vista por Psicología (no asignada a Psicología)</h2>
+<div class="pc"><div class="adm">
+  <aside class="adm__side">
+    <span class="logo">Empoderate</span>
+    <div class="adm__perfil"><span class="avatar">P</span><span><b>Paola Ruiz</b><small>Psicología</small></span></div>
+    <span class="adm__link adm__link--on">Mis casos <em>4</em></span>
+    <span class="adm__link">Expedientes</span>
+  </aside>
+  <main class="adm__main">
+    <div class="card" style="flex-direction:row;align-items:center;gap:var(--space-4)">
+      <span class="avatar" style="width:64px;height:64px;font-size:22px">ML</span>
+      <div style="flex:1"><span class="h2">María López Ramírez</span><p class="muted">CURP LORM****** · 34 años · Col. Jiquilpan, Ahome</p></div>
+    </div>
+    <div class="aviso aviso--candado" style="display:flex;gap:8px;align-items:center"><i data-i="candado" data-s="18"></i> En atención jurídica desde 26 nov. El detalle solo lo ve el área asignada.</div>
+    <div class="card"><span class="h2">Datos generales</span><dl class="datos"><dt>Escolaridad</dt><dd>Secundaria</dd><dt>Personas a su cargo</dt><dd>Niñas o niños</dd></dl></div>
+  </main>
+</div></div>
+
+<h2 class="sec">Celular o tableta (el panel también es responsivo)</h2>
+<p class="sec-lead">Bajo 960 px el menú lateral se vuelve un cajón que se abre con el ícono de menú, y las tablas se vuelven tarjetas.</p>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="icono-btn"><i data-i="menu"></i></span><b>Solicitudes nuevas</b><span class="appbar__fin"><span class="icono-btn"><i data-i="buscar"></i></span></span></div>
+      <div class="cel__body">
+        <div class="card"><div class="acciones" style="justify-content:space-between"><b>C-015 · Ana Pérez G.</b><span class="badge badge--danger">Inmediata</span></div><span class="muted">Llegó por el asistente · hace 20 min</span><span class="btn btn--sm" style="align-self:flex-start">Abrir</span></div>
+        <div class="card"><div class="acciones" style="justify-content:space-between"><b>C-014 · María López R.</b><span class="badge badge--warn">Pronta</span></div><span class="muted">Llegó por el asistente · hace 2 h</span><span class="btn btn--sm" style="align-self:flex-start">Abrir</span></div>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Solicitudes</p>
+  </div>
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="btn btn--link btn--sm"><i data-i="izq" data-s="18"></i> Solicitudes</span></div>
+      <div class="cel__body">
+        <div><span class="h2">María López Ramírez</span><p class="muted">CURP LORM****** · 34 años · Jiquilpan</p></div>
+        <div class="acciones"><span class="badge badge--marca">Folio C-014</span><span class="badge badge--warn">Pronta</span></div>
+        <div class="card"><span class="h3">Lo que nos contó</span><p style="margin:0">Necesita asesoría para pensión alimenticia de 2 hijos.</p><span class="muted">WhatsApp · entre semana en la mañana</span></div>
+        <span class="titulo-seccion">Asignar a</span>
+        <span class="btn btn--block">Jurídico</span>
+        <div class="acciones"><span class="btn btn--ghost" style="flex:1">Psicología</span><span class="btn btn--ghost" style="flex:1">Ambas</span></div>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Ficha</p>
+  </div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

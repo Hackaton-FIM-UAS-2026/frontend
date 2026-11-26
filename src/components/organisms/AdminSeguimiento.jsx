@@ -27,7 +27,7 @@ const MEDIOS = {
 };
 
 const plantilla = (u) =>
-  `Hola ${primerNombre(u.nombre)}, te saluda Ana Torres, asesora de CEMujeres. Te escribo por tu registro en Empoderate. ` +
+  `Hola ${primerNombre(u.nombre)}, te saluda Ana Torres, asesora de SEMujeres. Te escribo por tu registro en Empoderate. ` +
   `¿Tienes unos minutos para platicar sobre tus recomendaciones de ${NOMBRE_RUTA[u.ruta].toLowerCase()}?`;
 
 /** Lista del dashboard: a quién toca dar seguimiento hoy. */
@@ -126,11 +126,11 @@ export function ContactarDialog({ usuaria, abierto, onCerrar, onRegistrar }) {
 const FUENTES = [
   ["todas", "Todo"],
   ["usuaria", "De ella"],
-  ["personal_cemujeres", "Del equipo"],
+  ["personal_semujeres", "Del equipo"],
   ["test_base", "Test"],
 ];
-const ICONO_FUENTE = { usuaria: "usuaria", personal_cemujeres: "usuarias", test_base: "check" };
-const TEXTO_FUENTE = { usuaria: "Usuaria", personal_cemujeres: "Equipo CEMujeres", test_base: "Test base" };
+const ICONO_FUENTE = { usuaria: "usuaria", personal_semujeres: "usuarias", test_base: "check" };
+const TEXTO_FUENTE = { usuaria: "Usuaria", personal_semujeres: "Equipo SEMujeres", test_base: "Test base" };
 
 /** Línea de tiempo de actividad con filtro por origen. */
 export function ActividadTimeline({ historial }) {

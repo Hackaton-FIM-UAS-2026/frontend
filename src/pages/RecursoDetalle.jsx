@@ -5,6 +5,7 @@ import { ApiEstado } from "../components/molecules";
 import { Button, Icon } from "../components/atoms";
 import { api } from "../services/api";
 import { useApi } from "../services/useApi";
+import { destino } from "../modulos/registro";
 
 export default function RecursoDetalle() {
   const { id } = useParams();
@@ -37,9 +38,9 @@ export default function RecursoDetalle() {
       <AppTemplate>
         <div className="card card--sunken empty">
           <span className="empty__icon"><Icon name="buscar" size={26} /></span>
-          <h1 className="card__title">No encontramos este recurso</h1>
-          <p className="muted">Revisa tus otras recomendaciones.</p>
-          <Button to="/dashboard">Ver mis recursos</Button>
+          <h1 className="card__title">No encontramos esta opción</h1>
+          <p className="muted">Revisa tus otras opciones.</p>
+          <Button to={destino("/inicio", "/dashboard")}>Ver mis opciones</Button>
         </div>
       </AppTemplate>
     );

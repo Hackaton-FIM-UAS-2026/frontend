@@ -4,7 +4,7 @@ export const USUARIAS = [
     contacto: { telefono: "668 555 0101", correo: "maria.h@correo.example", medio: "WhatsApp", horario: "Mañanas" }, ruta: "emprendimiento", puente: "capacitacion", estado: "Inscrita", municipio: "Ahome", version: 4, ultima: "25 nov",
     campos: { Edad: "35 a 44", Escolaridad: "Secundaria", "Horas a la semana": "10 a 15", Horario: "Mañana", Cuidados: "Niñas o niños", Dispositivo: "Solo celular con datos", Negocio: "Ya vendo" },
     historial: [
-      { fecha: "25 nov", texto: "Asesora registró: inscrita al curso de finanzas básicas", fuente: "personal_cemujeres" },
+      { fecha: "25 nov", texto: "Asesora registró: inscrita al curso de finanzas básicas", fuente: "personal_semujeres" },
       { fecha: "25 nov", texto: "Respondió: tiene RFC = No", fuente: "usuaria" },
       { fecha: "24 nov", texto: "Test base completado", fuente: "test_base" } ] },
   { id: 2, nombre: "Lucía Valenzuela",
@@ -20,7 +20,7 @@ export const USUARIAS = [
   { id: 4, nombre: "Karla Osuna",
     contacto: { telefono: "668 555 0104", correo: "karla.o@correo.example", medio: "WhatsApp", horario: "Noches" }, ruta: "empleabilidad", puente: "capacitacion", estado: "Contratada", municipio: "Ahome", version: 5, ultima: "22 nov",
     campos: { Edad: "25 a 34", Escolaridad: "Preparatoria", "Horas a la semana": "16 a 29", Horario: "Tarde", Cuidados: "Niñas o niños", Dispositivo: "Celular con wifi", Negocio: "No" },
-    historial: [{ fecha: "22 nov", texto: "Asesora registró: contratada (atención al cliente)", fuente: "personal_cemujeres" }] },
+    historial: [{ fecha: "22 nov", texto: "Asesora registró: contratada (atención al cliente)", fuente: "personal_semujeres" }] },
   { id: 5, nombre: "Daniela Ruiz",
     contacto: { telefono: "687 555 0105", correo: "daniela.r@correo.example", medio: "Correo", horario: "Fines de semana" }, ruta: "emprendimiento", puente: null, estado: "Nueva", municipio: "Guasave", version: 1, ultima: "21 nov",
     campos: { Edad: "25 a 34", Escolaridad: "Universidad", "Horas a la semana": "16 a 29", Horario: "Fines de semana", Cuidados: "Ninguna", Dispositivo: "Computadora", Negocio: "Tengo una idea" },
@@ -28,7 +28,7 @@ export const USUARIAS = [
   { id: 6, nombre: "Patricia Lugo",
     contacto: { telefono: "668 555 0106", correo: "patricia.l@correo.example", medio: "WhatsApp", horario: "Mañanas" }, ruta: "capacitacion", puente: null, estado: "Curso terminado", municipio: "Ahome", version: 4, ultima: "20 nov",
     campos: { Edad: "35 a 44", Escolaridad: "Secundaria", "Horas a la semana": "Menos de 10", Horario: "Mañana", Cuidados: "Niñas o niños", Dispositivo: "Solo celular con datos", Negocio: "No" },
-    historial: [{ fecha: "20 nov", texto: "Asesora registró: curso terminado", fuente: "personal_cemujeres" }] },
+    historial: [{ fecha: "20 nov", texto: "Asesora registró: curso terminado", fuente: "personal_semujeres" }] },
 ];
 
 export const CASOS_INICIALES = [

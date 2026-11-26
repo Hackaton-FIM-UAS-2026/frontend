@@ -1,21 +1,24 @@
 import { NavLink, Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Logo, Icon } from "../atoms";
+import { MenuCuenta } from "../molecules";
+import { destino } from "../../modulos/registro";
 
-const ITEMS = [
-  ["/dashboard", "Recursos", "libro"],
+// Se calcula al renderizar (no al cargar el archivo): registro.js importa este módulo de forma circular.
+const items = () => [
+  [destino("/inicio", "/dashboard"), "Inicio", "casa"],
+  [destino("/explorar", "/dashboard"), "Explorar", "buscar"],
   ["/seguimiento", "Mi avance", "avance"],
-  ["/chat", "Asistente", "chat"],
 ];
 
-/** Barra superior de la app. En escritorio lleva las pestañas; en móvil, solo marca y apoyo. */
+/** Barra superior de la app. En escritorio lleva las pestañas; siempre, el menú de cuenta. */
 export function AppHeader() {
   return (
     <header className="appbar">
       <div className="appbar__in container">
         <Link to="/" className="appbar__logo" aria-label="Empoderate, inicio"><Logo /></Link>
         <nav className="appbar__tabs" aria-label="Principal">
-          {ITEMS.map(([to, label, icon]) => (
+          {items().map(([to, label, icon]) => (
             <NavLink key={to} to={to} className={({ isActive }) => `tab ${isActive ? "tab--on" : ""}`}>
               {({ isActive }) => (
                 <>
@@ -26,7 +29,7 @@ export function AppHeader() {
             </NavLink>
           ))}
         </nav>
-        <Link to="/apoyo" className="appbar__apoyo">Necesito apoyo</Link>
+        <div className="appbar__fin"><MenuCuenta /></div>
       </div>
     </header>
   );
@@ -36,7 +39,7 @@ export function AppHeader() {
 export function BottomNav() {
   return (
     <nav className="bottomnav" aria-label="Principal">
-      {ITEMS.map(([to, label, icon]) => (
+      {items().map(([to, label, icon]) => (
         <NavLink key={to} to={to} className={({ isActive }) => `bn ${isActive ? "bn--on" : ""}`}>
           {({ isActive }) => (
             <>

@@ -1,0 +1,104 @@
+/* ===== M7 · Landing y páginas de cada tema ===== */
+.m7-sec { padding-block: var(--space-10); }
+.m7-sec--alt { background: var(--surface-sunken); }
+.m7-sec--marca { background: var(--surface-brand); color: var(--text-on-brand); }
+.m7-sec--marca .m7-titulo { color: var(--text-on-brand); }
+.m7-sec--marca .m7-lead { color: var(--text-on-brand-muted); }
+.m7-centro .container { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.m7-titulo { font-family: var(--font-display); font-weight: 600; color: var(--text-heading); font-size: var(--step-3); line-height: var(--leading-snug); letter-spacing: var(--tracking-display); margin: 0 0 var(--space-3); }
+.m7-titulo--grande { font-size: var(--step-4); }
+.m7-lead { color: var(--text-soft); font-size: var(--step-0); max-width: 60ch; margin: 0 0 var(--space-7); }
+.m7-sub { margin: 0 0 var(--space-3); font-size: var(--step-1); color: var(--text-heading); }
+.m7-sub--sep { margin-top: var(--space-9); }
+.m7-peq { margin: 0; color: var(--text-soft); font-size: var(--step--1); }
+.m7-mas { display: inline-flex; align-items: center; gap: 6px; margin-top: var(--space-6); font-weight: 700; color: var(--action-ink); text-decoration: none; }
+.m7-mas:hover { text-decoration: underline; }
+.m7-fila { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+.m7-fila--centro { justify-content: center; }
+.m7-auto { width: auto; }
+.m7-col { display: flex; flex-direction: column; gap: var(--space-5); }
+.m7-dos, .m7-tres, .m7-cuatro { display: grid; gap: var(--space-6); }
+.m7-sep { margin-top: var(--space-8); }
+
+.m7-cifras { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); align-self: center; }
+.m7-cifra { border-top: 2px solid var(--morado-300); padding-top: var(--space-3); }
+.m7-cifra b { display: block; font-family: var(--font-display); font-weight: 600; font-size: var(--step-3); color: var(--text-heading); line-height: 1.1; }
+.m7-cifra span { font-size: var(--step--1); color: var(--text-soft); }
+
+.m7-pilar { display: flex; flex-direction: column; gap: var(--space-2); }
+.m7-pilar__ic { width: 48px; height: 48px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--action-soft); color: var(--action-ink); margin-bottom: var(--space-2); }
+.m7-pilar h3 { margin: 0; font-size: var(--step-1); color: var(--text-heading); }
+.m7-pilar p { margin: 0; color: var(--text-soft); }
+
+.m7-lista { margin: 0 0 var(--space-2); padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--space-2); }
+.m7-linea { list-style: none; margin: 0 0 var(--space-4); padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.m7-linea li { padding-left: var(--space-4); border-left: 2px solid var(--morado-200); }
+.m7-linea small { display: block; color: var(--text-muted); font-size: var(--step--1); }
+
+/* Diagrama de bolitas y palitos (vertical en celular) */
+.m7-flujo { list-style: none; margin: 0; padding: 0; display: grid; }
+.m7-flujo__paso { position: relative; display: flex; gap: var(--space-4); padding-bottom: var(--space-6); }
+.m7-flujo__paso::after { content: ""; position: absolute; left: 31px; top: 64px; bottom: 0; width: 2px; background: var(--morado-300); }
+.m7-flujo__paso > div { display: flex; flex-direction: column; padding-top: var(--space-3); }
+.m7-flujo b { color: var(--text-heading); }
+.m7-flujo small { color: var(--text-soft); font-size: var(--step--1); max-width: 26ch; }
+.m7-bolita { width: 64px; height: 64px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--surface); color: var(--action-ink); border: 2px solid var(--morado-300); box-shadow: var(--shadow-1); position: relative; z-index: 1; }
+.m7-bolita--fuerte { background: var(--action); border-color: var(--action); color: var(--on-action); }
+.m7-bolita--sm { width: 44px; height: 44px; }
+.m7-flujo__rama { margin-left: 31px; padding-left: var(--space-5); border-left: 2px solid var(--morado-300); display: flex; flex-direction: column; gap: var(--space-4); }
+.m7-flujo__rama > div { position: relative; display: flex; gap: var(--space-3); align-items: center; }
+.m7-flujo__rama > div::before { content: ""; position: absolute; left: calc(-1 * var(--space-5)); width: var(--space-5); top: 50%; height: 2px; background: var(--morado-300); }
+.m7-flujo__rama span { display: flex; flex-direction: column; }
+
+.m7-aliadas { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--space-7); }
+.m7-aliadas img { height: 48px; width: auto; max-width: 200px; object-fit: contain; filter: grayscale(1); opacity: 0.7; transition: filter var(--dur-fast) ease, opacity var(--dur-fast) ease; }
+@media (hover: hover) { .m7-aliadas img:hover { filter: none; opacity: 1; } }
+.m7-hueco { height: 48px; width: 170px; border: 1.5px dashed var(--border-strong); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted); font-size: var(--step--1); }
+
+.m7-peligro { color: var(--text); gap: var(--space-3); align-self: start; }
+.m7-peligro h3 { margin: 0; font-size: var(--step-1); color: var(--text-heading); }
+.m7-peligro p { margin: 0; color: var(--text-soft); }
+.m7-peligro .m7-peq { text-align: center; }
+
+/* Páginas de tema */
+.m7-pagina { padding-top: var(--space-8); }
+.m7-migas { display: flex; align-items: center; gap: var(--space-2); font-size: var(--step--1); color: var(--text-muted); margin-bottom: var(--space-4); }
+.m7-migas a { color: var(--action-ink); }
+.m7-areas ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); }
+.m7-areas li { display: flex; gap: var(--space-3); align-items: flex-start; }
+.m7-areas li .m7-pilar__ic { margin: 0; }
+.m7-areas b { display: block; color: var(--text-heading); }
+.m7-areas small { color: var(--text-soft); font-size: var(--step--1); }
+.m7-visita h3 { margin: 0 0 var(--space-2); font-size: var(--step-0); }
+.m7-visita p { margin: 0; display: flex; gap: 6px; align-items: center; color: var(--text-soft); font-size: var(--step--1); }
+.m7-detalle { gap: var(--space-2); }
+.m7-faq { display: grid; gap: var(--space-4); }
+.m7-faq h3 { margin: 0; font-size: var(--step-0); }
+.m7-faq p { margin: 0; color: var(--text-soft); font-size: var(--step--1); }
+.m7-sumate { gap: var(--space-3); align-self: center; }
+.m7-sumate .m7-sub { color: var(--text-on-brand); margin: 0; }
+.m7-sumate p { margin: 0; color: var(--text-on-brand-muted); }
+.m7-claro { color: var(--text-on-brand); font-size: var(--step--1); text-align: center; }
+.m7-sigue { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); margin-top: var(--space-9); padding-top: var(--space-5); border-top: 1px solid var(--border); color: var(--text-muted); }
+
+/* Barra de la landing: menú desplegable en celular */
+.sitenav__on { background: var(--action-soft); color: var(--action-ink) !important; }
+.sitehead__entrar { display: none; }
+.mobilenav__velo { position: fixed; inset: var(--appbar-h) 0 0 0; background: var(--surface-scrim); z-index: -1; }
+.mobilenav__cta { padding-top: var(--space-4); }
+.mobilenav__cta a { border-bottom: 0 !important; justify-content: center !important; }
+
+@media (min-width: 640px) { .m7-faq { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 960px) {
+  .m7-dos { grid-template-columns: 1fr 1fr; gap: var(--space-8); align-items: start; }
+  .m7-tres { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .m7-cuatro { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .m7-aliadas img { height: 56px; }
+  .m7-hueco { height: 56px; }
+  .m7-flujo { grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.3fr); align-items: start; }
+  .m7-flujo__paso { flex-direction: column; align-items: center; text-align: center; padding: 0 var(--space-2); }
+  .m7-flujo__paso > div { padding-top: 0; align-items: center; }
+  .m7-flujo__paso::after { top: 31px; bottom: auto; left: calc(50% + 34px); right: calc(-50% + 34px); width: auto; height: 2px; }
+  .m7-flujo__rama { margin: 6px 0 0; }
+}
+@media (min-width: 1100px) { .sitehead__entrar { display: inline-flex; } }

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M6 · Empresas — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M6 · Empresas y bolsa de trabajo</h1>
+  <p>Las empresas se registran y publican. Una persona de Empoderamiento económico revisa <b>cada</b> empresa y <b>cada</b> vacante.</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Nada se publica sin aprobación humana. Estados visibles para la empresa: «En revisión» (<code>badge--warn</code>), «Publicada» (<code>badge--ok</code>), «No aprobada» (<code>badge--danger</code>) con el motivo.</li>
+  <li>La alerta de la IA es solo una ayuda: <code>.aviso</code> «La IA notó: …». Los botones «Aprobar» y «No aprobar» siempre los presiona una persona.</li>
+  <li>Candidatas: solo <b>nombre, escolaridad, habilidades, experiencia y teléfono</b>. Nunca colonia, CURP, canalizaciones ni nada de SEMujeres.</li>
+  <li>El panel de empresa usa el mismo layout del panel (sidebar morado) con su propio menú: Mis vacantes · Candidatas · Mi empresa.</li>
+  <li>Registro de empresa: una sola columna, 6 campos máximo + logo opcional.</li>
+</ul></div>
+
+<h2 class="sec">1 · Registro de empresa (público)</h2>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span><span class="appbar__fin muted">Empresas</span></div>
+      <div class="cel__body">
+        <h1 class="h1">Registra tu empresa</h1>
+        <p class="lead">Publica vacantes para mujeres de Ahome. SEMujeres revisa cada registro.</p>
+        <div class="input">Nombre de la empresa<span class="campo">Empático coffee bar</span></div>
+        <div class="input">RFC<span class="campo">ECB2001015A1</span></div>
+        <div class="input">Giro<span class="campo">Cafetería</span></div>
+        <div class="input">Persona de contacto<span class="campo">Sofía Leyva</span></div>
+        <div class="input">Teléfono<span class="campo">668 …</span></div>
+        <div class="input">Logo (opcional)<span class="campo">Subir imagen</span></div>
+        <span class="btn btn--block">Enviar registro</span>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Ruta /empresas/registro</p>
+  </div>
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span></div>
+      <div class="cel__body">
+        <div class="aviso aviso--ok"><b>Recibimos tu registro.</b> Una persona de SEMujeres lo revisará y te avisaremos aquí mismo.</div>
+        <span class="badge badge--warn">En revisión</span>
+        <p class="muted">Mientras tanto puedes preparar tus vacantes; se publicarán cuando se apruebe tu empresa y cada vacante.</p>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">Después de enviar</p>
+  </div>
+</div>
+
+<h2 class="sec">2 · Panel de la empresa</h2>
+<div class="pc"><div class="adm">
+  <aside class="adm__side">
+    <span class="logo">Empoderate</span>
+    <div class="adm__perfil"><span class="avatar">E</span><span><b>Empático coffee bar</b><small>Empresa aprobada</small></span></div>
+    <span class="adm__link adm__link--on">Mis vacantes</span>
+    <span class="adm__link">Candidatas <em>2</em></span>
+    <span class="adm__link">Mi empresa</span>
+  </aside>
+  <main class="adm__main">
+    <div class="adm__top"><h1>Mis vacantes</h1><span class="btn" style="margin-left:auto">+ Nueva vacante</span></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="tabla">
+        <tr><th>Vacante</th><th>Horario</th><th>Estado</th><th>Candidatas</th></tr>
+        <tr><td><b>Barista</b></td><td>Mañanas</td><td><span class="badge badge--ok">Publicada</span></td><td>2</td></tr>
+        <tr><td><b>Cajera</b></td><td>Tardes</td><td><span class="badge badge--warn">En revisión</span></td><td>—</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <span class="h2">Candidatas · Barista</span>
+      <table class="tabla">
+        <tr><th>Nombre</th><th>Escolaridad</th><th>Habilidades</th><th>Teléfono</th><th></th></tr>
+        <tr><td><b>Lucía Torres</b></td><td>Preparatoria</td><td>Atención al cliente, Computación</td><td>668 555 0102</td><td><span class="btn btn--sm btn--quiet">Marcar contratada</span></td></tr>
+        <tr><td><b>María López</b></td><td>Secundaria</td><td>Cocina, Ventas</td><td>668 555 0101</td><td><span class="btn btn--sm btn--quiet">Marcar contratada</span></td></tr>
+      </table>
+    </div>
+  </main>
+</div></div>
+
+<h2 class="sec">3 · Revisión en el panel de SEMujeres (Empoderamiento económico)</h2>
+<div class="pc"><div class="adm">
+  <aside class="adm__side">
+    <span class="logo">Empoderate</span>
+    <div class="adm__perfil"><span class="avatar">C</span><span><b>Carmen Vega</b><small>Empoderamiento económico</small></span></div>
+    <span class="adm__link">Resumen</span>
+    <span class="adm__link">Usuarias</span>
+    <span class="adm__link adm__link--on">Revisión de empresas <em>3</em></span>
+    <span class="adm__link">Catálogo</span>
+  </aside>
+  <main class="adm__main">
+    <div class="adm__top"><h1>Revisión de empresas</h1></div>
+    <div class="chips"><span class="chip chip--on">Vacantes (2)</span><span class="chip">Empresas (1)</span></div>
+    <div class="cols">
+      <div class="card">
+        <span class="badge badge--warn">En revisión</span>
+        <span class="h2">Edecán para eventos · Promociones Del Valle</span>
+        <dl class="datos"><dt>Sueldo</dt><dd>$25,000 a la semana</dd><dt>Lugar</dt><dd>Guadalajara, Jal. (viaje pagado)</dd><dt>Pide</dt><dd>Fotos de cuerpo completo</dd></dl>
+        <div class="aviso">La IA notó: sueldo muy por arriba del promedio, trabajo fuera de la ciudad y piden fotos. Revisa con cuidado.</div>
+        <div class="input">Motivo (si no se aprueba)<span class="campo">Escribe el motivo…</span></div>
+        <div class="acciones"><span class="btn btn--ghost">Aprobar y publicar</span><span class="btn btn--secondary">No aprobar</span></div>
+      </div>
+      <div class="card">
+        <span class="badge badge--warn">En revisión</span>
+        <span class="h2">Cajera · Empático coffee bar</span>
+        <dl class="datos"><dt>Sueldo</dt><dd>$7,800 al mes</dd><dt>Lugar</dt><dd>Los Mochis</dd><dt>Horario</dt><dd>Tardes</dd></dl>
+        <div class="acciones"><span class="btn">Aprobar y publicar</span><span class="btn btn--link">No aprobar</span></div>
+      </div>
+    </div>
+  </main>
+</div></div>
+
+<h2 class="sec">Registro de empresa en computadora</h2>
+<div class="pc"><div class="auth-pc">
+  <div class="auth-pc__marca">
+    <span class="logo">Empoderate · Empresas</span>
+    <div><h2>Abre tus puertas a mujeres de Ahome</h2><p style="margin-top:var(--space-4)">Publica tus vacantes. SEMujeres revisa cada una para que las candidatas lleguen con confianza.</p></div>
+    <p>Un programa de la Secretaría de las Mujeres de Ahome</p>
+  </div>
+  <div class="auth-pc__form"><div>
+    <h1 class="h1">Registra tu empresa</h1>
+    <div class="input">Nombre de la empresa<span class="campo">Empático coffee bar</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)"><div class="input">RFC<span class="campo">ECB2001015A1</span></div><div class="input">Giro<span class="campo">Cafetería</span></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3)"><div class="input">Contacto<span class="campo">Sofía Leyva</span></div><div class="input">Teléfono<span class="campo">668 …</span></div></div>
+    <div class="input">Logo (opcional)<span class="campo">Subir imagen</span></div>
+    <span class="btn btn--block">Enviar registro</span>
+  </div></div>
+</div></div>
+</div><script src="_iconos.js"></script></body></html>

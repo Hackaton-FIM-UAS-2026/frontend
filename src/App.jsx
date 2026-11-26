@@ -9,10 +9,13 @@ import Seguimiento from "./pages/Seguimiento";
 import Chat from "./pages/Chat";
 import Apoyo from "./pages/Apoyo";
 import AdminPanel from "./pages/AdminPanel";
+import { rutasModulos } from "./modulos/registro";
 
 export default function App() {
   return (
     <Routes>
+      {/* Rutas de los módulos M1–M7 (src/modulos/<m>/rutas.jsx) */}
+      {rutasModulos.map((r) => <Route key={r.path} path={r.path} element={r.element} />)}
       <Route path="/" element={<Home />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/test" element={<TestBase />} />

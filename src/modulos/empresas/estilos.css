@@ -1,0 +1,44 @@
+/* ===== M6 · Empresas ===== */
+.m6-pila { display: flex; flex-direction: column; gap: var(--space-4); }
+.m6-fila { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.m6-dos { display: grid; gap: var(--space-4); }
+.m6-h1 { font-family: var(--font-display); font-weight: 600; color: var(--text-heading); font-size: var(--step-3); line-height: var(--leading-snug); margin: 0; }
+.m6-muted { color: var(--text-muted); font-size: var(--step--1); margin: 0; }
+.m6-error { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--danger-soft); color: var(--danger-ink); font-size: var(--step--1); }
+.m6-ok { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--success-soft); color: var(--success-ink); font-size: var(--step--1); }
+.m6-aviso { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--warning-soft); color: var(--warning-ink); font-size: var(--step--1); }
+.m6-alerta { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--action-softer); color: var(--action-ink); font-size: var(--step--1); }
+.m6-chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.m6-chip { min-height: 40px; padding: 0 var(--space-4); border: 1.5px solid var(--morado-300); border-radius: var(--radius-pill); background: var(--surface); color: var(--action-ink); font-weight: 600; font-size: var(--step--1); cursor: pointer; }
+.m6-chip--on { background: var(--action); border-color: var(--action); color: var(--on-action); }
+.m6-rejilla { display: grid; gap: var(--space-5); }
+.m6-rev { display: flex; flex-direction: column; gap: var(--space-3); }
+.m6-rev__t { margin: 0; font-size: var(--step-1); color: var(--text-heading); }
+.m6-datos { display: grid; grid-template-columns: auto 1fr; gap: 6px var(--space-4); margin: 0; font-size: var(--step--1); }
+.m6-datos div { display: contents; }
+.m6-datos dt { color: var(--text-muted); }
+.m6-datos dd { margin: 0; font-weight: 600; }
+.m6-docs { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.m6-docs legend { font-weight: 600; font-size: var(--step--1); margin-bottom: var(--space-2); }
+.m6-select { max-width: 420px; }
+.m6-logo { max-height: 64px; width: auto; align-self: flex-start; }
+
+/* Registro (público) */
+.m6-reg { min-height: 100dvh; display: grid; background: var(--bg); }
+.m6-reg__marca { display: none; }
+.m6-reg__lado { display: grid; grid-template-rows: auto 1fr; }
+.m6-reg__barra { min-height: var(--appbar-h); display: flex; align-items: center; padding: 0 var(--gutter); background: var(--surface); box-shadow: var(--shadow-bar); }
+.m6-reg__barra a { display: inline-flex; text-decoration: none; }
+.m6-reg__form { width: 100%; max-width: 520px; margin: 0 auto; padding: var(--space-7) var(--gutter) var(--space-9); display: flex; flex-direction: column; gap: var(--space-4); }
+
+@media (min-width: 640px) { .m6-dos { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 960px) {
+  .m6-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .m6-reg { grid-template-columns: 1fr 1fr; }
+  .m6-reg__marca { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-6); padding: var(--space-9) var(--space-8); background: var(--surface-brand); color: var(--text-on-brand); position: sticky; top: 0; height: 100dvh; }
+  .m6-reg__marca a { display: inline-flex; text-decoration: none; }
+  .m6-reg__titulo { font-family: var(--font-display); font-weight: 500; font-size: var(--step-4); line-height: var(--leading-tight); margin: 0 0 var(--space-4); }
+  .m6-reg__texto { color: var(--text-on-brand-muted); margin: 0; max-width: 40ch; }
+  .m6-reg__barra { background: transparent; box-shadow: none; }
+  .m6-reg__form { align-self: center; padding-top: 0; }
+}

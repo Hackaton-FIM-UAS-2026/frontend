@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M2 · Asistente — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M2 · Asistente (equipo de agentes)</h1>
+  <p>El asistente atiende primero. Resuelve lo económico; canaliza a SEMujeres solo en los 4 casos; en emergencia, línea 24 h.</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Encabezado: «Asistente de SEMujeres» + «Asistente automático». <b>Nunca</b> fingir ser una persona.</li>
+  <li>«Salir rápido» (<code>--sensible-exit</code>) siempre visible arriba a la derecha; también con Esc.</li>
+  <li>Al abrir: saludo + chips «Busco trabajo», «Quiero un curso», «Necesito apoyo», «Hablar con una persona».</li>
+  <li>Campo de texto + micrófono (dictado) + enviar. Mínimo 48 px.</li>
+  <li>Recursos citados = tarjetas tocables. Nunca un recurso que no exista.</li>
+  <li>Emergencia: tarjeta morada con «Llamar a SEMujeres 24 h» (número de configuración, no de la IA) y debajo, pequeño, «Si no contestan: 911».</li>
+  <li>Solo morados. Nada de rojos de alerta.</li>
+  <li><b>Escritorio:</b> la barra de la app con sus pestañas arriba y la conversación en una columna centrada de 760 px; la caja de texto queda fija abajo de esa columna.</li>
+</ul></div>
+
+<h2 class="sec">Computadora</h2>
+<div class="pc">
+  <div class="appbar appbar--pc"><span class="logo">Empoderate</span>
+    <nav class="tabs"><span class="tab"><i data-i="casa" data-s="18"></i>Inicio</span><span class="tab"><i data-i="buscar" data-s="18"></i>Explorar</span><span class="tab"><i data-i="avance" data-s="18"></i>Mi avance</span></nav>
+    <span class="appbar__fin"><span class="salida"><i data-i="x" data-s="16"></i> Salir rápido</span><span class="icono-btn"><i data-i="menu"></i></span></span>
+  </div>
+  <div class="chat-pc">
+    <div style="display:flex;align-items:center;gap:var(--space-3)"><span class="avatar">S</span><div><b>Asistente de SEMujeres</b><p class="muted">Asistente automático · disponible 24 h</p></div></div>
+    <div class="burbuja">Hola, María. Soy el asistente de SEMujeres. ¿En qué te ayudo?</div>
+    <div class="chips"><span class="chip">Busco trabajo</span><span class="chip">Quiero un curso</span><span class="chip">Necesito apoyo</span><span class="chip">Hablar con una persona</span></div>
+    <div class="burbuja burbuja--yo">busco trabajo pero solo puedo en la mañana</div>
+    <div class="burbuja">Encontré 2 opciones en la mañana cerca de ti:</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);max-width:86%">
+      <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Barista · Empático coffee bar</span><span class="muted">Lun a vie 7–13 h · Los Mochis</span></div>
+      <div class="card"><span class="badge badge--curso">Curso · gratis</span><span class="h3">Barismo básico</span><span class="muted">Sábados · 4 semanas</span></div>
+    </div>
+    <div class="chat-form" style="border-radius:var(--radius-pill);box-shadow:var(--shadow-2);margin-top:var(--space-4)"><span class="campo">Escribe aquí…</span><span class="redondo redondo--suave"><i data-i="microfono"></i></span><span class="redondo"><i data-i="enviar"></i></span></div>
+  </div>
+</div>
+
+<h2 class="sec">Celular</h2>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="chat-head"><span class="avatar">S</span><div><b>Asistente de SEMujeres</b><small>Asistente automático · 24 h</small></div><span class="salida" style="margin-left:auto"><i data-i="x" data-s="14"></i> Salir</span></div>
+      <div class="cel__body">
+        <div class="burbuja">Hola, María. Soy el asistente de SEMujeres. ¿En qué te ayudo?</div>
+        <div class="chips"><span class="chip">Busco trabajo</span><span class="chip">Quiero un curso</span><span class="chip">Necesito apoyo</span><span class="chip">Hablar con una persona</span></div>
+        <div class="burbuja burbuja--yo">busco trabajo pero solo puedo en la mañana</div>
+        <div class="burbuja">Encontré 2 opciones en la mañana cerca de ti:</div>
+        <div class="card"><span class="badge badge--vacante">Vacante</span><span class="h3">Barista · Empático coffee bar</span><span class="muted">Lun a vie 7–13 h · Los Mochis</span></div>
+      </div>
+      <div class="chat-form"><span class="campo">Escribe aquí…</span><span class="redondo redondo--suave"><i data-i="microfono"></i></span><span class="redondo"><i data-i="enviar"></i></span></div>
+    </div></div>
+    <p class="pie-pantalla">A · Resuelve<small>Agente de Oportunidades</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="chat-head"><span class="avatar">S</span><div><b>Asistente de SEMujeres</b><small>Asistente automático</small></div><span class="salida" style="margin-left:auto"><i data-i="x" data-s="14"></i> Salir</span></div>
+      <div class="cel__body">
+        <div class="burbuja burbuja--yo">mi ex no me quiere dar la pensión de los niños</div>
+        <div class="burbuja">Lo siento, María. Eso lo atiende el área jurídica de SEMujeres y es gratis. ¿Quieres que te contacten?</div>
+        <span class="btn btn--block">Sí, que me contacten</span>
+        <span class="btn btn--block btn--ghost">Primero quiero saber más</span>
+        <div class="burbuja">¿Cómo es seguro contactarte?</div>
+        <div class="chips"><span class="chip chip--on">WhatsApp</span><span class="chip">Llamada</span><span class="chip">Solo aquí</span><span class="chip">Prefiero ir en persona</span></div>
+        <div class="aviso"><b>Esto les vamos a enviar:</b><br>«Necesita asesoría para pensión alimenticia de 2 hijos. Contacto por WhatsApp entre semana en la mañana.»
+          <div class="acciones" style="margin-top:var(--space-3)"><span class="btn btn--sm">Está bien, enviar</span><span class="btn btn--sm btn--link">Corregir</span></div></div>
+      </div>
+      <div class="chat-form"><span class="campo">Escribe aquí…</span><span class="redondo redondo--suave"><i data-i="microfono"></i></span><span class="redondo"><i data-i="enviar"></i></span></div>
+    </div></div>
+    <p class="pie-pantalla">B · Canaliza (1/2)<small>Permiso, contacto seguro y resumen aprobado</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="chat-head"><span class="avatar">S</span><div><b>Asistente de SEMujeres</b><small>Asistente automático</small></div><span class="salida" style="margin-left:auto"><i data-i="x" data-s="14"></i> Salir</span></div>
+      <div class="cel__body">
+        <div class="aviso aviso--ok"><b>Listo.</b> Tu folio es <b>C-014</b>. Una persona de SEMujeres te contactará en máximo 2 días hábiles.</div>
+        <div class="burbuja">Si prefieres ir en persona, dime qué día te queda y te esperamos.</div>
+        <div class="chips"><span class="chip">Mañana en la mañana</span><span class="chip">Mañana en la tarde</span><span class="chip">Otro día</span></div>
+        <div class="aviso aviso--ok">Te esperamos el <b>jueves 27 en la mañana</b> en Trabajo Social. Pregunta en recepción.</div>
+      </div>
+      <div class="chat-form"><span class="campo">Escribe aquí…</span><span class="redondo redondo--suave"><i data-i="microfono"></i></span><span class="redondo"><i data-i="enviar"></i></span></div>
+    </div></div>
+    <p class="pie-pantalla">B · Canaliza (2/2)<small>Folio y visita prevista opcional</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="chat-head"><span class="avatar">S</span><div><b>Asistente de SEMujeres</b><small>Asistente automático</small></div><span class="salida" style="margin-left:auto"><i data-i="x" data-s="14"></i> Salir</span></div>
+      <div class="cel__body">
+        <div class="burbuja burbuja--yo">ya llegó y me está amenazando</div>
+        <div class="card card--brand">
+          <span class="h2" style="color:inherit">Tu seguridad es primero</span>
+          <span>Llama ahora a la línea 24 h de SEMujeres.</span>
+          <span class="btn btn--light btn--block"><i data-i="telefono"></i> Llamar a SEMujeres 24 h</span>
+          <span class="muted" style="text-align:center">Si no contestan: 911</span>
+        </div>
+        <div class="burbuja">Si puedes, ve a un lugar con más gente o cierra con seguro. Aquí sigo contigo.</div>
+      </div>
+      <div class="chat-form"><span class="campo">Escribe aquí…</span><span class="redondo redondo--suave"><i data-i="microfono"></i></span><span class="redondo"><i data-i="enviar"></i></span></div>
+    </div></div>
+    <p class="pie-pantalla">C · Emergencia<small>El botón sale aunque la IA falle</small></p>
+  </div>
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="chat-head"><span class="avatar">S</span><div><b>Asistente de SEMujeres</b><small>Asistente automático</small></div><span class="salida" style="margin-left:auto"><i data-i="x" data-s="14"></i> Salir</span></div>
+      <div class="cel__body">
+        <div class="burbuja burbuja--yo">cuanto es 5+5</div>
+        <div class="burbuja">Solo puedo ayudarte con empleo, cursos, becas, apoyos o con contactar a SEMujeres. ¿Buscamos algo de eso?</div>
+        <div class="chips"><span class="chip">Busco trabajo</span><span class="chip">Quiero un curso</span><span class="chip">Necesito apoyo</span></div>
+      </div>
+      <div class="chat-form"><span class="campo">Escribe aquí…</span><span class="redondo redondo--suave"><i data-i="microfono"></i></span><span class="redondo"><i data-i="enviar"></i></span></div>
+    </div></div>
+    <p class="pie-pantalla">D · Fuera de tema<small>Lo redacta la IA; nunca contesta el tema ajeno</small></p>
+  </div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

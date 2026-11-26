@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M1 · Entrada — Diseño</title><link rel="stylesheet" href="_maqueta.css"></head>
+<body><div class="doc">
+<header>
+  <p class="muted"><a href="index.html">← Todos los módulos</a></p>
+  <h1>M1 · Entrada</h1>
+  <p>Dos formas de entrar: con Google o con su correo. Esta pantalla <b>no</b> es la landing: es la puerta a la app.</p>
+</header>
+
+<div class="reglas"><h2>No negociable</h2><ul>
+  <li>Orden: <b>Google → Correo</b>, ambos como botones grandes. Sin inicio de sesión por celular.</li>
+  <li>Botones de proveedor: blancos con borde <code>--border-strong</code>, ícono a la izquierda, 48 px mínimo, ancho completo.</li>
+  <li>Título exacto: «Hola. Entra para ver tus opciones». Sin «iniciar sesión», «autenticación» ni «LFPDPPP».</li>
+  <li>Casilla «Acepto el aviso de privacidad»; los botones se habilitan al marcarla.</li>
+  <li>Correo o contraseña mal: «Ese correo o contraseña no coinciden». <b>Nunca</b> crear cuenta sin que ella lo pida.</li>
+  <li><b>Escritorio (≥ 960 px):</b> dos mitades. Izquierda, panel morado con el mensaje de marca; derecha, el mismo formulario (máx. 400 px de ancho).</li>
+</ul></div>
+
+<h2 class="sec">Computadora</h2>
+<div class="pc"><div class="auth-pc">
+  <div class="auth-pc__marca">
+    <span class="logo">Empoderate</span>
+    <div>
+      <h2>Tu siguiente paso empieza aquí</h2>
+      <p style="margin-top:var(--space-4)">Trabajo, cursos, becas y apoyos de Ahome, elegidos para ti. Y si lo necesitas, SEMujeres te acompaña.</p>
+    </div>
+    <p>Una plataforma de la Secretaría de las Mujeres de Ahome</p>
+  </div>
+  <div class="auth-pc__form"><div>
+    <h1 class="h1">Hola. Entra para ver tus opciones</h1>
+    <p class="lead">Es gratis y tus datos están protegidos.</p>
+    <span class="btn btn--block btn--proveedor"><b style="color:var(--info)">G</b> Entrar con Google</span>
+    <span class="btn btn--block btn--proveedor"><i data-i="correo"></i> Entrar con mi correo</span>
+    <label class="cumple" style="font-weight:400"><span style="width:22px;height:22px;border-radius:6px;background:var(--action);color:var(--on-action);display:grid;place-items:center"><i data-i="check" data-s="16"></i></span> Acepto el <u>aviso de privacidad</u></label>
+  </div></div>
+</div></div>
+
+<h2 class="sec">Celular</h2>
+<div class="fila">
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="logo">Empoderate</span></div>
+      <div class="cel__body">
+        <h1 class="h1">Hola. Entra para ver tus opciones</h1>
+        <p class="lead">Es gratis y tus datos están protegidos.</p>
+        <span class="btn btn--block btn--proveedor"><b style="color:var(--info)">G</b> Entrar con Google</span>
+        <span class="btn btn--block btn--proveedor"><i data-i="correo"></i> Entrar con mi correo</span>
+        <label class="cumple" style="font-weight:400"><span style="width:22px;height:22px;border-radius:6px;background:var(--action);color:var(--on-action);display:grid;place-items:center"><i data-i="check" data-s="16"></i></span> Acepto el <u>aviso de privacidad</u></label>
+        <p class="muted" style="margin-top:auto">¿Necesitas ayuda para entrar? Ven a SEMujeres Ahome o llama a la línea 24 h.</p>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">1 · Entrar<small>/entrar</small></p>
+  </div>
+
+
+  <div>
+    <div class="cel"><div class="cel__in">
+      <div class="appbar"><span class="btn btn--link btn--sm"><i data-i="izq" data-s="18"></i> Regresar</span></div>
+      <div class="cel__body">
+        <h1 class="h1">Entrar con tu correo</h1>
+        <div class="input">Tu correo<span class="campo">maria@gmail.com</span></div>
+        <div class="input">Contraseña<span class="campo">••••••</span></div>
+        <div class="aviso" style="background:var(--danger-soft);color:var(--danger-ink)">Ese correo o contraseña no coinciden.</div>
+        <span class="btn btn--block">Entrar</span>
+        <span class="btn btn--block btn--ghost">Es mi primera vez: crear cuenta</span>
+      </div>
+    </div></div>
+    <p class="pie-pantalla">2 · Correo<small>Crear cuenta es una acción aparte</small></p>
+  </div>
+</div>
+</div><script src="_iconos.js"></script></body></html>

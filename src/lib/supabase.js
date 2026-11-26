@@ -8,13 +8,30 @@ export const supabase = createClient(
   { auth: { persistSession: true, autoRefreshToken: true } }
 );
 
-/** Registro o inicio de sesión con correo + contraseña (demo: "Confirm email" apagado). */
-export async function entrar(correo, password) {
-  let { data, error } = await supabase.auth.signInWithPassword({ email: correo, password });
-  if (error && /invalid/i.test(error.message)) {
-    ({ data, error } = await supabase.auth.signUp({ email: correo, password }));
-  }
-  if (error) throw error;
+const errorAmable = (error, texto) => Object.assign(new Error(texto), { causa: error });
+
+/** Entrar con Google: redirige a Google y vuelve a /entrar/listo. */
+export async function entrarConGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: `${window.location.origin}/entrar/listo` },
+  });
+  if (error) throw errorAmable(error, "Por ahora no se puede entrar con Google. Intenta con tu correo.");
+}
+
+/** Entrar con correo y contraseña. Nunca crea una cuenta si falla. */
+export async function entrarConCorreo(correo, password) {
+  const { data, error } = await supabase.auth.signInWithPassword({ email: correo, password });
+  if (error) throw errorAmable(error, "Ese correo o contraseña no coinciden.");
+  return data.session;
+}
+
+/** Crear cuenta con correo (acción explícita de la usuaria). */
+export async function crearCuentaCorreo(correo, password) {
+  const { data, error } = await supabase.auth.signUp({ email: correo, password });
+  if (error) throw errorAmable(error, /registered|exists/i.test(error.message)
+    ? "Ya hay una cuenta con ese correo. Usa «Entrar»."
+    : "No pudimos crear tu cuenta. Revisa tus datos.");
   return data.session;
 }
 

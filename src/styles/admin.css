@@ -1,4 +1,4 @@
-/* ===== PANEL CEMUJERES (mismos tokens que la app) ===== */
+/* ===== PANEL SEMUJERES (mismos tokens que la app) ===== */
 .adm { min-height: 100dvh; background: var(--bg); }
 
 /* Barra lateral: drawer en móvil, fija en escritorio */
@@ -232,7 +232,7 @@
 .timeline__item::after { content: ""; position: absolute; left: 13.5px; top: 32px; bottom: 4px; width: 1px; background: var(--border-strong); }
 .timeline__item:last-child::after { display: none; }
 .timeline__icon { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--surface-sunken); color: var(--text-soft); }
-.timeline__item--personal_cemujeres .timeline__icon { background: var(--action-soft); color: var(--action-ink); }
+.timeline__item--personal_semujeres .timeline__icon { background: var(--action-soft); color: var(--action-ink); }
 .timeline__item--usuaria .timeline__icon { background: var(--success-soft); color: var(--success-ink); }
 .timeline__item p { margin: 3px 0 2px; }
 .timeline__item small { color: var(--text-muted); }

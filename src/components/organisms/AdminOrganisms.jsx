@@ -3,7 +3,7 @@ import { Badge, Button, Icon, Avatar, Input } from "../atoms";
 import { NOMBRE_RUTA } from "../../services/motorRuta";
 import { diasSinActividad, necesitaSeguimiento, textoDias, ContactoCard, ActividadTimeline } from "./AdminSeguimiento.jsx";
 
-/* ===== Piezas del panel CEMujeres (datos ficticios) ===== */
+/* ===== Piezas del panel SEMujeres (datos ficticios) ===== */
 
 export function Panel({ titulo, accion, children, className = "" }) {
   return (
@@ -228,7 +228,7 @@ export function UserFicha({ usuaria, onVolver, onRegistrar, onContactar }) {
             </Input>
             <Input as="textarea" label="Nota" rows="3" value={nota} onChange={(e) => setNota(e.target.value)} />
             <Button onClick={() => { onRegistrar(usuaria.id, estado, nota); setNota(""); }}>Guardar</Button>
-            <p className="muted small pnl__nota">Queda con la fuente «personal_cemujeres» y la versión del expediente sube. Si choca con lo que dijo ella, se marca para revisar.</p>
+            <p className="muted small pnl__nota">Queda con la fuente «personal_semujeres» y la versión del expediente sube. Si choca con lo que dijo ella, se marca para revisar.</p>
           </Panel>
         </div>
       </div>

@@ -82,7 +82,7 @@ export function SensitiveFlow({ onDone }) {
                 <p>Vamos a guardar solo: tipo de apoyo, tu forma segura de contacto y un resumen que tú apruebas.
                    No guardamos tu conversación. Puedes borrar todo desde la app cuando quieras.</p>
                 <label className="check-row"><input type="checkbox" checked={acepta} onChange={(e) => setAcepta(e.target.checked)} />
-                  Acepto el aviso de privacidad para datos sensibles y que me contacte una especialista de CEMujeres.</label>
+                  Acepto el aviso de privacidad para datos sensibles y que me contacte una especialista de SEMujeres.</label>
                 <Button block disabled={!acepta} onClick={() => onDone({ tipo, contacto })}>Enviar mi solicitud</Button>
                 <Button block variant="ghost" onClick={() => onDone(null)}>No, gracias</Button>
                 <Button variant="link" onClick={() => ir(1)}><Icon name="izq" size={18} /> Regresar</Button>
