@@ -29,7 +29,7 @@ const PORQUE = {
   dispositivo: "Para elegir recursos que puedas usar desde tu celular.",
   habilidades: "Para acercarte oportunidades donde ya sabes hacer algo.",
   negocio: "Para saber si ya tienes algo avanzado.",
-  documentos: "Algunos trámites los piden; podemos ayudarte a conseguirlos.",
+  documentos: "Tu CURP abre tu expediente en SEMujeres; los demás documentos los piden algunos trámites.",
 };
 
 export const seccionDe = (campo) => SECCIONES.findIndex((s) => s.campos.includes(campo));
@@ -90,6 +90,8 @@ export function TestBaseWizard({ indice, respuestas, onChange, onNext, onBack })
               onChange={(v) => onChange(q.campo, v)}
               valorOtro={q.otro && respuestas[q.otro.campo]}
               onChangeOtro={q.otro && ((t) => onChange(q.otro.campo, t))}
+              textos={respuestas}
+              onChangeTexto={(campo, t) => onChange(campo, t)}
               onNext={onNext}
               onBack={indice > 0 ? onBack : null}
             />

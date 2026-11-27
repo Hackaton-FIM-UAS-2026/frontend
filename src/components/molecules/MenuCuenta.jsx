@@ -2,29 +2,37 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Icon } from "../atoms";
 import { Dialog } from "./Dialog.jsx";
+import { MisDatos } from "./MisDatos.jsx";
 import { salir } from "../../lib/supabase";
+import { AvisoPrivacidadContenido } from "../../modulos/portada/Paginas.jsx";
 
-/** Menú ☰ de la usuaria: aviso de privacidad, borrar datos y cerrar sesión (celulares compartidos). */
+/** Menú ☰ de la usuaria: mis datos y aviso de privacidad en ventanas, borrar datos y cerrar sesión. */
 export function MenuCuenta() {
-  const [abierto, setAbierto] = useState(false);
+  const [vista, setVista] = useState(null); // null | "menu" | "datos" | "aviso"
   const nav = useNavigate();
-  const ir = (ruta) => { setAbierto(false); nav(ruta); };
+  const cerrar = () => setVista(null);
   const cerrarSesion = async () => {
-    setAbierto(false);
+    cerrar();
     try { await salir(); } finally { nav("/"); }
   };
   return (
     <>
-      <button type="button" className="menucuenta__btn" onClick={() => setAbierto(true)} aria-label="Abrir menú">
+      <button type="button" className="menucuenta__btn" onClick={() => setVista("menu")} aria-label="Abrir menú">
         <Icon name="menu" size={22} />
       </button>
-      <Dialog abierto={abierto} onCerrar={() => setAbierto(false)} titulo="Menú">
+      <Dialog abierto={vista === "menu"} onCerrar={cerrar} titulo="Menú">
         <div className="menucuenta">
-          <button type="button" className="opt" onClick={() => ir("/seguimiento")}>Mis datos</button>
-          <button type="button" className="opt" onClick={() => ir("/privacidad")}>Aviso de privacidad</button>
-          <button type="button" className="opt" onClick={() => ir("/seguimiento#mis-datos")}>Borrar mis datos</button>
+          <button type="button" className="opt" onClick={() => setVista("datos")}>Mis datos</button>
+          <button type="button" className="opt" onClick={() => setVista("aviso")}>Aviso de privacidad</button>
+          <button type="button" className="opt" onClick={() => { cerrar(); nav("/seguimiento#mis-datos"); }}>Borrar mis datos</button>
           <Button block variant="ghost" onClick={cerrarSesion}><Icon name="salir" size={20} /> Cerrar sesión</Button>
         </div>
+      </Dialog>
+      <Dialog abierto={vista === "datos"} onCerrar={cerrar} titulo="Mis datos" descripcion="Completa lo que falte. Tu CURP es la llave de tu expediente en SEMujeres.">
+        {vista === "datos" && <MisDatos />}
+      </Dialog>
+      <Dialog abierto={vista === "aviso"} onCerrar={cerrar} titulo="Aviso de privacidad" ancho>
+        {vista === "aviso" && <AvisoPrivacidadContenido />}
       </Dialog>
     </>
   );

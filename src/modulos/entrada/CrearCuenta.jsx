@@ -19,7 +19,7 @@ export default function CrearCuenta() {
   const crear = async (e) => {
     e.preventDefault();
     setError("");
-    if (!d.nombre.trim()) return setError("Escribe tu nombre.");
+    if (d.nombre.trim().split(/\s+/).length < 2) return setError("Escribe tu nombre completo: nombre y apellidos.");
     if (!d.correo.trim()) return setError("Escribe tu correo.");
     if (d.pass.length < 6) return setError("La contraseña debe tener al menos 6 caracteres.");
     if (!acepta) return setError("Para continuar, acepta el aviso de privacidad.");
@@ -39,7 +39,7 @@ export default function CrearCuenta() {
       <form className="m1-pila" onSubmit={crear} noValidate>
         <h1 className="m1-titulo">Crea tu cuenta</h1>
         <p className="m1-lead">Es gratis. En 3 minutos te mostramos tus opciones.</p>
-        <Input id="nombre" label="¿Cómo te llamas?" autoComplete="given-name" value={d.nombre} onChange={(e) => setD({ ...d, nombre: e.target.value })} />
+        <Input id="nombre" label="Nombre completo" hint="Nombre y apellidos, como en tu identificación." autoComplete="name" value={d.nombre} onChange={(e) => setD({ ...d, nombre: e.target.value })} />
         <Input id="correo" type="email" label="Tu correo" autoComplete="email" value={d.correo} onChange={(e) => setD({ ...d, correo: e.target.value })} />
         <Input id="pass" type="password" label="Crea una contraseña" autoComplete="new-password" hint="Al menos 6 caracteres."
           value={d.pass} onChange={(e) => setD({ ...d, pass: e.target.value })} />

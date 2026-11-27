@@ -23,7 +23,8 @@ const ROL_TEXTO = {
   recepcion: "Recepción",
 };
 // Roles que usan el panel base (resumen, usuarias, ofertas, canalizaciones, catálogo, métricas)
-const ROLES_BASE = ["asesora_economica", "especialista_juridica", "especialista_psicologica", "coordinacion"];
+// Especialistas y Trabajo Social usan solo sus secciones (sin ofertas, catálogo ni métricas generales)
+const ROLES_BASE = ["asesora_economica", "coordinacion"];
 const COLOR_RUTA = { empleabilidad: "var(--turquesa-500)", emprendimiento: "var(--naranja-500)", capacitacion: "var(--magenta-500)" };
 const NOMBRE = { empleabilidad: "Empleabilidad", emprendimiento: "Emprendimiento", capacitacion: "Capacitación" };
 

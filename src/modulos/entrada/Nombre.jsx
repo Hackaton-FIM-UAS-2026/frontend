@@ -16,14 +16,14 @@ export default function Nombre() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       const m = data.session?.user?.user_metadata || {};
-      const sugerido = m.given_name || (m.full_name || m.name || "").split(" ")[0];
+      const sugerido = m.full_name || m.name || [m.given_name, m.family_name].filter(Boolean).join(" ");
       if (sugerido) setNombre((n) => n || sugerido);
     });
   }, []);
 
   const seguir = async (e) => {
     e.preventDefault();
-    if (!nombre.trim()) return setError("Escribe tu nombre.");
+    if (nombre.trim().split(/\s+/).length < 2) return setError("Escribe tu nombre completo: nombre y apellidos.");
     setEnviando(true);
     try {
       nav(await adondeIr({ ...recuperar(), nombre: nombre.trim() }), { replace: true });
@@ -36,9 +36,9 @@ export default function Nombre() {
   return (
     <EntradaLayout>
       <form className="m1-pila" onSubmit={seguir} noValidate>
-        <h1 className="m1-titulo">¿Cómo te llamas?</h1>
-        <p className="m1-lead">Así te saludamos en la app. Puedes escribir solo tu nombre.</p>
-        <Input id="nombre" label="Tu nombre" autoComplete="given-name" maxLength={120} value={nombre}
+        <h1 className="m1-titulo">¿Cuál es tu nombre completo?</h1>
+        <p className="m1-lead">Lo usamos para abrir tu expediente en SEMujeres. Escribe tu nombre y tus apellidos.</p>
+        <Input id="nombre" label="Nombre completo" autoComplete="name" maxLength={120} value={nombre}
           onChange={(e) => setNombre(e.target.value)} />
         {error && <p className="m1-error" role="alert">{error}</p>}
         <Button block type="submit" loading={enviando}>Continuar</Button>

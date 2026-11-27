@@ -8,8 +8,16 @@ import "../modulos/caminos/estilos.css";
 
 const ESTADO = { aplicado: "Aplicaste", guardado: "Guardaste para después", inscrita: "Te inscribiste", terminado: "Terminaste", contratada: "¡Te contrataron!" };
 
+const CATEGORIAS = [["todo", "Todo"], ["vacante", "Vacantes"], ["curso", "Cursos"], ["apoyo", "Becas y apoyos"], ["semujeres", "Apoyo de SEMujeres"], ["perfil", "Mi perfil"]];
+const CAT_TIPO = { vacante: "vacante", curso: "curso", beca: "apoyo", apoyo: "apoyo", financiamiento: "apoyo" };
+const ETQ = { vacante: ["Vacante", "vacante"], curso: ["Curso", "curso"], apoyo: ["Beca o apoyo", "apoyo"], semujeres: ["SEMujeres", "semujeres"], perfil: ["Perfil", "perfil"] };
+
 export default function Seguimiento() {
-  const { datos: s, cargando, error, recargar } = useApi(api.seguimiento);
+  const { datos: s, cargando, error, recargar } = useApi(async () => {
+    const [seg, canal] = await Promise.all([api.seguimiento(), api.misCanalizaciones().catch(() => [])]);
+    return { ...seg, canalizaciones: canal };
+  });
+  const [cat, setCat] = useState("todo");
   const [borrar, setBorrar] = useState(false);
   const [aviso, setAviso] = useState("");
 
@@ -21,9 +29,13 @@ export default function Seguimiento() {
 
   if (!s) return <AppTemplate><ApiEstado cargando={cargando} error={error} reintentar={recargar} /></AppTemplate>;
   const hechos = [
-    ...s.recursos.map((r) => ({ texto: `${ESTADO[r.estado] || r.estado}: ${r.titulo}`, fecha: r.fecha })),
-    ...s.historial.map((h) => ({ texto: h.texto, fecha: h.fecha })),
+    ...s.canalizaciones.map((c) => ({ cat: "semujeres", texto: `Pediste apoyo a SEMujeres · ${c.departamento}`, detalle: `${c.estado_texto} · folio ${c.folio}`, fecha: c.fecha })),
+    ...s.recursos.map((r) => ({ cat: CAT_TIPO[r.tipo] || "apoyo", texto: `${ESTADO[r.estado] || r.estado}: ${r.titulo}`, fecha: r.fecha })),
+    // Lo que no es aplicar/guardar (test, datos que agregaste) va en «Mi perfil»
+    ...s.historial.filter((h) => !/^(Aplicó|Guardó) /.test(h.texto)).map((h) => ({ cat: "perfil", texto: h.texto, fecha: h.fecha })),
   ];
+  const conteo = Object.fromEntries(CATEGORIAS.map(([k]) => [k, k === "todo" ? hechos.length : hechos.filter((h) => h.cat === k).length]));
+  const visibles = cat === "todo" ? hechos : hechos.filter((h) => h.cat === cat);
 
   return (
     <AppTemplate>
@@ -31,8 +43,21 @@ export default function Seguimiento() {
       <div className="m3-col">
         <section className="card" aria-labelledby="hecho-t">
           <h2 id="hecho-t" className="m3-h2">Lo que has hecho</h2>
-          {hechos.length
-            ? <ul className="m3-linea">{hechos.map((h, i) => <li key={i}>{h.texto}<small>{h.fecha}</small></li>)}</ul>
+          {hechos.length > 0 && (
+            <div className="m3-chips" role="tablist" aria-label="Filtrar por categoría">
+              {CATEGORIAS.filter(([k]) => k === "todo" || conteo[k]).map(([k, t]) => (
+                <button key={k} type="button" role="tab" aria-selected={cat === k} className={`m3-chip ${cat === k ? "m3-chip--on" : ""}`}
+                  onClick={() => setCat(k)}>{t} {conteo[k]}</button>
+              ))}
+            </div>
+          )}
+          {visibles.length
+            ? <ul className="m3-linea m3-avance">{visibles.map((h, i) => (
+                <li key={i}>
+                  <span className={`m3-tipo m3-tipo--${ETQ[h.cat][1]}`}>{ETQ[h.cat][0]}</span>
+                  <span className="m3-avance__t">{h.texto}</span>
+                  <small>{[h.detalle, h.fecha].filter(Boolean).join(" · ")}</small>
+                </li>))}</ul>
             : <p className="m3-muted">Aquí verás lo que vayas haciendo: cursos, vacantes a las que apliques y más.</p>}
         </section>
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { QuizTemplate } from "../components/templates";
 import { QuizAside, TestBaseWizard } from "../components/organisms";
 import { TEST_BASE, conTextoOtro } from "../data/campos";
-import { api } from "../services/api";
+import { api, patch } from "../services/api";
 
 export default function TestBase() {
   const nav = useNavigate();
@@ -24,6 +24,12 @@ export default function TestBase() {
         Object.assign(datos, { [q.campo]: resp[q.campo] }, conTextoOtro(q, resp[q.campo], q.otro && resp[q.otro.campo]));
       }
       await api.guardarCampos(datos, "test_base");
+      // CURP, RFC y dirección van a «Mis datos» (perfil), no al test
+      const identidad = Object.fromEntries(["curp", "rfc", "direccion"].map((k) => [k, (resp[k] || "").trim()]).filter(([, v]) => v));
+      if (Object.keys(identidad).length) {
+        try { await patch("/me/datos", identidad); }
+        catch (e) { alert(`${e.message} Puedes corregirlo después en Menú → Mis datos.`); }
+      }
       nav("/resultado");
     } catch (e) {
       if (e.status === 401) nav("/registro");

@@ -338,3 +338,7 @@ a.card, .card--link { text-decoration: none; cursor: pointer; }
   border-radius: var(--radius-pill); background: var(--surface-brand); color: var(--text-on-brand);
   font-weight: 600; box-shadow: var(--shadow-2);
 }
+.misdatos { display: flex; flex-direction: column; gap: var(--space-4); }
+.misdatos__error { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--danger-soft); color: var(--danger-ink); font-size: var(--step--1); }
+.misdatos__ok { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--success-soft); color: var(--success-ink); font-size: var(--step--1); font-weight: 600; }
+.misdatos input[readonly] { background: var(--surface-sunken); color: var(--text-soft); }

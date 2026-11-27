@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import { Button, Icon, Input } from "../atoms";
 import { OptionButton } from "./QuizMolecules.jsx";
+import { datosDocumentos } from "../../data/campos";
 
 /** Tarjeta de una pregunta: pregunta, "por qué preguntamos" y opciones. */
-export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusiva, otro, valor, valorOtro, onChangeOtro, onChange, onNext, onBack }) {
+export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusiva, otro, datos, valor, valorOtro, onChangeOtro, textos, onChangeTexto, onChange, onNext, onBack }) {
   const sel = tipo === "multiple" ? valor || [] : valor;
   const activa = (o) => (tipo === "multiple" ? sel.includes(o) : sel === o);
   const titulo = useRef(null);
@@ -25,6 +26,7 @@ export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusi
   };
 
   const muchas = opciones.length > 4;
+  const docs = datos ? datosDocumentos({ datos }, sel, textos) : null;
   return (
     <div className="card qcard">
       <h2 ref={titulo} tabIndex={-1}>{pregunta}</h2>
@@ -41,9 +43,19 @@ export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusi
           onChange={(e) => onChangeOtro?.(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter") onNext?.(sel); }} />
       )}
+      {docs && docs.visibles.length > 0 && (
+        <div className="qcard__datos">
+          {docs.visibles.map((d) => (
+            <Input key={d.campo} label={d.label} hint={d.ayuda} maxLength={d.max} autoComplete="off"
+              value={(textos || {})[d.campo] || ""} error={(textos || {})[d.campo] ? docs.errores[d.campo] : undefined}
+              onChange={(e) => onChangeTexto?.(d.campo, d.mayusculas ? e.target.value.toUpperCase() : e.target.value)} />
+          ))}
+          {docs.errores.curp && !(textos || {}).curp && <p className="qcard__hint">{docs.errores.curp}</p>}
+        </div>
+      )}
       <div className="qcard__nav">
         {onBack ? <Button variant="link" onClick={onBack}><Icon name="izq" size={18} /> Regresar</Button> : <span />}
-        {tipo === "multiple" && <Button onClick={() => onNext?.(sel)} disabled={!sel.length}>Continuar <Icon name="der" size={18} /></Button>}
+        {tipo === "multiple" && <Button onClick={() => onNext?.(sel)} disabled={!sel.length || (docs && !docs.valido)}>Continuar <Icon name="der" size={18} /></Button>}
         {otro && tipo !== "multiple" && sel === otro.opcion && <Button onClick={() => onNext?.(sel)}>Continuar <Icon name="der" size={18} /></Button>}
       </div>
     </div>

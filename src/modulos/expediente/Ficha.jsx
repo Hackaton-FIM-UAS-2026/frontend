@@ -4,12 +4,51 @@ import { Panel } from "../../components/organisms";
 import { ApiEstado } from "../../components/molecules";
 import { Avatar, Badge, Button, Icon, Input } from "../../components/atoms";
 import { useApi } from "../../services/useApi";
-import { asignar, expediente, nota } from "./servicio.js";
+import { derivar, estadoCaso, expediente, nota } from "./servicio.js";
 import { Candado, Urgencia } from "./comun.jsx";
 import "./estilos.css";
 
 const ESCRIBE_NOTAS = ["trabajo_social", "especialista_juridica", "especialista_psicologica"];
-const AREAS = [["juridica", "Jurídico"], ["psicologica", "Psicología"], ["ambas", "Ambas"]];
+const DESTINOS = [["juridica", "Jurídico"], ["psicologica", "Psicología"], ["ambas", "Jurídico y Psicología"], ["economico", "Empoderamiento económico"]];
+const ESTADOS_CASO = [["contactada", "Ya la contacté"], ["en atención", "En atención"], ["cerrada", "Concluir caso"]];
+const ESPECIALISTAS = ["especialista_juridica", "especialista_psicologica"];
+
+/** Trabajo Social valora la situación y decide a qué departamento va el expediente. */
+function Derivar({ id, onListo }) {
+  const [area, setArea] = useState("");
+  const [valoracion, setValoracion] = useState("");
+  const [urgencia, setUrgencia] = useState("pronta");
+  const [error, setError] = useState("");
+  const [enviando, setEnviando] = useState(false);
+  const enviar = async () => {
+    setError("");
+    if (!area) return setError("Elige el departamento.");
+    if (valoracion.trim().length < 10) return setError("Escribe tu valoración (al menos una frase).");
+    setEnviando(true);
+    try { const r = await derivar(id, { area, valoracion: valoracion.trim(), urgencia }); onListo(r); setArea(""); setValoracion(""); }
+    catch (e) { setError(e.message); }
+    finally { setEnviando(false); }
+  };
+  return (
+    <Panel titulo="Enviar a un departamento">
+      <p className="muted small">Después de valorar su situación, elige quién la atiende. Tu valoración solo la ve Trabajo Social; la especialista recibe el resumen.</p>
+      <Input as="textarea" rows={3} label="Tu valoración" value={valoracion} maxLength={1500} onChange={(e) => setValoracion(e.target.value)} />
+      <p className="m4-subt">Enviar a</p>
+      <div className="m4-acciones">
+        {DESTINOS.map(([a, t]) => (
+          <button key={a} type="button" className={`m4-opcion ${area === a ? "m4-opcion--on" : ""}`} aria-pressed={area === a} onClick={() => setArea(a)}>{t}</button>
+        ))}
+      </div>
+      {area && area !== "economico" && (
+        <Input as="select" label="Urgencia" value={urgencia} onChange={(e) => setUrgencia(e.target.value)}>
+          <option value="inmediata">Inmediata</option><option value="pronta">Pronta</option><option value="informativa">Informativa</option>
+        </Input>
+      )}
+      {error && <p className="m4-error" role="alert">{error}</p>}
+      <Button className="m4-auto" loading={enviando} onClick={enviar}>Enviar expediente</Button>
+    </Panel>
+  );
+}
 
 function Datos({ filas }) {
   if (!filas?.length) return <p className="muted small">Sin datos todavía.</p>;
@@ -27,9 +66,9 @@ export default function Ficha({ yo }) {
   if (!e) return <ApiEstado cargando={cargando} error={error} reintentar={recargar} />;
   const g = e.general;
 
-  const hacerAsignar = async (folio, area) => {
-    setOcupado(folio + area);
-    try { await asignar(folio, area); setAviso(`Listo: ${folio} quedó asignada.`); recargar(); }
+  const cambiarEstado = async (folio, estado) => {
+    setOcupado(folio + estado);
+    try { await estadoCaso(folio, estado); setAviso(`Listo: ${folio} quedó «${estado}».`); recargar(); }
     catch (err) { setAviso(err.message); }
     finally { setOcupado(""); }
   };
@@ -64,19 +103,22 @@ export default function Ficha({ yo }) {
               <p className="m4-resumen">{s.resumen || "Sin resumen."}</p>
               {s.contacto && <Datos filas={[["Contacto seguro", [s.contacto.medio, s.contacto.horario].filter(Boolean).join(" · ") || "—"],
                 ["¿Dejar mensaje?", s.contacto.mensaje ? "Sí" : "No"]]} />}
-              {yo.rol === "trabajo_social" && s.estado === "nueva" && (
+              {ESPECIALISTAS.includes(yo.rol) && s.estado !== "cerrada" && (
                 <>
-                  <p className="m4-subt">Asignar a</p>
+                  <p className="m4-subt">Estado del caso: {s.estado}</p>
                   <div className="m4-acciones">
-                    {AREAS.map(([a, t], i) => (
-                      <Button key={a} variant={i === 0 ? "primary" : "ghost"} loading={ocupado === s.folio + a}
-                        onClick={() => hacerAsignar(s.folio, a)}>{t}</Button>
+                    {ESTADOS_CASO.filter(([e]) => e !== s.estado).map(([e, t]) => (
+                      <Button key={e} size="sm" variant={e === "cerrada" ? "ghost" : "quiet"} loading={ocupado === s.folio + e}
+                        onClick={() => cambiarEstado(s.folio, e)}>{t}</Button>
                     ))}
                   </div>
                 </>
               )}
             </Panel>
           ))}
+          {yo.rol === "trabajo_social" && (
+            <Derivar id={id} onListo={(r) => { setAviso(r.area === "economico" ? "Listo: la enviaste a Empoderamiento económico." : `Listo: expediente enviado (${r.folio}).`); recargar(); }} />
+          )}
           {e.bloqueos.map((b) => <Candado key={b}>{b}</Candado>)}
           <Panel titulo="Datos generales"><Datos filas={g.datos} /></Panel>
           {e.economico && (

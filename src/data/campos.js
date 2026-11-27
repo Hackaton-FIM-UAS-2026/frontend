@@ -27,7 +27,17 @@ export const TEST_BASE = [
   { campo: "negocio", pregunta: "¿Tienes un negocio o una idea?", tipo: "unica",
     opciones: ["No", "Tengo una idea", "Ya vendo"] },
   { campo: "documentos", pregunta: "¿Con qué documentos cuentas?", tipo: "multiple",
-    opciones: ["CURP", "INE", "RFC", "Comprobante de domicilio"] },
+    opciones: ["CURP", "INE", "RFC", "Comprobante de domicilio"],
+    // Datos de identidad que se piden al marcar el documento (van a «Mis datos», no al test).
+    // La CURP se pide siempre: es la llave del expediente único en SEMujeres.
+    datos: [
+      { campo: "curp", label: "Tu CURP", opcion: "CURP", siempre: true, mayusculas: true, max: 18,
+        patron: /^[A-Z]{4}\d{6}[HMX][A-Z]{5}[A-Z0-9]\d$/, error: "Revisa tu CURP: son 18 letras y números.",
+        ayuda: "La encuentras en tu acta o en gob.mx/curp." },
+      { campo: "rfc", label: "Tu RFC", opcion: "RFC", mayusculas: true, max: 13,
+        patron: /^[A-ZÑ&]{3,4}\d{6}[A-Z0-9]{3}$/, error: "Revisa tu RFC: son 12 o 13 letras y números.", ayuda: "Opcional." },
+      { campo: "direccion", label: "Tu dirección", opcion: "Comprobante de domicilio", max: 200, ayuda: "Calle, número y colonia. Opcional." },
+    ] },
 ];
 
 // Preguntas "faltantes" que el agente hace al abrir un recurso (campo → texto claro)
@@ -39,6 +49,20 @@ export const eligioOtro = (q, valor) =>
 export function conTextoOtro(q, valor, texto) {
   const t = (texto || "").trim();
   return eligioOtro(q, valor) && t ? { [q.otro.campo]: t } : {};
+}
+
+/** Campos de identidad visibles para lo que marcó, y si se puede continuar. */
+export function datosDocumentos(q, valor, textos = {}) {
+  const sel = valor || [];
+  const visibles = (q.datos || []).filter((d) => d.siempre || sel.includes(d.opcion));
+  const errores = {};
+  for (const d of visibles) {
+    const t = (textos[d.campo] || "").trim().toUpperCase();
+    const requerido = d.campo === "curp" && sel.includes("CURP");
+    if (requerido && !t) errores[d.campo] = "Escribe tu CURP para abrir tu expediente.";
+    else if (t && d.patron && !d.patron.test(t)) errores[d.campo] = d.error;
+  }
+  return { visibles, errores, valido: Object.keys(errores).length === 0 };
 }
 
 export const DICCIONARIO_PREGUNTAS = {

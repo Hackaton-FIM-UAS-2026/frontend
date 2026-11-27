@@ -159,6 +159,14 @@ const PNT = "https://www.plataformadetransparencia.org.mx/";
 export function Privacidad() {
   return (
     <Pagina tema="Aviso de privacidad" intro="Qué datos guardamos, para qué los usamos y cómo puedes pedir que los corrijamos o los borremos.">
+      <AvisoPrivacidadContenido />
+    </Pagina>
+  );
+}
+
+/** Texto del aviso (se usa en /privacidad y en el menú de la usuaria con sesión iniciada). */
+export function AvisoPrivacidadContenido() {
+  return (
       <div className="m7-col m7-aviso">
         <p className="card card--sunken m7-peq" role="note">
           Versión pendiente de validación por SEMujeres. Mientras tanto, también aplica el{" "}
@@ -172,8 +180,8 @@ export function Privacidad() {
         <section className="card">
           <h2 className="m7-sub">Qué datos te pedimos</h2>
           <ul>
-            <li>Tu nombre y tu correo, para crear tu cuenta, y tu teléfono si nos lo das.</li>
-            <li>Si te registras en persona con el personal de SEMujeres: también tu CURP y tu colonia.</li>
+            <li>Tu nombre completo y tu correo, para crear tu cuenta.</li>
+            <li>Tu CURP, para abrir tu expediente único en SEMujeres (así no tienes que repetir tu historia), y, si nos los das, tu teléfono, tu RFC y tu dirección.</li>
             <li>Tus respuestas del test: edad, municipio, estudios, situación, meta, tiempo libre, personas a tu cargo,
               cómo te conectas, qué sabes hacer, si tienes negocio y qué documentos tienes (solo si los tienes, nunca el documento).</li>
             <li>Lo que contestas al revisar un curso, apoyo o vacante, y a qué aplicas o guardas.</li>
@@ -224,6 +232,5 @@ export function Privacidad() {
             Si este aviso cambia, lo publicaremos en esta página.</p>
         </section>
       </div>
-    </Pagina>
   );
 }
