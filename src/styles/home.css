@@ -157,3 +157,25 @@ html:has(.home) { scroll-behavior: smooth; }
 .sitefoot__brand p { max-width: 34ch; }
 .sitefoot__note { margin-top: var(--space-8); padding-top: var(--space-5); border-top: 1px solid var(--border-on-brand); font-size: var(--step--1); }
 @media (min-width: 960px) { .sitefoot__in { grid-template-columns: 1.2fr 1fr 1fr; gap: var(--space-8); } }
+
+/* ---------- Ilustración del hero: movimiento calmado y en bucle ---------- */
+/* El sendero avanza hacia la meta, la meta late suave, las hojas se mecen y el sol flota. */
+.camino-ilus__pasos { animation: ilus-avanza 1.8s linear infinite; }
+.camino-ilus__pulso { transform-box: fill-box; transform-origin: center; opacity: 0;
+  animation: ilus-pulso 2.8s var(--ease-out) 1s infinite; }
+.camino-ilus__hoja { transform-box: fill-box; transform-origin: 0% 100%;
+  animation: ilus-brisa 4.2s var(--ease-in-out) infinite alternate; }
+.camino-ilus__hoja--2 { animation-duration: 5s; animation-delay: -1.6s; }
+.camino-ilus__sol { animation: ilus-flota 7s var(--ease-in-out) infinite alternate; }
+
+@keyframes ilus-avanza { to { stroke-dashoffset: -28; } }
+@keyframes ilus-pulso {
+  0% { opacity: 0.55; transform: scale(1); }
+  70%, 100% { opacity: 0; transform: scale(3.2); }
+}
+@keyframes ilus-brisa { from { transform: rotate(-5deg); } to { transform: rotate(4deg); } }
+@keyframes ilus-flota { from { transform: translateY(3px); } to { transform: translateY(-5px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .camino-ilus__pasos, .camino-ilus__pulso, .camino-ilus__hoja, .camino-ilus__sol { animation: none; }
+}
