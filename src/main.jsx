@@ -14,6 +14,11 @@ import "./styles/quiz.css";
 import "./styles/admin.css";
 import "./styles/responsive.css";
 
+// Sin conexión: el service worker muestra los números de emergencia (public/emergencia.html)
+if ("serviceWorker" in navigator && import.meta.env.PROD) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").catch(() => {}));
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>

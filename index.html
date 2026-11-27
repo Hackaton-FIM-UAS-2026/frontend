@@ -14,5 +14,11 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Si la app no alcanzó a cargar y no hay internet, mostramos los números de emergencia
+      setTimeout(function () {
+        if (!document.getElementById("root").hasChildNodes() && !navigator.onLine) location.replace("/emergencia.html");
+      }, 4000);
+    </script>
   </body>
 </html>
