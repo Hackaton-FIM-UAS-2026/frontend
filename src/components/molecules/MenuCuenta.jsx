@@ -10,6 +10,8 @@ import { AvisoPrivacidadContenido } from "../../modulos/portada/Paginas.jsx";
 export function MenuCuenta() {
   const [vista, setVista] = useState(null); // null | "menu" | "datos" | "aviso"
   const nav = useNavigate();
+  // Al pasar del menú a otra ventana, el <dialog> del menú dispara «close»: solo cierra si sigue siendo la vista actual
+  const cerrarSi = (v) => () => setVista((actual) => (actual === v ? null : actual));
   const cerrar = () => setVista(null);
   const cerrarSesion = async () => {
     cerrar();
@@ -20,7 +22,7 @@ export function MenuCuenta() {
       <button type="button" className="menucuenta__btn" onClick={() => setVista("menu")} aria-label="Abrir menú">
         <Icon name="menu" size={22} />
       </button>
-      <Dialog abierto={vista === "menu"} onCerrar={cerrar} titulo="Menú">
+      <Dialog abierto={vista === "menu"} onCerrar={cerrarSi("menu")} titulo="Menú">
         <div className="menucuenta">
           <button type="button" className="opt" onClick={() => setVista("datos")}>Mis datos</button>
           <button type="button" className="opt" onClick={() => setVista("aviso")}>Aviso de privacidad</button>
@@ -28,10 +30,10 @@ export function MenuCuenta() {
           <Button block variant="ghost" onClick={cerrarSesion}><Icon name="salir" size={20} /> Cerrar sesión</Button>
         </div>
       </Dialog>
-      <Dialog abierto={vista === "datos"} onCerrar={cerrar} titulo="Mis datos" descripcion="Completa lo que falte. Tu CURP es la llave de tu expediente en SEMujeres.">
+      <Dialog abierto={vista === "datos"} onCerrar={cerrarSi("datos")} titulo="Mis datos" descripcion="Completa lo que falte. Tu CURP es la llave de tu expediente en SEMujeres.">
         {vista === "datos" && <MisDatos />}
       </Dialog>
-      <Dialog abierto={vista === "aviso"} onCerrar={cerrar} titulo="Aviso de privacidad" ancho>
+      <Dialog abierto={vista === "aviso"} onCerrar={cerrarSi("aviso")} titulo="Aviso de privacidad" ancho>
         {vista === "aviso" && <AvisoPrivacidadContenido />}
       </Dialog>
     </>

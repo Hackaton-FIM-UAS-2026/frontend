@@ -5,6 +5,7 @@ import { useApi } from "../../services/useApi";
 import { caminos as pedirCaminos } from "./servicio.js";
 import { Avance, Tarjeta } from "./Tarjeta.jsx";
 import "./estilos.css";
+import { enFrase } from "../../services/texto";
 
 function Camino({ c }) {
   const faltas = c.puentes.filter((p) => p.motivo === "te_falta");
@@ -16,7 +17,7 @@ function Camino({ c }) {
         <div className="m3-puente">
           {faltas.map((p) => (
             <div key={p.recurso.id} className="m3-puente__paso">
-              <span className="m3-puente__lbl">Para lograrlo te falta: {p.para.toLowerCase()}</span>
+              <span className="m3-puente__lbl">Para lograrlo te falta: {enFrase(p.para)}</span>
               <Tarjeta r={p.recurso} />
             </div>
           ))}

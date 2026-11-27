@@ -6,6 +6,7 @@ import { useApi } from "../../services/useApi";
 import { casos } from "./servicio.js";
 import { Urgencia, Vacio } from "./comun.jsx";
 import "./estilos.css";
+import { cap } from "../../services/texto";
 
 /** Casos asignados (Trabajo Social ve todos; cada especialista, solo los de su área). */
 export default function Casos() {
@@ -23,8 +24,8 @@ export default function Casos() {
               <tr key={c.folio}>
                 <td className="dt__main"><strong>{c.folio}</strong></td>
                 <td data-label="Mujer">{c.nombre}</td>
-                <td data-label="Atención">{c.area}</td>
-                <td data-label="Estado"><Badge tone="primary">{c.estado}</Badge></td>
+                <td data-label="Atención">{cap(c.area)}</td>
+                <td data-label="Estado"><Badge tone="primary">{cap(c.estado)}</Badge></td>
                 <td data-label="Urgencia"><Urgencia valor={c.urgencia} /></td>
                 <td className="dt__end"><Button size="sm" variant="quiet" onClick={() => nav(`/admin/expedientes/${c.usuaria_id}`)}>Ver expediente</Button></td>
               </tr>

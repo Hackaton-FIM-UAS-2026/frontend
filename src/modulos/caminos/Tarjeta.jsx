@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
+import { horarioDe } from "../../services/texto";
 
 const TIPO = { vacante: ["Vacante", "vacante"], curso: ["Curso", "curso"], beca: ["Beca", "apoyo"], apoyo: ["Apoyo", "apoyo"], financiamiento: ["Apoyo", "apoyo"] };
 
 /** Tarjeta de una opción. `extra` = línea adicional (p. ej. «Cumples 3 de 4»). */
 export function Tarjeta({ r, etiqueta, children }) {
   const [txt, tono] = TIPO[r.tipo] || ["Opción", "apoyo"];
-  const detalle = [r.horario, r.modalidad === "En línea" ? "En línea" : r.ubicacion, r.sueldo || (r.costo === "Gratis" && r.tipo !== "vacante" ? "Gratis" : null)]
+  const detalle = [horarioDe(r), r.modalidad === "En línea" ? "En línea" : r.ubicacion, r.sueldo || (r.costo === "Gratis" && r.tipo !== "vacante" ? "Gratis" : null)]
     .filter(Boolean).join(" · ");
   return (
     <Link to={`/recurso/${r.id}`} className="card card--link m3-tarjeta">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Badge, Button, Icon, Avatar, Input } from "../atoms";
 import { NOMBRE_RUTA } from "../../services/motorRuta";
 import { diasSinActividad, necesitaSeguimiento, textoDias, ContactoCard, ActividadTimeline } from "./AdminSeguimiento.jsx";
+import { cap } from "../../services/texto";
 
 /* ===== Piezas del panel SEMujeres (datos ficticios) ===== */
 
@@ -103,7 +104,7 @@ export function UsersTable({ usuarias, onOpen, onContactar, compact }) {
                 <td className="dt__main"><span className="who"><Avatar nombre={u.nombre} size={34} />{u.nombre}</span></td>
                 <td data-label="Ruta"><Badge tone={u.ruta}>{NOMBRE_RUTA[u.ruta]}</Badge></td>
                 {!compact && <>
-                  <td data-label="Estado"><Badge tone={TONO_ESTADO[u.estado] || "primary"}>{u.estado}</Badge></td>
+                  <td data-label="Estado"><Badge tone={TONO_ESTADO[u.estado] || "primary"}>{cap(u.estado)}</Badge></td>
                   <td data-label="Municipio">{u.municipio}</td>
                   <td data-label="Actividad">
                     {textoDias(d)}
@@ -138,12 +139,12 @@ export function CasosTable({ casos, onCambiar }) {
           {[...casos].sort((a, b) => ORDEN[a.urgencia] - ORDEN[b.urgencia]).map((c) => (
             <tr key={c.id}>
               <td><strong>{c.id}</strong><br /><small className="muted">{c.fecha}</small></td>
-              <td><Badge tone={TONO_URG[c.urgencia]} dot>{c.urgencia}</Badge></td>
-              <td>{c.tipo}</td>
+              <td><Badge tone={TONO_URG[c.urgencia]} dot>{cap(c.urgencia)}</Badge></td>
+              <td>{cap(c.tipo)}</td>
               <td>{c.medio}<br /><small className="muted">{c.horario}</small></td>
               <td>
                 <select className="sel" value={c.estado} onChange={(e) => onCambiar(c.id, e.target.value)} aria-label={`Estado del caso ${c.id}`}>
-                  {["nueva", "contactada", "en atención", "cerrada"].map((s) => <option key={s}>{s}</option>)}
+                  {["nueva", "asignada", "contactada", "en atención", "cerrada"].map((s) => <option key={s} value={s}>{cap(s)}</option>)}
                 </select>
               </td>
             </tr>
@@ -160,8 +161,8 @@ export function CasosCompactos({ casos }) {
       {casos.slice(0, 4).map((c) => (
         <li key={c.id}>
           <Avatar nombre={c.usuaria} size={38} />
-          <span><strong>{c.id} · {c.tipo}</strong><small>{c.estado} · {c.fecha}</small></span>
-          <Badge tone={TONO_URG[c.urgencia]} dot>{c.urgencia}</Badge>
+          <span><strong>{c.id} · {cap(c.tipo)}</strong><small>{cap(c.estado)} · {c.fecha}</small></span>
+          <Badge tone={TONO_URG[c.urgencia]} dot>{cap(c.urgencia)}</Badge>
         </li>
       ))}
     </ul>
@@ -202,7 +203,7 @@ export function UserFicha({ usuaria, onVolver, onRegistrar, onContactar }) {
           <p className="ficha2__badges">
             <Badge tone={usuaria.ruta}>{NOMBRE_RUTA[usuaria.ruta]}</Badge>
             {usuaria.puente && <Badge tone={usuaria.puente}>Puente: {NOMBRE_RUTA[usuaria.puente]}</Badge>}
-            <Badge tone={TONO_ESTADO[usuaria.estado] || "primary"} dot>{usuaria.estado}</Badge>
+            <Badge tone={TONO_ESTADO[usuaria.estado] || "primary"} dot>{cap(usuaria.estado)}</Badge>
             {necesitaSeguimiento(usuaria) && <Badge tone="warning" dot>Dar seguimiento</Badge>}
           </p>
         </div>

@@ -6,6 +6,7 @@ import { useApi } from "../../services/useApi";
 import { get } from "../../services/api";
 import { Urgencia, Vacio } from "./comun.jsx";
 import "./estilos.css";
+import { cap } from "../../services/texto";
 
 const AREA = { especialista_juridica: "Jurídico", especialista_psicologica: "Psicología", trabajo_social: "Trabajo Social" };
 const ESTADOS = [["nueva", "Por asignar", "var(--warning)"], ["asignada", "Asignados", "var(--info)"], ["contactada", "Contactadas", "var(--morado-300)"],
@@ -41,7 +42,7 @@ export default function ResumenArea({ yo }) {
               {r.recientes.map((c) => (
                 <li key={c.folio}>
                   <button type="button" className="m4-persona" onClick={() => nav(`/admin/expedientes/${c.usuaria_id}`)}>
-                    <span><strong>{c.nombre}</strong><small>{c.folio} · {c.estado} · hace {c.hace}</small></span>
+                    <span><strong>{c.nombre}</strong><small>{c.folio} · {cap(c.estado)} · hace {c.hace}</small></span>
                     <Urgencia valor={c.urgencia} />
                   </button>
                 </li>

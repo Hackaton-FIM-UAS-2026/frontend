@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Button, Icon, Badge } from "../atoms";
 import { RequirementItem, PageHeader, OptionButton } from "../molecules";
 import { DICCIONARIO_PREGUNTAS } from "../../data/campos";
+import { horarioDe } from "../../services/texto";
 // Tipo visible (sin palabras internas como «empleabilidad»)
 const TIPO = { vacante: "Vacante", curso: "Curso", beca: "Beca", apoyo: "Apoyo", financiamiento: "Apoyo para tu negocio" };
 const TONO_TIPO = { vacante: "empleabilidad", curso: "capacitacion", beca: "emprendimiento", apoyo: "emprendimiento", financiamiento: "emprendimiento" };
@@ -22,8 +23,12 @@ const aparece = {
 export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
   const [resp, setResp] = useState({});
   const conApi = Array.isArray(recurso.preguntas);
+  // La primera tanda de preguntas queda fija: al contestar, la página vuelve a pedir el recurso y la IA
+  // podría redactarlas distinto. Se conservan el texto, el orden y las ya contestadas (con su respuesta).
+  const fijas = useRef(null);
+  if (conApi && fijas.current === null && recurso.preguntas.length) fijas.current = recurso.preguntas;
   const preguntas = conApi
-    ? recurso.preguntas
+    ? (fijas.current || recurso.preguntas)
     : recurso.requisitos.filter((r) => r.ok === null && !(r.campo in resp) && DICCIONARIO_PREGUNTAS[r.campo])
         .slice(0, 3).map((r) => ({ campo: r.campo, ...DICCIONARIO_PREGUNTAS[r.campo] }));
   const reqs = conApi ? recurso.requisitos
@@ -47,6 +52,7 @@ export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
         title={recurso.titulo}
         lead={recurso.proveedor}
         meta={<>
+          {horarioDe(recurso) && <span><Icon name="reloj" size={16} /> {horarioDe(recurso)}</span>}
           <span><Icon name="ubicacion" size={16} /> {recurso.ubicacion}</span>
           <span><Icon name="moneda" size={16} /> {recurso.costo}</span>
           <span><Icon name="escudo" size={16} /> Verificado en {recurso.verificado_el}</span>

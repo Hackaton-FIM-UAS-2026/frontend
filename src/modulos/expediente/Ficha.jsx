@@ -7,6 +7,7 @@ import { useApi } from "../../services/useApi";
 import { derivar, estadoCaso, expediente, nota } from "./servicio.js";
 import { Candado, Urgencia } from "./comun.jsx";
 import "./estilos.css";
+import { cap } from "../../services/texto";
 
 const ESCRIBE_NOTAS = ["trabajo_social", "especialista_juridica", "especialista_psicologica"];
 const DESTINOS = [["juridica", "Jurídico"], ["psicologica", "Psicología"], ["ambas", "Jurídico y Psicología"], ["economico", "Empoderamiento económico"]];
@@ -30,13 +31,15 @@ function Derivar({ id, onListo }) {
     finally { setEnviando(false); }
   };
   return (
-    <Panel titulo="Enviar a un departamento">
+    <Panel titulo="Enviar a un departamento" className="m4-derivar">
       <p className="muted small">Después de valorar su situación, elige quién la atiende. Tu valoración solo la ve Trabajo Social; la especialista recibe el resumen.</p>
       <Input as="textarea" rows={3} label="Tu valoración" value={valoracion} maxLength={1500} onChange={(e) => setValoracion(e.target.value)} />
       <p className="m4-subt">Enviar a</p>
-      <div className="m4-acciones">
+      <div className="m4-destinos" role="radiogroup" aria-label="Departamento">
         {DESTINOS.map(([a, t]) => (
-          <button key={a} type="button" className={`m4-opcion ${area === a ? "m4-opcion--on" : ""}`} aria-pressed={area === a} onClick={() => setArea(a)}>{t}</button>
+          <button key={a} type="button" role="radio" aria-checked={area === a} className={`m4-opcion ${area === a ? "m4-opcion--on" : ""}`} onClick={() => setArea(a)}>
+            <span className="m4-opcion__radio" aria-hidden="true" />{t}
+          </button>
         ))}
       </div>
       {area && area !== "economico" && (
@@ -105,7 +108,7 @@ export default function Ficha({ yo }) {
                 ["¿Dejar mensaje?", s.contacto.mensaje ? "Sí" : "No"]]} />}
               {ESPECIALISTAS.includes(yo.rol) && s.estado !== "cerrada" && (
                 <>
-                  <p className="m4-subt">Estado del caso: {s.estado}</p>
+                  <p className="m4-subt">Estado del caso: {cap(s.estado)}</p>
                   <div className="m4-acciones">
                     {ESTADOS_CASO.filter(([e]) => e !== s.estado).map(([e, t]) => (
                       <Button key={e} size="sm" variant={e === "cerrada" ? "ghost" : "quiet"} loading={ocupado === s.folio + e}
@@ -125,7 +128,7 @@ export default function Ficha({ yo }) {
             <Panel titulo="Empoderamiento económico">
               <Datos filas={e.economico.datos} />
               {e.economico.recursos.length > 0 && (
-                <ul className="m4-linea">{e.economico.recursos.map((r, i) => <li key={i}>{r.titulo}<small>{r.estado} · {r.fecha}</small></li>)}</ul>
+                <ul className="m4-linea">{e.economico.recursos.map((r, i) => <li key={i}>{r.titulo}<small>{cap(r.estado)} · {r.fecha}</small></li>)}</ul>
               )}
             </Panel>
           )}
