@@ -4,6 +4,7 @@ import { ApiEstado, Dialog } from "../components/molecules";
 import { Button, Icon } from "../components/atoms";
 import { api } from "../services/api";
 import { useApi } from "../services/useApi";
+import { fechaCita, MODALIDAD } from "../services/fechas";
 import "../modulos/caminos/estilos.css";
 
 const ESTADO = { aplicado: "Aplicaste", guardado: "Guardada para después", inscrita: "Te inscribiste", terminado: "Terminaste", contratada: "¡Te contrataron!" };
@@ -32,6 +33,9 @@ function Solicitud({ c }) {
           </li>
         ))}
       </ol>
+      {c.cita && (
+        <p className="m3-sol__cita"><Icon name="calendario" size={18} /> <span>Tu cita: <b>{fechaCita(c.cita.fecha)}</b> · {MODALIDAD[c.cita.modalidad]}</span></p>
+      )}
       <p className="m3-sol__nota">{c.estado_texto}</p>
     </li>
   );

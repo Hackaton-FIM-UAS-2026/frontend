@@ -27,7 +27,16 @@ export default function RecursoDetalle() {
   const enCurso = useRef(false);   // candado inmediato: dos taps seguidos llegan antes de que React re-renderice
   const [estadoLocal, setEstadoLocal] = useState(null);
 
-  // Cada respuesta entra al expediente (fuente: entrevista) y el backend recalcula "¡Cumples!"
+  // Todas las respuestas entran juntas al expediente (fuente: entrevista) y el backend recalcula "¡Cumples!"
+  const responderTodo = async (respuestas) => {
+    try {
+      await api.guardarCampos(respuestas, "entrevista");
+      recargar();
+    } catch (e) {
+      alert(e.message || "No pudimos guardar tus respuestas.");
+      throw e;
+    }
+  };
   const responder = async (campo, valor) => {
     try {
       await api.guardarCampos({ [campo]: valor }, "entrevista");
@@ -74,7 +83,7 @@ export default function RecursoDetalle() {
       <Button variant="link" size="sm" onClick={() => nav(-1)} className="back"><Icon name="izq" size={18} /> Volver</Button>
       {recurso
         ? <ResourceDetail key={recurso.id} recurso={{ ...recurso, mi_estado: (estadoLocal?.id === id && estadoLocal.estado) || recurso.mi_estado }}
-            enviando={enviando} onResponder={responder} onAction={accion} />
+            enviando={enviando} onResponderTodo={responderTodo} onAction={accion} />
         : <ApiEstado cargando={cargando} error={error} reintentar={recargar} />}
     </AppTemplate>
   );

@@ -20,8 +20,13 @@ const aparece = {
  * Con backend: `recurso.preguntas`, `recurso.cumple` y `requisitos[].ok` ya vienen evaluados;
  * al contestar se llama `onResponder(campo, valor)` y la página vuelve a pedir el recurso.
  */
-export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
+export function ResourceDetail({ recurso, enviando, onAction, onResponder, onResponderTodo }) {
   const [resp, setResp] = useState({});
+  const [mandadas, setMandadas] = useState(false);   // ya se enviaron todas: se espera el resultado nuevo
+  const [mandando, setMandando] = useState(false);
+  // Si al abrir ya cumple, no hace falta preguntarle nada
+  const yaCumplia = useRef(null);
+  if (yaCumplia.current === null) yaCumplia.current = recurso.cumple === true;
   const conApi = Array.isArray(recurso.preguntas);
   // La primera tanda de preguntas queda fija: al contestar, la página vuelve a pedir el recurso y la IA
   // podría redactarlas distinto. Se conservan el texto, el orden y las ya contestadas (con su respuesta).
@@ -38,10 +43,20 @@ export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
   // Estado guardado por el backend: "aplicado" o más (inscrita, contratada…) ya no se vuelve a aplicar
   const aplicado = Boolean(recurso.mi_estado) && recurso.mi_estado !== "guardado";
   const guardado = recurso.mi_estado === "guardado";
-  const responder = (campo, valor) => {
-    setResp({ ...resp, [campo]: valor });
-    onResponder?.(campo, valor);
+  // Las respuestas se guardan juntas al contestar la última; luego se actualiza el resultado una sola vez
+  const responder = async (campo, valor) => {
+    if (mandadas || mandando) return;
+    const nuevas = { ...resp, [campo]: valor };
+    setResp(nuevas);
+    if (!onResponderTodo) { onResponder?.(campo, valor); return; }
+    if (preguntas.every((p) => nuevas[p.campo] !== undefined)) {
+      setMandando(true);
+      try { await onResponderTodo(nuevas); setMandadas(true); }
+      finally { setMandando(false); }
+    }
   };
+  const verPreguntas = preguntas.length > 0 && !yaCumplia.current && !mandadas;
+  const contestadas = preguntas.filter((p) => resp[p.campo] !== undefined).length;
 
   return (
     <div className="detail">
@@ -72,9 +87,13 @@ export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
       </section>
 
       <AnimatePresence initial={false}>
-        {preguntas.length > 0 && (
+        {verPreguntas && (
           <motion.section key="agentbox" className="card card--sunken agentbox" aria-labelledby="agent-titulo" {...aparece}>
             <h2 id="agent-titulo" className="card__title">Para saber si cumples, cuéntanos:</h2>
+            <p className="agentbox__avance" role="status">
+              {mandando ? "Guardando tus respuestas y actualizando tu resultado…"
+                : `${contestadas} de ${preguntas.length} contestadas. Al terminar actualizamos tu resultado.`}
+            </p>
             <AnimatePresence initial={false} mode="popLayout">
               {preguntas.map((p) => (
                 <motion.div key={p.campo} className="agentbox__q" {...aparece}>
@@ -89,6 +108,9 @@ export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
               ))}
             </AnimatePresence>
           </motion.section>
+        )}
+        {mandadas && (
+          <motion.p key="gracias" className="agentbox__gracias" role="status" {...aparece}>Gracias. Actualizamos tu resultado con tus respuestas.</motion.p>
         )}
         {cumple && (
           <motion.p key="cumples" className="cumples" role="status" {...aparece}>

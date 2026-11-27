@@ -4,8 +4,10 @@ import { Panel } from "../../components/organisms";
 import { ApiEstado } from "../../components/molecules";
 import { Avatar, Badge, Button, Icon, Input } from "../../components/atoms";
 import { useApi } from "../../services/useApi";
-import { derivar, estadoCaso, expediente, nota } from "./servicio.js";
+import { cita as programarCita, derivar, estadoCaso, expediente, nota } from "./servicio.js";
 import { Candado, Urgencia } from "./comun.jsx";
+import { Contacto } from "./Contacto.jsx";
+import { fechaCita, MODALIDAD } from "../../services/fechas";
 import "./estilos.css";
 import { cap } from "../../services/texto";
 
@@ -13,6 +15,40 @@ const ESCRIBE_NOTAS = ["trabajo_social", "especialista_juridica", "especialista_
 const DESTINOS = [["juridica", "Jurídico"], ["psicologica", "Psicología"], ["ambas", "Jurídico y Psicología"], ["economico", "Empoderamiento económico"]];
 const ESTADOS_CASO = [["contactada", "Ya la contacté"], ["en atención", "En atención"], ["cerrada", "Concluir caso"]];
 const ESPECIALISTAS = ["especialista_juridica", "especialista_psicologica"];
+
+const manana = () => { const d = new Date(); d.setDate(d.getDate() + 1); return d.toLocaleDateString("en-CA"); };
+
+/** Programar (o cambiar) la cita del caso. Si es en SEMujeres, Recepción la ve en Visitas previstas. */
+function ProgramarCita({ folio, actual, onListo }) {
+  const [abierto, setAbierto] = useState(!actual);
+  const [d, setD] = useState({ fecha: manana(), hora: "10:00", modalidad: "presencial", nota: "" });
+  const [error, setError] = useState("");
+  const [enviando, setEnviando] = useState(false);
+  const guardar = async () => {
+    setError(""); setEnviando(true);
+    try { await programarCita(folio, { ...d, nota: d.nota.trim() || null }); setAbierto(false); onListo(); }
+    catch (e) { setError(e.message); }
+    finally { setEnviando(false); }
+  };
+  if (!abierto) return <Button size="sm" variant="link" className="m4-auto" onClick={() => setAbierto(true)}>{actual ? "Cambiar la cita" : "Programar cita"}</Button>;
+  return (
+    <div className="m4-citaform">
+      <div className="m4-citaform__fila">
+        <Input type="date" label="Día" value={d.fecha} min={new Date().toLocaleDateString("en-CA")} onChange={(e) => setD({ ...d, fecha: e.target.value })} />
+        <Input type="time" label="Hora" value={d.hora} step="900" onChange={(e) => setD({ ...d, hora: e.target.value })} />
+      </div>
+      <Input as="select" label="Cómo" value={d.modalidad} onChange={(e) => setD({ ...d, modalidad: e.target.value })}>
+        <option value="presencial">En SEMujeres (presencial)</option><option value="llamada">Por llamada</option><option value="videollamada">Por videollamada</option>
+      </Input>
+      <Input label="Nota para la cita (opcional)" value={d.nota} maxLength={300} onChange={(e) => setD({ ...d, nota: e.target.value })} hint="Por ejemplo: traer su INE y acta de nacimiento." />
+      {error && <p className="m4-error" role="alert">{error}</p>}
+      <div className="m4-acciones">
+        <Button size="sm" loading={enviando} onClick={guardar}>Guardar cita</Button>
+        {actual && <Button size="sm" variant="link" onClick={() => setAbierto(false)}>Cancelar</Button>}
+      </div>
+    </div>
+  );
+}
 
 /** Trabajo Social valora la situación y decide a qué departamento va el expediente. */
 function Derivar({ id, onListo }) {
@@ -106,6 +142,17 @@ export default function Ficha({ yo }) {
               <p className="m4-resumen">{s.resumen || "Sin resumen."}</p>
               {s.contacto && <Datos filas={[["Contacto seguro", [s.contacto.medio, s.contacto.horario].filter(Boolean).join(" · ") || "—"],
                 ["¿Dejar mensaje?", s.contacto.mensaje ? "Sí" : "No"]]} />}
+              {s.area_asignada && (
+                <div className="m4-cita">
+                  <p className="m4-subt">Cita</p>
+                  {s.cita
+                    ? <p className="m4-cita__cuando"><Icon name="calendario" size={18} /> <b>{fechaCita(s.cita.fecha)}</b> · {MODALIDAD[s.cita.modalidad]}{s.cita.nota ? <small>{s.cita.nota}</small> : null}</p>
+                    : <p className="muted small">Todavía no tiene cita.</p>}
+                  {[...ESPECIALISTAS, "trabajo_social"].includes(yo.rol) && s.estado !== "cerrada" && (
+                    <ProgramarCita key={s.cita?.fecha || "nueva"} folio={s.folio} actual={s.cita} onListo={() => { setAviso(`Listo: cita guardada (${s.folio}).`); recargar(); }} />
+                  )}
+                </div>
+              )}
               {ESPECIALISTAS.includes(yo.rol) && s.estado !== "cerrada" && (
                 <>
                   <p className="m4-subt">Estado del caso: {cap(s.estado)}</p>
@@ -134,6 +181,7 @@ export default function Ficha({ yo }) {
           )}
         </div>
         <div className="m4-col">
+          {g.contacto && <Panel titulo="Cómo contactarla"><Contacto c={g.contacto} /></Panel>}
           <Panel titulo="Línea de tiempo">
             {e.eventos.length
               ? <ul className="m4-linea">{e.eventos.map((ev, i) => <li key={i}>{ev.texto}<small>{ev.fecha}</small></li>)}</ul>

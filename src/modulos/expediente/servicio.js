@@ -9,3 +9,4 @@ export const nota = (id, texto) => post(`/panel/expedientes/${id}/notas`, { text
 export const alta = (datos) => post("/panel/expedientes", datos);
 export const derivar = (id, datos) => post(`/panel/expedientes/${id}/derivar`, datos);
 export const estadoCaso = (folio, estado) => patch(`/admin/canalizaciones/${folio}`, { estado });
+export const cita = (folio, datos) => patch(`/panel/casos/${folio}/cita`, datos);

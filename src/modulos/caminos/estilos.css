@@ -124,3 +124,4 @@
 @media (min-width: 960px) {
   .m3-av { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: var(--space-6); }
 }
+.m3-sol__cita { margin: 0; display: flex; align-items: center; gap: var(--space-2); padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--action-softer); color: var(--action-ink); font-size: var(--step--1); }

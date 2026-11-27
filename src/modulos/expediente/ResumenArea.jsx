@@ -5,6 +5,7 @@ import { Button, Icon } from "../../components/atoms";
 import { useApi } from "../../services/useApi";
 import { get } from "../../services/api";
 import { Urgencia, Vacio } from "./comun.jsx";
+import { fechaCita } from "../../services/fechas";
 import "./estilos.css";
 import { cap } from "../../services/texto";
 
@@ -32,8 +33,8 @@ export default function ResumenArea({ yo }) {
       <div className="m4-cifras">
         <Cifra icono="usuarias" valor={r.abiertos} texto={esTS ? "Casos abiertos" : "Mis casos abiertos"} />
         <Cifra icono="alerta" valor={r.urgentes} texto="Urgentes" tono={r.urgentes ? "urgente" : ""} />
-        <Cifra icono="bandeja" valor={r.nuevos_semana} texto="Nuevos esta semana" />
-        <Cifra icono="calendario" valor={r.visitas_hoy} texto={`Visitas hoy a ${AREA[yo.rol] || "tu módulo"}`} />
+        <Cifra icono="calendario" valor={r.citas_proximas} texto="Citas próximas" />
+        <Cifra icono="ubicacion" valor={r.visitas_hoy} texto={`Visitas hoy a ${AREA[yo.rol] || "tu módulo"}`} />
       </div>
       <div className="m4-cols">
         <Panel titulo={esTS ? "Casos que requieren atención" : "Tus pacientes"} accion={<Button size="sm" variant="link" onClick={() => nav("/admin/casos")}>Ver todos</Button>}>
@@ -42,7 +43,7 @@ export default function ResumenArea({ yo }) {
               {r.recientes.map((c) => (
                 <li key={c.folio}>
                   <button type="button" className="m4-persona" onClick={() => nav(`/admin/expedientes/${c.usuaria_id}`)}>
-                    <span><strong>{c.nombre}</strong><small>{c.folio} · {cap(c.estado)} · hace {c.hace}</small></span>
+                    <span><strong>{c.nombre}</strong><small>{c.folio} · {cap(c.estado)} · {c.cita ? `Cita: ${fechaCita(c.cita.fecha)}` : "Sin cita"}</small></span>
                     <Urgencia valor={c.urgencia} />
                   </button>
                 </li>

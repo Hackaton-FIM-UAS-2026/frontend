@@ -6,3 +6,7 @@
 .m5-vacio { margin: 0; color: var(--text-soft); }
 .m5-acciones { display: inline-flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
 .m5-nota { margin: 0; color: var(--text-muted); font-size: var(--step--1); }
+.m5-barra { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.m5-form { display: flex; flex-direction: column; gap: var(--space-4); }
+.m5-error { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--danger-soft); color: var(--danger-ink); font-size: var(--step--1); }
+.m5-ok { margin: 0; padding: var(--space-2) var(--space-4); border-radius: var(--radius-md); background: var(--success-soft); color: var(--success-ink); font-size: var(--step--1); font-weight: 600; }

@@ -188,3 +188,5 @@
 .resultado__cta { margin-top: var(--space-6); }
 @media (min-width: 640px) { .resultado__cta .btn { width: auto; } }
 .back { margin: calc(var(--space-3) * -1) 0 var(--space-4) calc(var(--space-3) * -1); }
+.agentbox__avance { margin: calc(-1 * var(--space-2)) 0 0; color: var(--text-muted); font-size: var(--step--1); }
+.agentbox__gracias { margin: 0; padding: var(--space-3) var(--space-4); border-radius: var(--radius-md); background: var(--action-softer); color: var(--action-ink); font-size: var(--step--1); font-weight: 600; }

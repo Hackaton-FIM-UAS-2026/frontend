@@ -5,6 +5,8 @@ import { Badge, Button } from "../../components/atoms";
 import { useApi } from "../../services/useApi";
 import { casos } from "./servicio.js";
 import { Urgencia, Vacio } from "./comun.jsx";
+import { Contacto } from "./Contacto.jsx";
+import { fechaCita, MODALIDAD } from "../../services/fechas";
 import "./estilos.css";
 import { cap } from "../../services/texto";
 
@@ -18,13 +20,14 @@ export default function Casos() {
     <Panel>
       <div className="tablewrap">
         <table className="dt dt--stack">
-          <thead><tr><th>Folio</th><th>Mujer</th><th>Atención</th><th>Estado</th><th>Urgencia</th><th /></tr></thead>
+          <thead><tr><th>Folio</th><th>Mujer y contacto</th><th>Cita</th><th>Estado</th><th>Urgencia</th><th /></tr></thead>
           <tbody>
             {datos.map((c) => (
               <tr key={c.folio}>
                 <td className="dt__main"><strong>{c.folio}</strong></td>
-                <td data-label="Mujer">{c.nombre}</td>
-                <td data-label="Atención">{cap(c.area)}</td>
+                <td data-label="Mujer"><strong>{c.nombre}</strong><small className="m4-area">Atención {c.area}</small><Contacto c={c} compacto /></td>
+                <td data-label="Cita">{c.cita ? <span className="m4-cita-celda"><b>{fechaCita(c.cita.fecha)}</b><small>{MODALIDAD[c.cita.modalidad]}</small></span>
+                  : <span className="muted small">Sin cita</span>}</td>
                 <td data-label="Estado"><Badge tone="primary">{cap(c.estado)}</Badge></td>
                 <td data-label="Urgencia"><Urgencia valor={c.urgencia} /></td>
                 <td className="dt__end"><Button size="sm" variant="quiet" onClick={() => nav(`/admin/expedientes/${c.usuaria_id}`)}>Ver expediente</Button></td>
