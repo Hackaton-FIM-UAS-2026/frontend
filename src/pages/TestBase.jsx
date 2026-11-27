@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { QuizTemplate } from "../components/templates";
 import { QuizAside, TestBaseWizard } from "../components/organisms";
-import { TEST_BASE } from "../data/campos";
+import { TEST_BASE, conTextoOtro } from "../data/campos";
 import { api } from "../services/api";
 
 export default function TestBase() {
@@ -17,7 +17,13 @@ export default function TestBase() {
     if (guardando) return;
     setGuardando(true);
     try {
-      await api.guardarCampos(resp, "test_base");
+      // Solo las respuestas del test, más el texto de «Otro» si lo escribió
+      const datos = {};
+      for (const q of TEST_BASE) {
+        if (resp[q.campo] === undefined) continue;
+        Object.assign(datos, { [q.campo]: resp[q.campo] }, conTextoOtro(q, resp[q.campo], q.otro && resp[q.otro.campo]));
+      }
+      await api.guardarCampos(datos, "test_base");
       nav("/resultado");
     } catch (e) {
       if (e.status === 401) nav("/registro");

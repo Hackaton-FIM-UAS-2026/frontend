@@ -19,7 +19,7 @@ const aparece = {
  * Con backend: `recurso.preguntas`, `recurso.cumple` y `requisitos[].ok` ya vienen evaluados;
  * al contestar se llama `onResponder(campo, valor)` y la página vuelve a pedir el recurso.
  */
-export function ResourceDetail({ recurso, onAction, onResponder }) {
+export function ResourceDetail({ recurso, enviando, onAction, onResponder }) {
   const [resp, setResp] = useState({});
   const conApi = Array.isArray(recurso.preguntas);
   const preguntas = conApi
@@ -30,6 +30,9 @@ export function ResourceDetail({ recurso, onAction, onResponder }) {
     : recurso.requisitos.map((r) => ({ ...r, ok: r.ok ?? (resp[r.campo] ? resp[r.campo] !== "No" && resp[r.campo] !== "Nada" : null) }));
   const cumple = conApi ? recurso.cumple === true : reqs.every((r) => r.ok === true);
   const listos = reqs.filter((r) => r.ok === true).length;
+  // Estado guardado por el backend: "aplicado" o más (inscrita, contratada…) ya no se vuelve a aplicar
+  const aplicado = Boolean(recurso.mi_estado) && recurso.mi_estado !== "guardado";
+  const guardado = recurso.mi_estado === "guardado";
   const responder = (campo, valor) => {
     setResp({ ...resp, [campo]: valor });
     onResponder?.(campo, valor);
@@ -90,8 +93,12 @@ export function ResourceDetail({ recurso, onAction, onResponder }) {
       </AnimatePresence>
 
       <div className="detail__actions">
-        <Button block onClick={() => onAction("aplicar")}>Aplicar <Icon name="flecha" size={18} /></Button>
-        <Button block variant="ghost" onClick={() => onAction("guardar")}>Guardar para después</Button>
+        {aplicado
+          ? <Button block disabled>{recurso.tipo === "vacante" ? "Ya aplicaste" : "Ya está en tu avance"} <Icon name="check" size={18} /></Button>
+          : <Button block onClick={() => onAction("aplicar")} disabled={enviando}>Aplicar <Icon name="flecha" size={18} /></Button>}
+        {!aplicado && (guardado
+          ? <Button block variant="ghost" disabled>Guardado <Icon name="check" size={18} /></Button>
+          : <Button block variant="ghost" onClick={() => onAction("guardar")} disabled={enviando}>Guardar para después</Button>)}
       </div>
     </div>
   );

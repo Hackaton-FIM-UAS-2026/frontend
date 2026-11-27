@@ -12,3 +12,4 @@ export * from "./Dialog.jsx";
 export * from "./ApiEstado.jsx";
 export * from "./BotonAsistente.jsx";
 export * from "./MenuCuenta.jsx";
+export * from "./Toast.jsx";

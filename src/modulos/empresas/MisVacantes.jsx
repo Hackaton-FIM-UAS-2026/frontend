@@ -8,8 +8,8 @@ import { crearVacante, vacantes } from "./servicio.js";
 import { Estado } from "./comun.jsx";
 
 const HORARIOS = ["Mañanas", "Tardes", "Noches", "Fines de semana", "Flexible"];
-const ESCOLARIDAD = ["", "Primaria", "Secundaria", "Preparatoria", "Universidad"];
-const DOCS = ["CURP", "INE", "RFC", "Cuenta bancaria"];
+const ESCOLARIDAD = ["", "Primaria", "Secundaria", "Media superior", "Licenciatura"];
+const DOCS = ["CURP", "INE", "RFC", "Comprobante de domicilio"];
 const VACIA = { titulo: "", descripcion: "", horario: "Mañanas", sueldo: "", ubicacion: "Los Mochis", escolaridad_minima: "", documentos: [] };
 
 function EditorVacante({ abierto, onCerrar, onGuardada }) {

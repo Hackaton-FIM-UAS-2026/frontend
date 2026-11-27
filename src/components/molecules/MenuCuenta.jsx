@@ -21,7 +21,7 @@ export function MenuCuenta() {
       <Dialog abierto={abierto} onCerrar={() => setAbierto(false)} titulo="Menú">
         <div className="menucuenta">
           <button type="button" className="opt" onClick={() => ir("/seguimiento")}>Mis datos</button>
-          <a className="opt" href="/#privacidad" onClick={() => setAbierto(false)}>Aviso de privacidad</a>
+          <button type="button" className="opt" onClick={() => ir("/privacidad")}>Aviso de privacidad</button>
           <button type="button" className="opt" onClick={() => ir("/seguimiento#mis-datos")}>Borrar mis datos</button>
           <Button block variant="ghost" onClick={cerrarSesion}><Icon name="salir" size={20} /> Cerrar sesión</Button>
         </div>

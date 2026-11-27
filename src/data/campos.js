@@ -4,9 +4,11 @@ export const TEST_BASE = [
   { campo: "edad", pregunta: "¿Cuántos años tienes?", tipo: "unica",
     opciones: ["18 a 24", "25 a 34", "35 a 44", "45 a 59", "60 o más"] },
   { campo: "municipio", pregunta: "¿En qué municipio vives?", tipo: "unica",
-    opciones: ["Ahome", "Guasave", "El Fuerte", "Otro"] },
+    opciones: ["Ahome", "Guasave", "El Fuerte", "Otro"],
+    // Al elegir «Otro» se pide el nombre (opcional) y se guarda en municipio_otro
+    otro: { opcion: "Otro", campo: "municipio_otro", label: "¿Cuál?" } },
   { campo: "escolaridad", pregunta: "¿Hasta qué grado estudiaste?", tipo: "unica",
-    opciones: ["Primaria", "Secundaria", "Preparatoria", "Universidad"] },
+    opciones: ["Sin estudios", "Primaria", "Secundaria", "Media superior", "Licenciatura"] },
   { campo: "situacion", pregunta: "¿Cuál es tu situación hoy?", tipo: "unica",
     opciones: ["Sin ingreso", "Empleo informal", "Empleo formal", "Negocio propio"] },
   { campo: "meta", pregunta: "¿Qué te gustaría lograr?", tipo: "unica",
@@ -24,10 +26,16 @@ export const TEST_BASE = [
   { campo: "negocio", pregunta: "¿Tienes un negocio o una idea?", tipo: "unica",
     opciones: ["No", "Tengo una idea", "Ya vendo"] },
   { campo: "documentos", pregunta: "¿Con qué documentos cuentas?", tipo: "multiple",
-    opciones: ["CURP", "INE", "RFC", "Cuenta bancaria"] },
+    opciones: ["CURP", "INE", "RFC", "Comprobante de domicilio"] },
 ];
 
 // Preguntas "faltantes" que el agente hace al abrir un recurso (campo → texto claro)
+/** Agrega el texto de «Otro» solo si eligió «Otro» y escribió algo. */
+export function conTextoOtro(q, valor, texto) {
+  const t = (texto || "").trim();
+  return q.otro && valor === q.otro.opcion && t ? { [q.otro.campo]: t } : {};
+}
+
 export const DICCIONARIO_PREGUNTAS = {
   tiene_rfc: { pregunta: "¿Tienes RFC?", opciones: ["Sí", "No"] },
   habilidad_excel: { pregunta: "¿Qué tanto sabes usar Excel?", opciones: ["Nada", "Básico", "Intermedio"] },

@@ -9,7 +9,7 @@ export const PESOS = [
       ["Menos de 10", "10 a 15"].includes(e.horas_semana) ||
       (e.cuidados || []).some((c) => c !== "Ninguna"),
     suma: { emprendimiento: 1, capacitacion: 1 } },
-  { id: "prepa", texto: "Terminaste la prepa o más", cumple: (e) => ["Preparatoria", "Universidad"].includes(e.escolaridad), suma: { empleabilidad: 1 } },
+  { id: "prepa", texto: "Terminaste la media superior o más", cumple: (e) => ["Media superior", "Licenciatura"].includes(e.escolaridad), suma: { empleabilidad: 1 } },
   { id: "sin_digital", texto: "Aún no usas herramientas digitales", cumple: (e) =>
       e.meta === "Un empleo" && !(e.habilidades || []).includes("Computación"),
     suma: { capacitacion: 2 } },

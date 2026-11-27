@@ -4,7 +4,7 @@ import { entrarConGoogle } from "../../lib/supabase";
 import { recordar } from "./sesion.js";
 
 /** Botón secundario de Google, debajo del formulario de correo. */
-export function BotonGoogle({ texto, nueva, volver, deshabilitado, onError }) {
+export function BotonGoogle({ texto, nueva, volver, onError }) {
   const [cargando, setCargando] = useState(false);
   const ir = async () => {
     setCargando(true);
@@ -14,7 +14,7 @@ export function BotonGoogle({ texto, nueva, volver, deshabilitado, onError }) {
   return (
     <>
       <div className="m1-o" aria-hidden="true"><span>o</span></div>
-      <Button block className="m1-proveedor" onClick={ir} disabled={deshabilitado} loading={cargando}>
+      <Button block className="m1-proveedor" onClick={ir} loading={cargando}>
         <span className="m1-g" aria-hidden="true">G</span> {texto}
       </Button>
     </>

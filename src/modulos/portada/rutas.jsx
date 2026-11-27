@@ -1,4 +1,4 @@
-import { ApoyoInfo, ComoFunciona, Empresas, QueHacemos, QuienesSomos } from "./Paginas.jsx";
+import { ApoyoInfo, ComoFunciona, Empresas, Privacidad, QueHacemos, QuienesSomos } from "./Paginas.jsx";
 
 export const rutas = [
   { path: "/quienes-somos", element: <QuienesSomos /> },
@@ -6,4 +6,5 @@ export const rutas = [
   { path: "/como-funciona", element: <ComoFunciona /> },
   { path: "/empresas", element: <Empresas /> },
   { path: "/apoyo", element: <ApoyoInfo /> },
+  { path: "/privacidad", element: <Privacidad /> },
 ];

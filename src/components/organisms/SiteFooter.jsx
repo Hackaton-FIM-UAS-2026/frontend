@@ -12,6 +12,7 @@ export function SiteFooter() {
         <div id="privacidad">
           <h3>Aviso de privacidad</h3>
           <p>Tratamos tus datos conforme a la ley de protección de datos personales. Lo privado solo se guarda con tu permiso y puedes borrarlo cuando quieras.</p>
+          <p><Link to="/privacidad">Lee el aviso completo</Link></p>
         </div>
         <div>
           <h3>¿Estás en peligro?</h3>

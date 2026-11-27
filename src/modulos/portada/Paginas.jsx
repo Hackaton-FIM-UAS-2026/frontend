@@ -150,3 +150,79 @@ export function ApoyoInfo() {
   );
 }
 
+
+const AVISO_OFICIAL = "https://transparencia.ahome.gob.mx/aip/Avisos_de_Privacidad/Aviso_Privacidad_Integral_Ahome.pdf";
+const AVISOS_AHOME = "https://transparencia.ahome.gob.mx/avisos-de-privacidad/";
+const PNT = "https://www.plataformadetransparencia.org.mx/";
+
+/** /privacidad — aviso de privacidad de Empoderate en lenguaje claro. */
+export function Privacidad() {
+  return (
+    <Pagina tema="Aviso de privacidad" intro="Qué datos guardamos, para qué los usamos y cómo puedes pedir que los corrijamos o los borremos.">
+      <div className="m7-col m7-aviso">
+        <p className="card card--sunken m7-peq" role="note">
+          Versión pendiente de validación por SEMujeres. Mientras tanto, también aplica el{" "}
+          <a href={AVISO_OFICIAL} target="_blank" rel="noopener">aviso de privacidad integral del Municipio de Ahome</a>.
+        </p>
+        <section className="card">
+          <h2 className="m7-sub">Quién es responsable de tus datos</h2>
+          <p>El H. Ayuntamiento de Ahome, a través de la Secretaría de las Mujeres (SEMujeres), en Los Mochis, Sinaloa,
+            es responsable de los datos que nos das en Empoderate.</p>
+        </section>
+        <section className="card">
+          <h2 className="m7-sub">Qué datos te pedimos</h2>
+          <ul>
+            <li>Tu nombre y tu correo, para crear tu cuenta, y tu teléfono si nos lo das.</li>
+            <li>Si te registras en persona con el personal de SEMujeres: también tu CURP y tu colonia.</li>
+            <li>Tus respuestas del test: edad, municipio, estudios, situación, meta, tiempo libre, personas a tu cargo,
+              cómo te conectas, qué sabes hacer, si tienes negocio y qué documentos tienes (solo si los tienes, nunca el documento).</li>
+            <li>Lo que contestas al revisar un curso, apoyo o vacante, y a qué aplicas o guardas.</li>
+          </ul>
+        </section>
+        <section className="card">
+          <h2 className="m7-sub">Datos sensibles</h2>
+          <p>Solo si pides apoyo jurídico o psicológico, y solo con tu consentimiento expreso, guardamos el tipo de apoyo,
+            tu forma segura de contacto y un resumen que tú apruebas. No guardamos tu conversación.
+            Esta información solo la ve el área de SEMujeres que te atiende.</p>
+        </section>
+        <section className="card">
+          <h2 className="m7-sub">Para qué los usamos</h2>
+          <ul>
+            <li>Mostrarte trabajos, cursos, becas y apoyos que te queden.</li>
+            <li>Darte seguimiento y, si lo pides, que una especialista de SEMujeres te contacte.</li>
+            <li>Hacer estadísticas sin nombres para mejorar los programas.</li>
+          </ul>
+        </section>
+        <section className="card">
+          <h2 className="m7-sub">Con quién se comparten</h2>
+          <p>No vendemos ni compartimos tus datos. Solo se entregan si una autoridad competente los pide de forma fundada y motivada.</p>
+          <p>Si aplicas a una vacante de una empresa registrada, esa empresa ve únicamente tu nombre, teléfono, escolaridad,
+            habilidades y si tienes experiencia. Nunca ve tu CURP, tu colonia, tus cuidados ni nada de tu atención en SEMujeres.</p>
+          <p>Para funcionar usamos proveedores de tecnología que solo procesan la información por encargo nuestro:
+            almacenamiento de datos e inteligencia artificial. La inteligencia artificial recibe tus respuestas del test para
+            elegir y explicarte opciones, y los mensajes que escribes en el asistente para responderte y detectar si necesitas
+            apoyo urgente. No le enviamos el nombre de tu perfil.</p>
+        </section>
+        <section className="card">
+          <h2 className="m7-sub">Tus derechos</h2>
+          <p>Puedes pedir el acceso, la corrección o la cancelación de tus datos, oponerte a su uso o retirar tu consentimiento
+            (derechos ARCO) ante la Unidad de Transparencia del Ayuntamiento de Ahome:</p>
+          <ul>
+            <li>Correo: <a href="mailto:transparencia@ahome.gob.mx">transparencia@ahome.gob.mx</a></li>
+            <li>Teléfono: <a href="tel:+526688164000">(668) 816 4000</a>, ext. 1205 · lunes a viernes de 8:00 a 16:00</li>
+            <li>En línea: <a href={PNT} target="_blank" rel="noopener">Plataforma Nacional de Transparencia</a></li>
+          </ul>
+          <p>Desde la app también puedes borrar tus datos privados cuando quieras, en <Link to="/seguimiento">Mi avance</Link>.</p>
+        </section>
+        <section className="card">
+          <h2 className="m7-sub">Fundamento legal</h2>
+          <p className="m7-peq">Artículos 6, apartado A, fracción II, y 16, segundo párrafo, de la Constitución Política de los Estados Unidos Mexicanos;
+            Ley General de Protección de Datos Personales en Posesión de Sujetos Obligados; Ley de Protección de Datos Personales
+            en Posesión de Sujetos Obligados del Estado de Sinaloa.</p>
+          <p className="m7-peq">Avisos oficiales del municipio: <a href={AVISOS_AHOME} target="_blank" rel="noopener">transparencia.ahome.gob.mx/avisos-de-privacidad</a>.
+            Si este aviso cambia, lo publicaremos en esta página.</p>
+        </section>
+      </div>
+    </Pagina>
+  );
+}

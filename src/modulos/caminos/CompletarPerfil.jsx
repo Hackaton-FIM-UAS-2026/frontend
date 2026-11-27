@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { AppTemplate } from "../../components/templates";
 import { ApiEstado, QuestionCard } from "../../components/molecules";
 import { Button, Icon, ProgressBar } from "../../components/atoms";
-import { TEST_BASE } from "../../data/campos";
+import { TEST_BASE, conTextoOtro } from "../../data/campos";
 import { api } from "../../services/api";
 import "./estilos.css";
 
@@ -24,6 +24,8 @@ export default function CompletarPerfil() {
     Promise.all([api.expediente(), api.diccionario()])
       .then(([exp, dic]) => {
         const tiene = new Set(Object.keys(exp.campos || {}));
+        // Quien marcó RFC en sus documentos ya tiene RFC: no se lo volvemos a preguntar
+        if ((exp.campos?.documentos?.valor || []).includes("RFC")) tiene.add("tiene_rfc");
         const entrevista = Object.entries(dic.preguntas || {}).map(([campo, p]) => ({ campo, tipo: "unica", ...p }));
         setFaltan([...TEST_BASE, ...entrevista].filter((q) => !tiene.has(q.campo)));
       })
@@ -37,7 +39,7 @@ export default function CompletarPerfil() {
     if (v === undefined || (Array.isArray(v) && !v.length) || guardando) return;
     setGuardando(true);
     try {
-      await api.guardarCampos({ [q.campo]: v }, "entrevista");
+      await api.guardarCampos({ [q.campo]: v, ...conTextoOtro(q, v, q.otro && resp[q.otro.campo]) }, "entrevista");
       if (i + 1 < faltan.length) setI(i + 1);
       else nav(volver, { replace: true });
     } catch (e) {
@@ -64,6 +66,8 @@ export default function CompletarPerfil() {
           <ProgressBar value={i} max={faltan.length} label="Avance" />
           <QuestionCard key={q.campo} numero={i + 1} {...q} valor={resp[q.campo]}
             onChange={(v) => setResp((r) => ({ ...r, [q.campo]: v }))}
+            valorOtro={q.otro && resp[q.otro.campo]}
+            onChangeOtro={q.otro && ((t) => setResp((r) => ({ ...r, [q.otro.campo]: t })))}
             onNext={siguiente} onBack={i > 0 ? () => setI(i - 1) : null} />
           {error && <p className="m3-muted" role="alert">No pudimos guardar tu respuesta. Intenta de nuevo.</p>}
         </div>

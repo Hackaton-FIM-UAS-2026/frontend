@@ -324,3 +324,17 @@ a.card, .card--link { text-decoration: none; cursor: pointer; }
 .menucuenta { display: flex; flex-direction: column; gap: var(--space-3); }
 .menucuenta .opt { text-align: left; text-decoration: none; color: var(--text); }
 .menucuenta .btn { margin-top: var(--space-3); }
+
+/* ---------- Toast: aviso breve tras una acción ---------- */
+.toast-zona {
+  position: fixed; left: 0; right: 0; z-index: var(--z-overlay); pointer-events: none;
+  bottom: calc(var(--bottomnav-h) + env(safe-area-inset-bottom) + var(--space-4));
+  display: flex; justify-content: center; padding: 0 var(--space-4);
+}
+@media (min-width: 960px) { .toast-zona { bottom: var(--space-6); } }
+.toast {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  max-width: 28rem; margin: 0; padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill); background: var(--surface-brand); color: var(--text-on-brand);
+  font-weight: 600; box-shadow: var(--shadow-2);
+}

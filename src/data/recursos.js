@@ -19,7 +19,7 @@ export const RECURSOS = [
     tipo: "vacante", rutas: ["empleabilidad"], modalidad: "Presencial", horario: "Tardes",
     horas_semana: 25, costo: "Sueldo", ubicacion: "Los Mochis", fecha_cierre: "2026-12-10",
     requisitos: [
-      { campo: "escolaridad", ok: true, label: "Preparatoria terminada" },
+      { campo: "escolaridad", ok: true, label: "Media superior terminada" },
       { campo: "habilidad_excel", ok: null, label: "Excel básico", duro: false },
     ], url_accion: "#", verificado_el: "2026-11" },
   { id: "r4", titulo: "Beca: alfabetización digital desde el celular", proveedor: "Ejemplo — ONG",

@@ -88,6 +88,8 @@ export function TestBaseWizard({ indice, respuestas, onChange, onNext, onBack })
               porque={PORQUE[q.campo]}
               valor={respuestas[q.campo]}
               onChange={(v) => onChange(q.campo, v)}
+              valorOtro={q.otro && respuestas[q.otro.campo]}
+              onChangeOtro={q.otro && ((t) => onChange(q.otro.campo, t))}
               onNext={onNext}
               onBack={indice > 0 ? onBack : null}
             />

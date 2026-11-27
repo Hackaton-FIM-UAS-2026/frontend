@@ -41,7 +41,7 @@ export default function IniciarSesion() {
         <Button block type="submit" loading={enviando}>Entrar</Button>
       </form>
       <BotonGoogle texto="Entrar con Google" volver={volver} onError={setError} />
-      <p className="m1-ayuda">Al entrar aceptas el <a href="/#privacidad">aviso de privacidad</a>.</p>
+      <p className="m1-ayuda">Al entrar aceptas el <Link to="/privacidad">aviso de privacidad</Link>.</p>
       <p className="m1-cambio">¿Es tu primera vez? <Link to={volver ? `/registro?volver=${encodeURIComponent(volver)}` : "/registro"}>Crea tu cuenta</Link></p>
     </EntradaLayout>
   );

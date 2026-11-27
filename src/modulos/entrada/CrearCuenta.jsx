@@ -6,7 +6,7 @@ import { EntradaLayout } from "./Layout.jsx";
 import { BotonGoogle } from "./Google.jsx";
 import { adondeIr, volverSeguro } from "./sesion.js";
 
-/** /registro — cuenta nueva: correo y contraseña primero, Google abajo. */
+/** /registro — cuenta nueva: correo y contraseña primero (con casilla), Google abajo (acepta al continuar). */
 export default function CrearCuenta() {
   const nav = useNavigate();
   const [params] = useSearchParams();
@@ -45,13 +45,13 @@ export default function CrearCuenta() {
           value={d.pass} onChange={(e) => setD({ ...d, pass: e.target.value })} />
         <label className="check-row m1-check">
           <input type="checkbox" checked={acepta} onChange={(e) => setAcepta(e.target.checked)} />
-          <span>Acepto el <a href="/#privacidad">aviso de privacidad</a></span>
+          <span>Acepto el <Link to="/privacidad">aviso de privacidad</Link></span>
         </label>
         {error && <p className="m1-error" role="alert">{error}</p>}
         <Button block type="submit" loading={enviando}>Crear mi cuenta</Button>
       </form>
-      <BotonGoogle texto="Registrarme con Google" nueva volver={volver} deshabilitado={!acepta} onError={setError} />
-      {!acepta && <p className="m1-ayuda">Para usar Google, primero acepta el aviso de privacidad.</p>}
+      <BotonGoogle texto="Registrarme con Google" nueva volver={volver} onError={setError} />
+      <p className="m1-ayuda">Al continuar con Google aceptas el <Link to="/privacidad">aviso de privacidad</Link>.</p>
       <p className="m1-cambio">¿Ya tienes cuenta? <Link to={volver ? `/entrar?volver=${encodeURIComponent(volver)}` : "/entrar"}>Inicia sesión</Link></p>
     </EntradaLayout>
   );
