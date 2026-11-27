@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="468" viewBox="0 0 590 468" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">Un camino hacia nuevas oportunidades</title>
+  <desc id="hero-desc">Paisaje en tonos lavanda con un camino hacia un punto de destino con hojas en movimiento, sol flotante y puntos que avanzan hacia el destino.</desc>
+  <defs>
+    <clipPath id="hero-frame"><rect x="0" y="0" width="590" height="468" rx="28"/></clipPath>
+  </defs>
+  <style>
+    #leaf-left { transform-origin: 94px 346px; animation: emp-leaf-left 4.2s ease-in-out infinite; }
+    #leaf-right { transform-origin: 490px 385px; animation: emp-leaf-right 5.2s ease-in-out infinite; }
+    #sun { animation: emp-sun 6s ease-in-out infinite; }
+    #road-dots { animation: emp-road 1.65s linear infinite; }
+    #destination-halo { transform-origin: 434px 215px; animation: emp-halo 2.8s ease-out infinite; }
+    #destination-dot { transform-origin: 434px 215px; animation: emp-dot 2.8s ease-in-out infinite; }
+    @keyframes emp-leaf-left { 0%,100% { transform: translate(0,0) rotate(0deg); } 25% { transform: translate(3px,-7px) rotate(14deg); } 75% { transform: translate(-3px,3px) rotate(-12deg); } }
+    @keyframes emp-leaf-right { 0%,100% { transform: translate(0,0) rotate(0deg); } 30% { transform: translate(-3px,-6px) rotate(-14deg); } 75% { transform: translate(3px,2px) rotate(10deg); } }
+    @keyframes emp-sun { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-13px); } }
+    @keyframes emp-road { from { stroke-dashoffset: 0; } to { stroke-dashoffset: -20; } }
+    @keyframes emp-halo { 0% { transform: scale(1); opacity: .34; } 70%,100% { transform: scale(3.1); opacity: 0; } }
+    @keyframes emp-dot { 0%,100% { transform: scale(1); } 23% { transform: scale(1.19); } 48% { transform: scale(1); } }
+    @media (prefers-reduced-motion: reduce) { #leaf-left, #leaf-right, #sun, #road-dots, #destination-halo, #destination-dot { animation: none !important; } #destination-halo { opacity: 0; } }
+  </style>
+  <g clip-path="url(#hero-frame)">
+    <rect id="sky" width="590" height="468" fill="#F7F4FB"/>
+    <circle id="sun" cx="431.5" cy="134.5" r="64.5" fill="#F4E3E9"/>
+    <g id="landscape">
+      <path id="hill-back" fill="#EEE6F5" d="M0 261 C78 221 139 202 221 218 C282 230 327 238 405 229 C478 222 540 209 590 190 V468 H0Z"/>
+      <path id="hill-middle" fill="#DDCDEA" d="M0 315 C82 286 154 272 237 280 C312 286 367 307 447 309 C500 310 553 296 590 282 V468 H0Z"/>
+      <path id="hill-front" fill="#C2A6D9" d="M0 377 C92 356 169 349 248 353 C325 357 394 380 465 380 C511 380 555 374 590 365 V468 H0Z"/>
+    </g>
+    <g id="road" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M220 480 C229 434 286 408 326 382 C357 362 374 343 365 317 C357 293 347 279 363 264 C382 245 410 227 434 215" stroke="#FBF8F1" stroke-width="37"/>
+      <path id="road-dots" d="M220 480 C229 434 286 408 326 382 C357 362 374 343 365 317 C357 293 347 279 363 264 C382 245 410 227 434 215" stroke="#8457A3" stroke-width="3.7" stroke-dasharray="3 17"/>
+    </g>
+    <g id="leaf-left">
+      <path fill="#592D85" d="M94 347 C97 317 116 302 147 300 C144 324 126 345 94 347Z"/>
+      <path fill="none" stroke="#DDCDEA" stroke-width="3" stroke-linecap="round" d="M96 345 Q116 326 137 309"/>
+    </g>
+    <g id="leaf-right">
+      <path fill="#4A2269" d="M490 385 C491 364 505 352 526 350 C525 371 511 385 490 385Z"/>
+    </g>
+    <g id="destination">
+      <circle id="destination-halo" cx="434" cy="215" r="9" fill="#64163C" opacity="0"/>
+      <circle id="destination-dot" cx="434" cy="215" r="8.5" fill="#64163C"/>
+    </g>
+  </g>
+</svg>

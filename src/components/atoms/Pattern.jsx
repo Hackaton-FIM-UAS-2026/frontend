@@ -27,7 +27,7 @@ export function CaminoIlustracion({ className = "" }) {
     <svg className={`camino-ilus ${className}`} viewBox="0 0 400 320" role="img"
       aria-label="Un sendero que sube entre colinas hacia el horizonte">
       <rect width="400" height="320" rx="24" fill="var(--morado-50)" />
-      <circle className="camino-ilus__sol" cx="292" cy="96" r="44" fill="var(--guinda-100)" />
+      <circle cx="292" cy="96" r="44" fill="var(--guinda-100)" />
       <path d="M0 176c56-30 112-40 176-26s132 10 224-20v190H0z" fill="var(--morado-100)" />
       <path d="M0 214c70-26 150-34 230-14s120 8 170-8v128H0z" fill="var(--morado-200)" />
       <path d="M0 256c90-22 170-22 250-6s110 6 150-2v72H0z" fill="var(--morado-300)" />
@@ -35,15 +35,11 @@ export function CaminoIlustracion({ className = "" }) {
       <path d="M150 320c10-40 70-52 92-78s-18-44 6-66 40-24 46-30"
         fill="none" stroke="var(--crema-50)" strokeWidth="26" strokeLinecap="round" />
       <path d="M150 320c10-40 70-52 92-78s-18-44 6-66 40-24 46-30"
-        className="camino-ilus__pasos" fill="none" stroke="var(--morado-500)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="2 12" />
+        fill="none" stroke="var(--morado-500)" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="2 12" />
       {/* hojas */}
-      <g className="camino-ilus__hoja">
-        <path d="M62 236c0-20 13-34 34-34 0 20-13 34-34 34z" fill="var(--morado-700)" />
-        <path d="M62 236L90 208" stroke="var(--morado-200)" strokeWidth="2" strokeLinecap="round" />
-      </g>
-      <path className="camino-ilus__hoja camino-ilus__hoja--2" d="M332 262c0-14 9-24 24-24 0 14-9 24-24 24z" fill="var(--morado-800)" />
-      {/* meta: un pulso suave señala hacia dónde va el camino */}
-      <circle className="camino-ilus__pulso" cx="294" cy="146" r="6" fill="none" stroke="var(--guinda-700)" strokeWidth="2" />
+      <path d="M62 236c0-20 13-34 34-34 0 20-13 34-34 34z" fill="var(--morado-700)" />
+      <path d="M62 236L90 208" stroke="var(--morado-200)" strokeWidth="2" strokeLinecap="round" />
+      <path d="M332 262c0-14 9-24 24-24 0 14-9 24-24 24z" fill="var(--morado-800)" />
       <circle cx="294" cy="146" r="6" fill="var(--guinda-700)" />
     </svg>
   );

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Button, Icon, CaminoIlustracion } from "../atoms";
+import { Button, Icon } from "../atoms";
 
 const sube = (delay) => ({
   initial: { opacity: 0, transform: "translateY(12px)" },
@@ -29,7 +29,8 @@ export function HeroSection() {
         <motion.div className="hero__art"
           initial={{ opacity: 0, transform: "scale(0.97)" }} animate={{ opacity: 1, transform: "scale(1)" }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}>
-          <CaminoIlustracion />
+          <img src="/hero/empoderate-hero.svg" width="590" height="468"
+            alt="Un camino entre colinas lavanda hacia un punto de destino" />
         </motion.div>
       </div>
     </section>
