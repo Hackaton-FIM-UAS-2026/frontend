@@ -29,7 +29,7 @@
 @media (hover: hover) { .m2-chip:hover { background: var(--action-softer); } }
 
 .m2-recursos { display: grid; gap: var(--space-3); max-width: 86%; }
-.m2-recurso { gap: var(--space-1); text-decoration: none; color: var(--text); }
+.card.m2-recurso { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); text-decoration: none; color: var(--text); }
 .m2-recurso small { color: var(--text-muted); font-size: var(--step--1); }
 .m2-tipo { width: fit-content; font-size: var(--step--2); font-weight: 700; padding: 3px 10px; border-radius: var(--radius-pill); }
 .m2-tipo--vacante { background: var(--ruta-empleabilidad-soft); color: var(--ruta-empleabilidad-ink); }

@@ -1,11 +1,12 @@
-import { useCallback, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { AppTemplate } from "../components/templates";
 import { ResourceDetail } from "../components/organisms";
-import { ApiEstado, Toast } from "../components/molecules";
+import { ApiEstado } from "../components/molecules";
 import { Button, Icon } from "../components/atoms";
 import { api } from "../services/api";
 import { useApi } from "../services/useApi";
+import { avisar } from "../services/avisos";
 import { destino } from "../modulos/registro";
 
 const AGREGADO = { curso: "Curso agregado", beca: "Beca agregada", apoyo: "Apoyo agregado", financiamiento: "Apoyo agregado" };
@@ -19,9 +20,8 @@ function mensajeAccion(accion, r, tipo) {
 export default function RecursoDetalle() {
   const { id } = useParams();
   const nav = useNavigate();
+  const { key } = useLocation();
   const { datos: recurso, cargando, error, recargar } = useApi(() => api.recurso(id), [id]);
-  const [aviso, setAviso] = useState(null);
-  const cerrarAviso = useCallback(() => setAviso(null), []);
   // Mientras se envía, los botones se bloquean; el estado nuevo se muestra al instante sin esperar la recarga
   const [enviando, setEnviando] = useState(false);
   const enCurso = useRef(false);   // candado inmediato: dos taps seguidos llegan antes de que React re-renderice
@@ -45,8 +45,10 @@ export default function RecursoDetalle() {
       const r = await api.accion(id, a);
       if (a === "aplicar" && r.url_accion && r.url_accion !== "#") window.open(r.url_accion, "_blank", "noopener");
       setEstadoLocal({ id, estado: r.estado });
-      setAviso(mensajeAccion(a, r, recurso?.tipo));
-      recargar();
+      avisar(mensajeAccion(a, r, recurso?.tipo));
+      // Si llegó desde otra pantalla de la app (chat, Inicio, Explorar…), regresa a ella
+      if (r.nuevo && key !== "default") nav(-1);
+      else recargar();
     } catch (e) {
       alert(e.message || "No pudimos registrar la acción.");
     } finally {
@@ -74,7 +76,6 @@ export default function RecursoDetalle() {
         ? <ResourceDetail key={recurso.id} recurso={{ ...recurso, mi_estado: (estadoLocal?.id === id && estadoLocal.estado) || recurso.mi_estado }}
             enviando={enviando} onResponder={responder} onAction={accion} />
         : <ApiEstado cargando={cargando} error={error} reintentar={recargar} />}
-      <Toast mensaje={aviso} onCerrar={cerrarAviso} />
     </AppTemplate>
   );
 }

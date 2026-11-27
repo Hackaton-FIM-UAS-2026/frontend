@@ -28,7 +28,11 @@ export async function esperarSesion(ms = 6000) {
  * si no lo terminó, su inicio la invita a hacerlo).
  */
 export async function adondeIr({ nueva = false, volver = null, nombre = null } = {}) {
-  await api.registro({ acepto_privacidad: true, ...(nombre ? { nombre } : {}) });
+  // Si confirmó su correo antes de entrar, el nombre viaja en los metadatos de su cuenta
+  if (!nombre) nombre = (await supabase.auth.getSession()).data.session?.user?.user_metadata?.nombre || null;
+  const r = await api.registro({ acepto_privacidad: true, ...(nombre ? { nombre } : {}) });
+  // Sin nombre (p. ej. cuenta de Google): se lo pedimos y luego sigue a donde iba
+  if (!r?.nombre && !nombre) { recordar({ nueva, volver }); return "/entrar/nombre"; }
   try { sessionStorage.removeItem(CLAVE); } catch {}
   if (nueva) return "/test";
   return volverSeguro(volver) || destino("/inicio", "/dashboard");

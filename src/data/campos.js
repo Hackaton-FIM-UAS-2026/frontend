@@ -22,7 +22,8 @@ export const TEST_BASE = [
   { campo: "dispositivo", pregunta: "¿Con qué te conectas?", tipo: "unica",
     opciones: ["Solo celular con datos", "Celular con wifi", "Computadora"] },
   { campo: "habilidades", pregunta: "¿Qué sabes hacer?", tipo: "multiple",
-    opciones: ["Cocina", "Costura", "Ventas", "Cuidado de personas", "Limpieza", "Computación", "Atención al cliente", "Otra"] },
+    opciones: ["Cocina", "Costura", "Ventas", "Cuidado de personas", "Limpieza", "Computación", "Atención al cliente", "Otra"],
+    otro: { opcion: "Otra", campo: "habilidades_otra", label: "¿Qué otra cosa sabes hacer?" } },
   { campo: "negocio", pregunta: "¿Tienes un negocio o una idea?", tipo: "unica",
     opciones: ["No", "Tengo una idea", "Ya vendo"] },
   { campo: "documentos", pregunta: "¿Con qué documentos cuentas?", tipo: "multiple",
@@ -30,10 +31,14 @@ export const TEST_BASE = [
 ];
 
 // Preguntas "faltantes" que el agente hace al abrir un recurso (campo → texto claro)
-/** Agrega el texto de «Otro» solo si eligió «Otro» y escribió algo. */
+/** ¿Eligió la opción «Otro/Otra» de esta pregunta? (única o de varias respuestas) */
+export const eligioOtro = (q, valor) =>
+  Boolean(q.otro) && (Array.isArray(valor) ? valor.includes(q.otro.opcion) : valor === q.otro.opcion);
+
+/** Agrega el texto de «Otro/Otra» solo si eligió esa opción y escribió algo. */
 export function conTextoOtro(q, valor, texto) {
   const t = (texto || "").trim();
-  return q.otro && valor === q.otro.opcion && t ? { [q.otro.campo]: t } : {};
+  return eligioOtro(q, valor) && t ? { [q.otro.campo]: t } : {};
 }
 
 export const DICCIONARIO_PREGUNTAS = {

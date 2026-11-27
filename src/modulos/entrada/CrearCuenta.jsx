@@ -25,7 +25,7 @@ export default function CrearCuenta() {
     if (!acepta) return setError("Para continuar, acepta el aviso de privacidad.");
     setEnviando(true);
     try {
-      const sesion = await crearCuentaCorreo(d.correo.trim(), d.pass);
+      const sesion = await crearCuentaCorreo(d.correo.trim(), d.pass, d.nombre.trim());
       if (!sesion) { setEnviando(false); return setError("Te mandamos un correo para confirmar tu cuenta. Ábrelo y vuelve a entrar."); }
       nav(await adondeIr({ nueva: true, volver, nombre: d.nombre.trim() }), { replace: true });
     } catch (err) {

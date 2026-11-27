@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
 import { Button, Icon, Input } from "../atoms";
 import { EmergencyBanner, OptionButton } from "../molecules";
+import { borrarChat } from "../../lib/supabase";
 
 const PASOS = 3;
 const variantes = {
@@ -18,7 +19,7 @@ export function SensitiveFlow({ onDone }) {
   const [tipo, setTipo] = useState("");
   const [contacto, setContacto] = useState({ medio: "", horario: "", mensaje: "" });
   const [acepta, setAcepta] = useState(false);
-  const salidaRapida = () => window.location.replace("https://www.google.com/search?q=clima");
+  const salidaRapida = () => { borrarChat(); window.location.replace("https://www.google.com/search?q=clima"); };
   const ir = (n) => { setDir(n > paso ? 1 : -1); setPaso(n); };
 
   // Salida rápida también con la tecla Esc

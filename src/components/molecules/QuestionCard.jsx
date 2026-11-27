@@ -36,7 +36,7 @@ export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusi
             role={tipo === "multiple" ? "button" : "radio"} />
         ))}
       </div>
-      {otro && sel === otro.opcion && (
+      {otro && activa(otro.opcion) && (
         <Input label={otro.label} hint="Opcional." value={valorOtro || ""} autoFocus maxLength={120}
           onChange={(e) => onChangeOtro?.(e.target.value)}
           onKeyDown={(e) => { if (e.key === "Enter") onNext?.(sel); }} />
@@ -44,7 +44,7 @@ export function QuestionCard({ numero, pregunta, porque, tipo, opciones, exclusi
       <div className="qcard__nav">
         {onBack ? <Button variant="link" onClick={onBack}><Icon name="izq" size={18} /> Regresar</Button> : <span />}
         {tipo === "multiple" && <Button onClick={() => onNext?.(sel)} disabled={!sel.length}>Continuar <Icon name="der" size={18} /></Button>}
-        {otro && sel === otro.opcion && <Button onClick={() => onNext?.(sel)}>Continuar <Icon name="der" size={18} /></Button>}
+        {otro && tipo !== "multiple" && sel === otro.opcion && <Button onClick={() => onNext?.(sel)}>Continuar <Icon name="der" size={18} /></Button>}
       </div>
     </div>
   );

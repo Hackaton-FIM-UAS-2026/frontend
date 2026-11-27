@@ -5,6 +5,7 @@ import { destino } from "../registro";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Icon } from "../../components/atoms";
 import { AppHeader } from "../../components/organisms";
+import { borrarChat, CLAVE_CHAT } from "../../lib/supabase";
 import { ResumenRecurso } from "./ResumenRecurso.jsx";
 import { Chips, ConfirmarResumen, TarjetaEmergencia } from "./Acciones.jsx";
 import { useDictado } from "./useDictado.js";
@@ -13,7 +14,7 @@ import "./estilos.css";
 
 const CHIPS_INICIO = ["Busco trabajo", "Quiero un curso", "Necesito apoyo", "Hablar con una persona"];
 const CONTACTO = ["WhatsApp", "Llamada", "Solo aquí", "Prefiero ir en persona"];
-const salidaRapida = () => window.location.replace("https://www.google.com/search?q=clima+los+mochis");
+const salidaRapida = () => { borrarChat(); window.location.replace("https://www.google.com/search?q=clima+los+mochis"); };
 
 const diaISO = (n) => { const d = new Date(); d.setDate(d.getDate() + n); return d.toLocaleDateString("en-CA"); };
 const VISITAS = [
@@ -25,15 +26,24 @@ const MODULO = { juridica: "juridico", psicologica: "psicologia", ambas: "trabaj
 let sec = 0;
 const msg = (de, texto, extra = {}) => ({ id: ++sec, de, texto, ...extra });
 
+// La conversación se recuerda en esta pestaña para volver a ella después de abrir un curso o una vacante
+const leerChat = () => { try { return JSON.parse(sessionStorage.getItem(CLAVE_CHAT)); } catch { return null; } };
+const MSGS_INICIO = () => [
+  msg("asistente", "Hola. Soy el asistente de SEMujeres. ¿En qué te ayudo?"),
+  msg("asistente", "Si alguien se acerca y no quieres que vea esta pantalla, toca «Salida rápida»: se cambia por una página del clima."),
+];
+
 export default function Asistente() {
   const nav = useNavigate();
   const reducir = useReducedMotion();
   const lista = useRequiereSesion();
-  const [msgs, setMsgs] = useState([
-    msg("asistente", "Hola. Soy el asistente de SEMujeres. ¿En qué te ayudo?"),
-    msg("asistente", "Si alguien se acerca y no quieres que vea esta pantalla, toca «Salida rápida»: se cambia por una página del clima."),
-  ]);
-  const [chips, setChips] = useState(CHIPS_INICIO);
+  const guardado = useState(leerChat)[0];
+  const [msgs, setMsgs] = useState(() => {
+    if (!guardado?.msgs?.length) return MSGS_INICIO();
+    sec = Math.max(sec, ...guardado.msgs.map((m) => m.id));
+    return guardado.msgs;
+  });
+  const [chips, setChips] = useState(guardado ? guardado.chips : CHIPS_INICIO);
   const [texto, setTexto] = useState("");
   const [escribiendo, setEscribiendo] = useState(false);
   const [canal, setCanal] = useState(null);   // { paso, area, resumen, urgencia, medio }
@@ -48,6 +58,10 @@ export default function Asistente() {
   }, []);
   useEffect(() => { fin.current?.scrollIntoView({ behavior: reducir ? "auto" : "smooth", block: "end" }); },
     [msgs, escribiendo, canal, chips, reducir]);
+
+  useEffect(() => {
+    try { sessionStorage.setItem(CLAVE_CHAT, JSON.stringify({ msgs, chips })); } catch {}
+  }, [msgs, chips]);
 
   const agregar = (...m) => setMsgs((x) => [...x, ...m]);
 

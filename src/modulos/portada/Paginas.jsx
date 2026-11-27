@@ -182,7 +182,8 @@ export function Privacidad() {
         <section className="card">
           <h2 className="m7-sub">Datos sensibles</h2>
           <p>Solo si pides apoyo jurídico o psicológico, y solo con tu consentimiento expreso, guardamos el tipo de apoyo,
-            tu forma segura de contacto y un resumen que tú apruebas. No guardamos tu conversación.
+            tu forma segura de contacto y un resumen que tú apruebas. No guardamos tu conversación: solo se recuerda
+            en tu navegador mientras tengas la pestaña abierta, y se borra con «Salida rápida» o al cerrar sesión.
             Esta información solo la ve el área de SEMujeres que te atiende.</p>
         </section>
         <section className="card">
