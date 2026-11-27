@@ -6,7 +6,7 @@ export function SiteFooter() {
     <footer className="sitefoot">
       <div className="sitefoot__in container">
         <div className="sitefoot__brand">
-          <Logo light />
+          <Logo light grande />
           <p>Plataforma de la Secretaría de las Mujeres de Ahome (SEMujeres) · Los Mochis, Sinaloa.</p>
         </div>
         <div id="privacidad">

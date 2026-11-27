@@ -14,7 +14,8 @@
 }
 .adm__side--open { transform: none; box-shadow: var(--shadow-3); }
 .adm__side :focus-visible { outline-color: var(--focus-ring-on-brand); }
-.adm__brand { display: flex; align-items: center; gap: var(--space-2); padding: 0 var(--space-2); }
+.adm__brand { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); padding: 0 var(--space-2); }
+.adm__brand .logo { height: 40px; }
 .adm__brand > span { font-size: var(--step--2); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--text-on-brand-muted); font-weight: 700; }
 .adm__close {
   margin-left: auto; display: grid; place-items: center; width: 44px; height: 44px;

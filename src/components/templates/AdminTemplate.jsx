@@ -35,7 +35,7 @@ export function AdminTemplate({ titulo, menu = MENU_BASE, marca = "SEMujeres", c
       <SkipLink />
       <aside className={`adm__side ${abierto ? "adm__side--open" : ""}`} aria-label="Menú del panel">
         <div className="adm__brand">
-          <Logo light /><span>{marca}</span>
+          <Logo light />{marca !== "SEMujeres" && <span>{marca}</span>}
           <button type="button" className="adm__close" onClick={() => setAbierto(false)} aria-label="Cerrar menú"><Icon name="x" size={22} /></button>
         </div>
         <div className="adm__profile">

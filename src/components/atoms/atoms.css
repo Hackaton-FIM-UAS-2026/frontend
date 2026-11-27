@@ -176,18 +176,10 @@ select.input {
   letter-spacing: 0.02em;
 }
 
-/* ---------- Logo ---------- */
-.logo {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: var(--step-2);
-  letter-spacing: -0.03em;
-  color: var(--action-ink);
-  line-height: 1;
-}
-.logo--light { color: var(--blanco); }
-.logo__dot { color: var(--guinda-500); }
-.logo--light .logo__dot { color: var(--morado-300); }
+/* ---------- Logo (imagen oficial en public/logo/) ---------- */
+.logo { display: block; height: 38px; width: auto; max-width: 100%; }
+.logo--grande { height: 56px; }
+@media (min-width: 960px) { .logo { height: 42px; } .logo--grande { height: 64px; } }
 
 /* ---------- Ilustración ---------- */
 .camino-ilus { width: 100%; height: auto; display: block; }

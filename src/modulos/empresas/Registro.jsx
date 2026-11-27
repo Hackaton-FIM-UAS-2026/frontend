@@ -48,7 +48,7 @@ export default function Registro() {
   return (
     <div className="m6-reg">
       <aside className="m6-reg__marca">
-        <Link to="/" aria-label="Empoderate, inicio"><Logo light /></Link>
+        <Link to="/" aria-label="Empoderate, inicio"><Logo light grande /></Link>
         <div>
           <p className="m6-reg__titulo">Abre tus puertas a mujeres de Ahome</p>
           <p className="m6-reg__texto">Publica tus vacantes. SEMujeres revisa cada una para que las candidatas lleguen con confianza.</p>

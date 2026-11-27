@@ -14,7 +14,7 @@ export function EntradaLayout({ regresar, children }) {
   return (
     <div className="m1">
       <aside className="m1-marca" aria-hidden="true">
-        <Logo light />
+        <Logo light grande />
         <div>
           <p className="m1-marca__titulo">Tu siguiente paso empieza aquí</p>
           <p className="m1-marca__texto">Trabajo, cursos, becas y apoyos de Ahome, elegidos para ti. Y si lo necesitas, SEMujeres te acompaña.</p>
